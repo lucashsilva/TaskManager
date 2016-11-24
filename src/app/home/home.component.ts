@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  showAddTask = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleAddTask(): void {
+    this.showAddTask = !this.showAddTask;
+  }
 }

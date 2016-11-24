@@ -12,11 +12,11 @@ export class TasksComponent implements OnInit {
 
   tasks: any;
 
-
   ngOnInit() {
     this.tasksService.getTasks().subscribe(data => {
       this.tasks = data;
     });;
   }
+
 
 }
