@@ -1,5 +1,5 @@
-<app-navbar (addTask)="toggleAddTask()"></app-navbar>
+<app-navbar (toggleTaskForm)="toggleTaskForm()"></app-navbar>
 <div class="wrapper">
   <app-tasks></app-tasks>
 </div>
-<app-task-form *ngIf="showAddTask" class="has-shadow"></app-task-form>
+<app-task-form *ngIf="showAddTask" (toggleTaskForm)="toggleTaskForm()" class="has-shadow"></app-task-form>

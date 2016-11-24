@@ -20,10 +20,13 @@ export class TaskComponent implements OnInit {
 export class Task {
   title: string;
   description: string;
-  status: string;
-  imageUrl: string; 
+  priority: string;
+  imageUrl: string;
   timestamp: Date;
   done: boolean;
 
-  constructor() {}
+  constructor() {
+    this.done = false;
+    this.priority = "normal";
+  }
 }

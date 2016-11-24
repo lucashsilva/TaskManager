@@ -8,17 +8,11 @@
 
   <div class="nav-right">
     <span class="nav-item">
-      <a *ngIf="addButton" (click)="toggleAddTask()" class="button is-primary" href="#">
+      <a (click)="toggleTaskForm()" class="button is-primary" href="#">
         <span class="icon">
           <i class="fa fa-plus square"></i>
         </span>
         <span>Adicionar tarefa</span>
-      </a>
-      <a *ngIf="!addButton" (click)="toggleAddTask()" class="button is-primary" href="#">
-        <span class="icon">
-          <i class="fa fa-times-circle"></i>
-        </span>
-        <span>Cancelar</span>
       </a>
     </span>
   </div>

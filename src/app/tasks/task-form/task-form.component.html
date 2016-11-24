@@ -2,17 +2,30 @@
   <h2>Adicionar tarefa</h2>
   <label class="label">Título</label>
   <p class="control">
-    <input class="input" type="text" placeholder="Título">
+    <input [(ngModel)]="task.title" class="input" type="text" placeholder="Título">
   </p>
 
   <label class="label">Descrição</label>
   <p class="control">
-    <textarea class="textarea" placeholder="Descrição"></textarea>
+    <textarea [(ngModel)]="task.description" class="textarea" placeholder="Descrição"></textarea>
   </p>
 
   <label class="label">Data e hora</label>
   <p class="control">
-    <input class="input" type="text" placeholder="Data">
-    <input class="input" type="text" placeholder="Hora">
+    <input [(ngModel)]="task.timestamp" class="input" type="text" placeholder="Data e hora">
+  </p>
+  <label class="label">Prioridade</label>
+  <p class="control">
+    <span class="select">
+      <select [(ngModel)]="task.priority">
+        <option value="normal" selected="selected">Normal</option>
+        <option value="important">Importante</option>
+      </select>
+    </span>
+  </p>
+  <p class="control">
+    <button (click)="saveTask()" class="button is-primary">Salvar</button>
+
+  <button (click)="toggleAddTask()" class="button">Cancelar</button>
   </p>
 </div>

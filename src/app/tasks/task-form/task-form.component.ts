@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Task } from '../task/task.component';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task-form',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskFormComponent implements OnInit {
 
-  constructor() { }
+  @Output() toggleTaskForm;
+  task: Task;
+
+  constructor(private tasksService: TasksService) {
+    this.toggleTaskForm = new EventEmitter();
+    this.task = new Task();
+  }
 
   ngOnInit() {
   }
 
+  toggleAddTask(): void {
+    this.toggleTaskForm.emit();
+  }
+
+  saveTask(): void {
+    this.tasksService.saveTask(this.task);
+
+  }
 }

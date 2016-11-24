@@ -9,10 +9,15 @@ export class TasksService {
 
   private tasksUrl = './assets/database.json';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getTasks() {
       return this.http.get(this.tasksUrl)
       .map((res: Response) => <Task[]> res.json().tasks);
     }
+
+  saveTask(task: Task): boolean {
+  //  this.tasks.push(task);
+    return true;
+  }
 }

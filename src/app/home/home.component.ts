@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleAddTask(): void {
+  toggleTaskForm(): void {
     this.showAddTask = !this.showAddTask;
   }
 }
