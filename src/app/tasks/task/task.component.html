@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <header class="card-header">
+    <div class="card-image" *ngIf="task.imageUrl">
+
+    <!-- Adicionar imagens -->
+
+    </div>
+    <p class="card-header-title">
+      {{ task.title }}
+    </p>
+    <a class="card-header-icon">
+      <i class="fa fa-angle-down"></i>
+    </a>
+  </header>
+  <div class="card-content" *ngIf="task.description">
+    <div class="content">
+      {{ task.description }}
+
+    </div>
+  </div>
+  <footer class="card-footer">
+
+    <a class="card-footer-item">{{ task.timestamp | date }}</a>
+    <a class="card-footer-item">{{ task.timestamp | date:'shortTime' }}</a>
+    <a class="card-footer-item">Editar</a>
+  </footer>
+</div>
