@@ -8,7 +8,7 @@ This project uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_
 * [**A**ngular 2](https://angular.io): frontend framework
 * [**N**ode.js](https://nodejs.org): runtime environment
 * [Angular CLI](https://cli.angular.io): project scaffolding
-* [Bootstrap](http://www.getbootstrap.com): layout and styles
+* [Bulma](http://bulma.io/): layout and styles
 * [Font Awesome](http://fontawesome.io): icons
 
 ## Prerequisites
