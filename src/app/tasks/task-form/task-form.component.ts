@@ -10,10 +10,12 @@ import { TasksService } from '../../services/tasks.service';
 export class TaskFormComponent implements OnInit {
 
   @Output() toggleTaskForm;
+  @Output() taskSubmitted;
   task: Task;
 
   constructor(private tasksService: TasksService) {
     this.toggleTaskForm = new EventEmitter();
+    this.taskSubmitted = new EventEmitter();
     this.task = new Task();
   }
 
@@ -25,7 +27,13 @@ export class TaskFormComponent implements OnInit {
   }
 
   saveTask(): void {
-    this.tasksService.saveTask(this.task);
+    this.tasksService.addTask(this.task).subscribe(
+     res => {
+       var newTask = res.json();
+     },
+     error => console.log(error)
+   );
 
+   this.taskSubmitted.emit({"message":"Tarefa adicionada com sucesso.", "success": true});
   }
 }

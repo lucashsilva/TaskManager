@@ -13,6 +13,10 @@ export class TasksComponent implements OnInit {
   tasks: any;
 
   ngOnInit() {
+    this.fetchTasks();
+  }
+
+  fetchTasks(): void {
     this.tasksService.getTasks().subscribe(data => {
       this.tasks = data;
     });;

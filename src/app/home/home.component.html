@@ -2,4 +2,4 @@
 <div class="wrapper">
   <app-tasks></app-tasks>
 </div>
-<app-task-form *ngIf="showAddTask" (toggleTaskForm)="toggleTaskForm()" class="has-shadow"></app-task-form>
+<app-task-form *ngIf="showAddTask" (toggleTaskForm)="toggleTaskForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow"></app-task-form>
