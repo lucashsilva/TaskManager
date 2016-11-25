@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
+import { TasksComponent } from '../tasks/tasks.component';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  @ViewChild(TasksComponent) tasks: TasksComponent;
   showAddTask = false;
 
   constructor() { }
@@ -16,5 +17,14 @@ export class HomeComponent implements OnInit {
 
   toggleTaskForm(): void {
     this.showAddTask = !this.showAddTask;
+  }
+
+  taskSubmitted(event) {
+    alert(event.message);
+
+    if(event.success) {
+      this.tasks.fetchTasks();
+      this.toggleTaskForm();
+    }
   }
 }

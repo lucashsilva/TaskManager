@@ -39,8 +39,8 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-duplicate-key": true,
-    "no-duplicate-variable": true,
+    "no-duplitaske-key": true,
+    "no-duplitaske-variable": true,
     "no-empty": false,
     "no-eval": true,
     "no-inferrable-types": true,
@@ -57,7 +57,7 @@
     "one-line": [
       true,
       "check-open-brace",
-      "check-catch",
+      "check-taskch",
       "check-else",
       "check-whitespace"
     ],
