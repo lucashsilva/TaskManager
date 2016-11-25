@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Task } from '../task/task.component';
 import { TasksService } from '../../services/tasks.service';
 
@@ -11,7 +11,8 @@ export class TaskFormComponent implements OnInit {
 
   @Output() toggleTaskForm;
   @Output() taskSubmitted;
-  task: Task;
+  @Input() task: Task;
+  @Input() editForm = false;
 
   constructor(private tasksService: TasksService) {
     this.toggleTaskForm = new EventEmitter();
@@ -26,14 +27,36 @@ export class TaskFormComponent implements OnInit {
     this.toggleTaskForm.emit();
   }
 
-  saveTask(): void {
+  addTask(): void {
     this.tasksService.addTask(this.task).subscribe(
      res => {
        var newTask = res.json();
+
+       if(res.status == 200){
+         this.taskSubmitted.emit({"message":"Tarefa adicionada com sucesso.", "success": true});
+       }
      },
      error => console.log(error)
    );
 
    this.taskSubmitted.emit({"message":"Tarefa adicionada com sucesso.", "success": true});
   }
+
+  saveTask(): void {
+    this.tasksService.editTask(this.task).subscribe(
+     res => {
+       if(res.status == 200){
+         this.taskSubmitted.emit({"message":"Tarefa atualizada com sucesso.", "success": true});
+       }
+     },
+     error => console.log(error)
+   );
+
+  }
+
+  setTask(task) {
+    this.task = task;
+  }
+
+
 }

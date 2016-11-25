@@ -11,7 +11,7 @@ app-navbar {
   top:60px;
 }
 
-app-task-form {
+app-task-form, app-task-edit-form {
   position:fixed;
   top:60px;
   z-index: 9999;

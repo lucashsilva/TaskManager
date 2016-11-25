@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { TasksComponent } from '../tasks/tasks.component';
+import { TaskFormComponent } from '../tasks/task-form/task-form.component';
+import { Task } from '../tasks/task/task.component';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,11 @@ import { TasksComponent } from '../tasks/tasks.component';
 })
 export class HomeComponent implements OnInit {
   @ViewChild(TasksComponent) tasks: TasksComponent;
-  showAddTask = false;
+  @ViewChild(TaskFormComponent) taskForm: TaskFormComponent;
+
+  showForm = false;
+  editForm = false;
+  taskToBeEdited: Task;
 
   constructor() { }
 
@@ -16,7 +22,9 @@ export class HomeComponent implements OnInit {
   }
 
   toggleTaskForm(): void {
-    this.showAddTask = !this.showAddTask;
+    this.showForm = !this.showForm;
+    this.taskToBeEdited = new Task();
+    this.editForm = false;
   }
 
   taskSubmitted(event) {
@@ -26,5 +34,12 @@ export class HomeComponent implements OnInit {
       this.tasks.fetchTasks();
       this.toggleTaskForm();
     }
+  }
+
+  editTask(task) {
+    this.toggleTaskForm();
+    this.taskToBeEdited = task;
+    this.editForm = true;
+
   }
 }

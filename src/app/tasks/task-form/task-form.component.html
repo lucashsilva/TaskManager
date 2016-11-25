@@ -1,5 +1,6 @@
 <div class="box content">
-  <h2>Adicionar tarefa</h2>
+  <h2 *ngIf="!editForm">Adicionar tarefa</h2>
+  <h2 *ngIf="editForm">Editar tarefa</h2>
   <label class="label">Título</label>
   <p class="control">
     <input [(ngModel)]="task.title" class="input" type="text" placeholder="Título">
@@ -12,7 +13,11 @@
 
   <label class="label">Data e hora</label>
   <p class="control">
-    <input [(ngModel)]="task.timestamp" class="input" type="text" placeholder="Data e hora">
+    <input [(ngModel)]="task.timestamp" ng2-datetime-picker
+       date-format="DD-MM-YYYY hh:mm"
+       hour="23"
+       minute='59'
+       close-on-select="false" width="auto" placeholder="Selecione a data e a hora" class="input"/>
   </p>
   <label class="label">Prioridade</label>
   <p class="control">
@@ -24,7 +29,8 @@
     </span>
   </p>
   <p class="control">
-    <button (click)="saveTask()" class="button is-primary">Salvar</button>
+    <button *ngIf="!editForm" (click)="addTask()" class="button is-primary">Adicionar</button>
+    <button *ngIf="editForm" (click)="saveTask()" class="button is-primary">Salvar</button>
 
   <button (click)="toggleAddTask()" class="button">Cancelar</button>
   </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class TasksComponent implements OnInit {
 
   tasks: any;
 
+  @Output() onEdit = new EventEmitter();
+
   ngOnInit() {
     this.fetchTasks();
   }
@@ -22,5 +24,13 @@ export class TasksComponent implements OnInit {
     });;
   }
 
+  deleteTask(task) {
+    this.tasksService.deleteTask(task).subscribe();
+    this.fetchTasks();
+  }
+
+  editTask(task) {
+    this.onEdit.emit(task);
+  }
 
 }

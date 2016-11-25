@@ -9,7 +9,10 @@
       {{ task.title }}
     </p>
     <a class="card-header-icon">
-      <i class="fa fa-angle-down"></i>
+      <i class="fa fa-check-square-o"></i>
+    </a>
+    <a class="card-header-icon" (click)="deleteTask()" >
+      <i class="fa fa-times"></i>
     </a>
   </header>
   <div class="card-content" *ngIf="task.description">
@@ -22,6 +25,6 @@
 
     <a class="card-footer-item">{{ task.timestamp | date }}</a>
     <a class="card-footer-item">{{ task.timestamp | date:'shortTime' }}</a>
-    <a class="card-footer-item">Editar</a>
+    <a (click)="editTask()" class="card-footer-item">Editar</a>
   </footer>
 </div>

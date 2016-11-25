@@ -1,5 +1,5 @@
 <app-navbar (toggleTaskForm)="toggleTaskForm()"></app-navbar>
 <div class="wrapper">
-  <app-tasks></app-tasks>
+  <app-tasks (onEdit)="editTask($event)"></app-tasks>
 </div>
-<app-task-form *ngIf="showAddTask" (toggleTaskForm)="toggleTaskForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow"></app-task-form>
+<app-task-form [task]="taskToBeEdited" [editForm]="editForm" *ngIf="showForm" (toggleTaskForm)="toggleTaskForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow animate-show"></app-task-form>

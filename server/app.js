@@ -64,7 +64,7 @@ db.once('open', function() {
   app.put('/task/:id', function(req, res) {
     Task.findOneAndUpdate({_id: req.params.id}, req.body, function(err) {
       if(err) return console.error(err);
-      res.sendStatus(200);
+      res.status(200).json({"success": true});
     })
   });
 

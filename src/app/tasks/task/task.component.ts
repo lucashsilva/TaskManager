@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -10,14 +10,26 @@ export class TaskComponent implements OnInit {
   constructor() { }
 
   @Input() task: Task;
+  @Output() onDelete = new EventEmitter();
+  @Output() onEdit = new EventEmitter();
 
   ngOnInit() {
+  }
+
+  deleteTask(): void {
+    //// id
+    this.onDelete.emit(this.task);
+  }
+
+  editTask(): void {
+    this.onEdit.emit(this.task);
   }
 
 }
 
 
 export class Task {
+  _id: string;
   title: string;
   description: string;
   priority: string;
@@ -29,4 +41,5 @@ export class Task {
     this.done = false;
     this.priority = "normal";
   }
+
 }

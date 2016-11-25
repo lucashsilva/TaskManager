@@ -11,6 +11,9 @@ import { TaskComponent } from './tasks/task/task.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component'
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { MomentModule } from 'angular2-moment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,9 @@ import { TaskFormComponent } from './tasks/task-form/task-form.component'
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2DatetimePickerModule,
+    MomentModule
   ],
   providers: [
     Title,
