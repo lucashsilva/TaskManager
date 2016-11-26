@@ -14,7 +14,7 @@
   <label class="label">Data e hora</label>
   <p class="control">
     <input [(ngModel)]="task.timestamp" ng2-datetime-picker
-       date-format="DD-MM-YYYY hh:mm"
+       date-format="DD/MM/YYYY HH:mm"
        hour="23"
        minute='59'
        close-on-select="false" width="auto" placeholder="Selecione a data e a hora" class="input"/>
@@ -27,11 +27,16 @@
         <option value="important">Importante</option>
       </select>
     </span>
+
+    <label class="checkbox">
+      <input [(ngModel)]="task.done" type="checkbox">
+      Terminada
+    </label>
   </p>
   <p class="control">
     <button *ngIf="!editForm" (click)="addTask()" class="button is-primary">Adicionar</button>
     <button *ngIf="editForm" (click)="saveTask()" class="button is-primary">Salvar</button>
 
-  <button (click)="toggleAddTask()" class="button">Cancelar</button>
+  <button (click)="toggleEditForm()" class="button">Cancelar</button>
   </p>
 </div>

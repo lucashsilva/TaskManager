@@ -1,4 +1,6 @@
-<div class="wrapper">
+<app-task-form *ngIf="showEditForm" [editForm]="showEditForm" [task]="task" (toggleTaskForm)="toggleEditForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow animate-show"></app-task-form>
+
+<div class="wrapper" [class.warning]="task.priority === 'important'">
   <header class="card-header">
     <div class="card-image" *ngIf="task.imageUrl">
 
@@ -8,11 +10,15 @@
     <p class="card-header-title">
       {{ task.title }}
     </p>
-    <a class="card-header-icon">
+
+    <a class="card-header-icon" (click)="switchDone()" *ngIf="!task.done">
       <i class="fa fa-check-square-o"></i>
     </a>
+    <a class="card-header-icon" (click)="switchDone()" *ngIf="task.done">
+      <i class="fa fa-undo"></i>
+    </a>
     <a class="card-header-icon" (click)="deleteTask()" >
-      <i class="fa fa-times"></i>
+      <i class="fa fa-trash"></i>
     </a>
   </header>
   <div class="card-content" *ngIf="task.description">
@@ -23,8 +29,8 @@
   </div>
   <footer class="card-footer">
 
-    <a class="card-footer-item">{{ task.timestamp | date }}</a>
-    <a class="card-footer-item">{{ task.timestamp | date:'shortTime' }}</a>
-    <a (click)="editTask()" class="card-footer-item">Editar</a>
+    <a class="card-footer-item"><i class="fa fa-calendar ficon"></i>{{ task.timestamp | date }}</a>
+    <a class="card-footer-item"><i class="fa fa-clock-o ficon"></i>{{ task.timestamp | date:'shortTime' }}</a>
+    <a class="card-footer-item" (click)="toggleEditForm()"> <i class="fa fa-edit"></i>Editar</a>
   </footer>
 </div>

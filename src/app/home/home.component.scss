@@ -11,12 +11,18 @@ app-navbar {
   top:60px;
 }
 
-app-task-form, app-task-edit-form {
+app-task-form {
   position:fixed;
-  top:60px;
+  top:65px;
   z-index: 9999;
   left: 0;
   right: 0;
   margin: 0 auto;
-  max-width:400px;
+  overflow-y: auto;
+}
+
+.btn-floating {
+  position:fixed;
+  right:15px;
+  bottom:15px;
 }

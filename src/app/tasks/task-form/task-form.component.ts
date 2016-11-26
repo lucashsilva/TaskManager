@@ -23,7 +23,7 @@ export class TaskFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleAddTask(): void {
+  toggleEditForm(): void {
     this.toggleTaskForm.emit();
   }
 
@@ -33,26 +33,31 @@ export class TaskFormComponent implements OnInit {
        var newTask = res.json();
 
        if(res.status == 200){
-         this.taskSubmitted.emit({"message":"Tarefa adicionada com sucesso.", "success": true});
+         this.taskSubmitted.emit(true);
+         alert("Tarefa adicionada com sucesso.");
        }
      },
      error => console.log(error)
    );
 
-   this.taskSubmitted.emit({"message":"Tarefa adicionada com sucesso.", "success": true});
+
   }
 
   saveTask(): void {
     this.tasksService.editTask(this.task).subscribe(
      res => {
+       var newTask = res.json();
+
        if(res.status == 200){
-         this.taskSubmitted.emit({"message":"Tarefa atualizada com sucesso.", "success": true});
+         this.taskSubmitted.emit(true);
+         alert("Tarefa atualizada com sucesso.");
        }
      },
      error => console.log(error)
    );
 
   }
+
 
   setTask(task) {
     this.task = task;

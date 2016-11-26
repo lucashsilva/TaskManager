@@ -12,9 +12,8 @@ export class HomeComponent implements OnInit {
   @ViewChild(TasksComponent) tasks: TasksComponent;
   @ViewChild(TaskFormComponent) taskForm: TaskFormComponent;
 
-  showForm = false;
-  editForm = false;
   taskToBeEdited: Task;
+  showForm = false;
 
   constructor() { }
 
@@ -23,23 +22,12 @@ export class HomeComponent implements OnInit {
 
   toggleTaskForm(): void {
     this.showForm = !this.showForm;
-    this.taskToBeEdited = new Task();
-    this.editForm = false;
   }
 
-  taskSubmitted(event) {
-    alert(event.message);
-
-    if(event.success) {
+  taskSubmitted(result) {
+    if(result) {
       this.tasks.fetchTasks();
       this.toggleTaskForm();
     }
-  }
-
-  editTask(task) {
-    this.toggleTaskForm();
-    this.taskToBeEdited = task;
-    this.editForm = true;
-
   }
 }

@@ -1,3 +1,21 @@
-<div *ngFor="let task of tasks" class="card is-fullwidth">
-  <app-task [task]="task" (onDelete)="deleteTask($event)" (onEdit)="editTask($event)"></app-task>
+<progress class="progress is-primary" value="{{ progress }}" max="1"></progress>
+<div class="tabs is-centered">
+  <ul>
+    <li (click)="toggleDoneTasks()" [class.is-active]="!showDoneTasks"><a>A fazer</a></li>
+    <li (click)="toggleDoneTasks()" [class.is-active]="showDoneTasks"><a>Terminadas</a></li>
+  </ul>
+</div>
+<div class="container">
+  <div *ngIf="!showDoneTasks" class="tasks">
+    <div class="notification is-primary" *ngIf="tasks.length === 0">Sem tarefas pendentes.</div>
+    <div *ngFor="let task of tasks" class="card is-fullwidth">
+      <app-task [task]="task" (onDelete)="fetchTasks()" (onEdit)="fetchTasks()"></app-task>
+    </div>
+  </div>
+  <div *ngIf="showDoneTasks" class="tasks">
+    <div class="notification is-primary" *ngIf="doneTasks.length === 0">Sem tarefas terminadas.</div>
+    <div *ngFor="let task of doneTasks" class="card is-fullwidth">
+      <app-task [task]="task" (onDelete)="fetchTasks()" (onEdit)="fetchTasks()"></app-task>
+    </div>
+  </div>
 </div>
