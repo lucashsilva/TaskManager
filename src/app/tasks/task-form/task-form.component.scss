@@ -1,3 +1,9 @@
+@import "../../../styles";
+
 .checkbox {
   margin:7px;
+}
+
+.button .default-color {
+  background-color: $default-color;
 }

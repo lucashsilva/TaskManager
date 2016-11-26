@@ -1,10 +1,17 @@
+@import "../../styles";
+
 app-task {
 
 }
 
 .tabs {
-  background: #fff;
   margin-top:-19px;
+  background-color: $white;
+}
+
+.tabs li a {
+  color: $default-color;
+  border-bottom-color: default-color;
 }
 
 .tasks {
