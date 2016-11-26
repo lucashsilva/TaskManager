@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit {
   @Input() task: Task;
   @Output() onDelete = new EventEmitter();
   @Output() onEdit = new EventEmitter();
+  @Output() onSwitch = new EventEmitter();
   showEditForm = false;
 
   ngOnInit() {
@@ -24,7 +25,6 @@ export class TaskComponent implements OnInit {
   }
 
   editTask(): void {
-    //apenas para marcar como terminada
     this.tasksService.editTask(this.task).subscribe();
     this.onEdit.emit();
   }
@@ -40,9 +40,11 @@ export class TaskComponent implements OnInit {
     }
   }
 
+
   switchDone(): void {
     this.task.done = !this.task.done;
-    this.editTask();
+    this.tasksService.editTask(this.task).subscribe();
+    this.onSwitch.emit();
 
   }
 

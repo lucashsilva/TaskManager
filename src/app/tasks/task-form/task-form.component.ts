@@ -34,7 +34,7 @@ export class TaskFormComponent implements OnInit {
 
        if(res.status == 200){
          this.taskSubmitted.emit(true);
-         alert("Tarefa adicionada com sucesso.");
+
        }
      },
      error => console.log(error)
@@ -50,7 +50,6 @@ export class TaskFormComponent implements OnInit {
 
        if(res.status == 200){
          this.taskSubmitted.emit(true);
-         alert("Tarefa atualizada com sucesso.");
        }
      },
      error => console.log(error)

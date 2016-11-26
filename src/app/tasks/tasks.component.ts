@@ -13,8 +13,9 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   doneTasks: Task[];
   progress: Number;
+  notificationMessage: String;
 
-  @Output() onEdit = new EventEmitter();
+  @Output('onEdit') onEditEmitter = new EventEmitter();
 
   constructor(private tasksService: TasksService) { }
 
@@ -23,7 +24,7 @@ export class TasksComponent implements OnInit {
     this.fetchTasks();
   }
 
-  fetchTasks(): void {
+  private fetchTasks(): void {
     this.initializeArrays();
 
     this.tasksService.getTasks().subscribe(data => {
@@ -42,6 +43,33 @@ export class TasksComponent implements OnInit {
       }
     });;
   }
+
+  onEdit(): void {
+    this.fetchTasks();
+    this.showNotification("Tarefa editada com sucesso.");
+  }
+
+  onAdd(): void {
+    this.fetchTasks();
+    this.showNotification("Tarefa adicionada com sucesso.");
+  }
+
+  onDelete(): void {
+    this.fetchTasks();
+  }
+
+  onSwitch(): void {
+    this.fetchTasks();
+  }
+
+  showNotification(message) {
+    this.notificationMessage = message;
+
+    setTimeout(() => {
+      this.notificationMessage = null;
+    }, 5000);
+  }
+
 
   private initializeArrays():void {
     this.tasks = <Task[]>(new Array());

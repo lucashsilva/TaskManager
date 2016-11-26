@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   taskSubmitted(result) {
     if(result) {
-      this.tasks.fetchTasks();
+      this.tasks.onAdd();
       this.toggleTaskForm();
     }
   }
