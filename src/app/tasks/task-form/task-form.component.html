@@ -28,7 +28,7 @@
       </select>
     </span>
 
-    <label class="checkbox">
+    <label *ngIf="editForm" class="checkbox">
       <input [(ngModel)]="task.done" type="checkbox">
       Terminada
     </label>

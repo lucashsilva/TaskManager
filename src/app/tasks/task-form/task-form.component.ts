@@ -21,6 +21,13 @@ export class TaskFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.editForm){
+      this.task = this.clone(this.task);
+    }
+  }
+
+  clone(task): Task {
+    return <Task> JSON.parse(JSON.stringify(task));
   }
 
   toggleEditForm(): void {
