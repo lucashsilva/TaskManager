@@ -7,13 +7,13 @@
 </div>
 <div class="container">
   <div *ngIf="!showDoneTasks" class="tasks">
-    <div class="notification is-primary" *ngIf="tasks.length === 0">Sem tarefas pendentes.</div>
+    <div class="notification is-primary" *ngIf="progress === 1">Sem tarefas pendentes.</div>
     <div *ngFor="let task of tasks" class="card is-fullwidth">
       <app-task [task]="task" (onDelete)="fetchTasks()" (onEdit)="fetchTasks()"></app-task>
     </div>
   </div>
   <div *ngIf="showDoneTasks" class="tasks">
-    <div class="notification is-primary" *ngIf="doneTasks.length === 0">Sem tarefas terminadas.</div>
+    <div class="notification is-primary" *ngIf="progress === 0">Sem tarefas terminadas.</div>
     <div *ngFor="let task of doneTasks" class="card is-fullwidth">
       <app-task [task]="task" (onDelete)="fetchTasks()" (onEdit)="fetchTasks()"></app-task>
     </div>

@@ -12,7 +12,7 @@ export class TasksComponent implements OnInit {
   showDoneTasks = false;
   tasks: Task[];
   doneTasks: Task[];
-  progress = 50;
+  progress: Number;
 
   @Output() onEdit = new EventEmitter();
 
