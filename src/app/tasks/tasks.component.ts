@@ -5,7 +5,7 @@ import { Task } from './task/task.component';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
 
@@ -46,12 +46,12 @@ export class TasksComponent implements OnInit {
 
   onEdit(): void {
     this.fetchTasks();
-    this.showNotification("Tarefa editada com sucesso.");
+    this.showNotification("Tarefa editada.");
   }
 
   onAdd(): void {
     this.fetchTasks();
-    this.showNotification("Tarefa adicionada com sucesso.");
+    this.showNotification("Tarefa adicionada.");
   }
 
   onDelete(): void {

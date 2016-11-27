@@ -1,4 +1,4 @@
-<progress class="progress is-success" value="{{ progress }}" max="1"></progress>
+<progress class="progress" value="{{ progress }}" max="1"></progress>
 <div class="tabs is-centered">
   <ul>
     <li (click)="toggleDoneTasks()" [class.is-active]="!showDoneTasks"><a>A fazer</a></li>
@@ -12,13 +12,13 @@
 </div>
   <div *ngIf="!showDoneTasks" class="tasks">
     <div class="notification is-primary" *ngIf="progress === 1">Sem tarefas pendentes.</div>
-    <div *ngFor="let task of tasks" class="card is-fullwidth">
+    <div *ngFor="let task of tasks | datesort" class="card is-fullwidth">
       <app-task [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
     </div>
   </div>
   <div *ngIf="showDoneTasks" class="tasks">
     <div class="notification is-primary" *ngIf="progress === 0">Sem tarefas terminadas.</div>
-    <div *ngFor="let task of doneTasks" class="card is-fullwidth">
+    <div *ngFor="let task of doneTasks | datesort" class="card is-fullwidth">
       <app-task [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
     </div>
   </div>

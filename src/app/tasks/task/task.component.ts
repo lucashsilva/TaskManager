@@ -8,13 +8,18 @@ import { TasksService } from '../../services/tasks.service';
 })
 export class TaskComponent implements OnInit {
 
-  constructor(private tasksService: TasksService) { }
-
   @Input() task: Task;
-  @Output() onDelete = new EventEmitter();
-  @Output() onEdit = new EventEmitter();
-  @Output() onSwitch = new EventEmitter();
-  showEditForm = false;
+  @Output() onDelete;
+  @Output() onEdit;
+  @Output() onSwitch;
+  showEditForm: boolean;
+
+  constructor(private tasksService: TasksService) {
+    this.onDelete = new EventEmitter();
+    this.onEdit = new EventEmitter();
+    this.onSwitch = new EventEmitter();
+    this.showEditForm = false;
+  }
 
   ngOnInit() {
   }

@@ -22,9 +22,13 @@ app-task {
   margin-top:-15px;
 }
 
-progress {
+progress  {
   border-radius: 0px;
   margin-top:-7px;
+}
+
+progress::-webkit-progress-value {
+  background: $default-color;
 }
 
 .notification {
