@@ -20,12 +20,9 @@ a {
 }
 
 .card-header .fa {
-  color: $default-color;
+  color: $grey;
 }
 
-.card-footer-item .fa {
-  color:$white;
-}
 
 .wrapper {
   position:relative;
@@ -38,10 +35,11 @@ a {
 
 .card-footer-item {
   font-size:12px;
-  color:$white;
-  background-color:$default-color;
+  color:$grey;
+
 
 }
+
 
 
 .ficon {
