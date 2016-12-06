@@ -13,6 +13,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test');
 var db = mongoose.connection;
@@ -83,7 +88,7 @@ db.once('open', function() {
   });
 
   app.listen(app.get('port'), function() {
-    console.log('Angular 2 Full Stack listening on port '+app.get('port'));
+    console.log('TaskManager listening on port '+app.get('port'));
   });
 });
 

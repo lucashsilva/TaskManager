@@ -1,6 +1,6 @@
 <app-task-form *ngIf="showEditForm" [editForm]="showEditForm" [task]="task" (toggleTaskForm)="toggleEditForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow animate-show"></app-task-form>
 
-<div class="wrapper">
+<div class="wrapper card is-fullwidth">
   <header class="card-header">
     <div class="card-image" *ngIf="task.imageUrl">
 

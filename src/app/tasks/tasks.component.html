@@ -12,14 +12,13 @@
 </div>
   <div *ngIf="!showDoneTasks" class="tasks">
     <div class="notification is-primary" *ngIf="progress === 1">Sem tarefas pendentes.</div>
-    <div *ngFor="let task of tasks | datesort" class="card is-fullwidth">
-      <app-task [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
-    </div>
+
+      <app-task *ngFor="let task of getUndoneTasks()" [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
+
   </div>
   <div *ngIf="showDoneTasks" class="tasks">
     <div class="notification is-primary" *ngIf="progress === 0">Sem tarefas terminadas.</div>
-    <div *ngFor="let task of doneTasks | datesort" class="card is-fullwidth">
-      <app-task [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
-    </div>
+      <app-task *ngFor="let task of getDoneTasks()" [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
+
   </div>
 </div>

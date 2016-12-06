@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { Task } from './task/task.component';
+import { TaskDateSortPipe } from './pipes/task-date-sort.pipe';
 
 @Component({
   selector: 'app-tasks',
@@ -9,15 +10,19 @@ import { Task } from './task/task.component';
 })
 export class TasksComponent implements OnInit {
 
-  showDoneTasks = false;
+  showDoneTasks: boolean;
   tasks: Task[];
   doneTasks: Task[];
   progress: Number;
   notificationMessage: String;
+  dateSortPipe: TaskDateSortPipe;
 
   @Output('onEdit') onEditEmitter = new EventEmitter();
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService) {
+    this.showDoneTasks = false;
+    this.dateSortPipe = new TaskDateSortPipe();
+  }
 
   ngOnInit() {
     this.initializeArrays();
@@ -42,12 +47,23 @@ export class TasksComponent implements OnInit {
         this.progress = done/tasks.length;
       }
     });;
+
   }
+
+  getDoneTasks() {
+    return this.dateSortPipe.transform(this.doneTasks, "");
+  }
+
+  getUndoneTasks() {
+    return this.dateSortPipe.transform(this.tasks, "");
+  }
+
 
   onEdit(): void {
     this.fetchTasks();
     this.showNotification("Tarefa editada.");
   }
+
 
   onAdd(): void {
     this.fetchTasks();
