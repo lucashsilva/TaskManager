@@ -1,24 +1,9 @@
-<progress class="progress" value="{{ progress }}" max="1"></progress>
-<div class="tabs is-centered">
-  <ul>
-    <li (click)="toggleDoneTasks()" [class.is-active]="!showDoneTasks"><a>A fazer</a></li>
-    <li (click)="toggleDoneTasks()" [class.is-active]="showDoneTasks"><a>Terminadas</a></li>
-  </ul>
-</div>
-<div class="container">
-  <div *ngIf="notificationMessage" class="notification is-success">
-  <button (click)="notificationMessage=null"class="delete"></button>
-  {{ notificationMessage }}
-</div>
-  <div *ngIf="!showDoneTasks" class="tasks">
-    <div class="notification is-primary" *ngIf="progress === 1">Sem tarefas pendentes.</div>
-
-      <app-task *ngFor="let task of getUndoneTasks()" [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
-
-  </div>
-  <div *ngIf="showDoneTasks" class="tasks">
-    <div class="notification is-primary" *ngIf="progress === 0">Sem tarefas terminadas.</div>
-      <app-task *ngFor="let task of getDoneTasks()" [task]="task" (onDelete)="onDelete()" (onEdit)="onEdit()" (onSwitch)="onSwitch()"></app-task>
-
-  </div>
-</div>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>
+<app-task></app-task>

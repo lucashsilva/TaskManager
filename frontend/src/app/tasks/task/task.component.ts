@@ -12,13 +12,11 @@ export class TaskComponent implements OnInit {
   @Output() onDelete;
   @Output() onEdit;
   @Output() onSwitch;
-  showEditForm: boolean;
 
   constructor(private tasksService: TasksService) {
     this.onDelete = new EventEmitter();
     this.onEdit = new EventEmitter();
     this.onSwitch = new EventEmitter();
-    this.showEditForm = false;
   }
 
   ngOnInit() {
@@ -34,13 +32,8 @@ export class TaskComponent implements OnInit {
     this.onEdit.emit();
   }
 
-  toggleEditForm(): void {
-    this.showEditForm = !this.showEditForm;
-  }
-
   taskSubmitted(result): void {
     if(result){
-      this.toggleEditForm();
       this.onEdit.emit();
     }
   }

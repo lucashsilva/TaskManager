@@ -13,8 +13,6 @@ export class TasksComponent implements OnInit {
   showDoneTasks: boolean;
   tasks: Task[];
   doneTasks: Task[];
-  progress: Number;
-  notificationMessage: String;
   dateSortPipe: TaskDateSortPipe;
 
   @Output('onEdit') onEditEmitter = new EventEmitter();
@@ -44,7 +42,6 @@ export class TasksComponent implements OnInit {
         }else{
           this.tasks.push(task);
         }
-        this.progress = done/tasks.length;
       }
     });;
 
@@ -61,13 +58,11 @@ export class TasksComponent implements OnInit {
 
   onEdit(): void {
     this.fetchTasks();
-    this.showNotification("Tarefa editada.");
   }
 
 
   onAdd(): void {
     this.fetchTasks();
-    this.showNotification("Tarefa adicionada.");
   }
 
   onDelete(): void {
@@ -76,14 +71,6 @@ export class TasksComponent implements OnInit {
 
   onSwitch(): void {
     this.fetchTasks();
-  }
-
-  showNotification(message) {
-    this.notificationMessage = message;
-
-    setTimeout(() => {
-      this.notificationMessage = null;
-    }, 5000);
   }
 
 

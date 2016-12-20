@@ -1,5 +1,14 @@
-<app-navbar (toggleTaskForm)="toggleTaskForm()"></app-navbar>
-<div class="wrapper">
-  <app-tasks (onEdit)="editTask($event)"></app-tasks>
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<div class="pusher">
+  <div class="ui stackable three column grid">
+  <div class="row">
+    <div class="column">
+      <app-tasks></app-tasks>
+    </div>
+    <div class="column"></div>
+    <div class="column"></div>
+  </div>
+
 </div>
-<app-task-form *ngIf="showForm" (toggleTaskForm)="toggleTaskForm()" (taskSubmitted)="taskSubmitted($event)" class="has-shadow animate-show"></app-task-form>
+</div>
