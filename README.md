@@ -1,29 +1,37 @@
-# SiLab02
+# Lab03Si
 
-The frontend of this project was generated with [angular-cli](https://github.com/angular/angular-cli).
+## Backend ##
 
-This project uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_bundle)):
-* [**M**ongoose.js](http://www.mongoosejs.com) ([MongoDB](http://www.mongodb.com)): database
-* [**E**xpress.js](http://expressjs.com): backend framework
-* [**A**ngular 2](https://angular.io): frontend framework
-* [**N**ode.js](https://nodejs.org): runtime environment
-* [Angular CLI](https://cli.angular.io): project scaffolding
-* [Bulma](http://bulma.io/): layout and styles
-* [Font Awesome](http://fontawesome.io): icons
+To do.
 
-## Prerequisites
-1. Install [Node.js](https://nodejs.org) and [MongoDB](http://www.mongodb.com)
-2. Install Angular CLI: `npm i angular-cli -g`
-3. From project root folder install all the dependencies: `npm i`
+## Frontend ##
 
+The frontend of this project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.16.
 
-## Run
-1. Command window 1: `mongod`: run MongoDB
-2. Command window 2: `ng build -w`: build the project and keep watching the files for changes
-3. Command window 3: `npm start`: run Express server
-4. Go to [localhost:3000](http://localhost:3000)
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Production
-Run `ng build -prod` to create a production ready bundle.
+## Code scaffolding
 
-Author: Lucas Silva
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). 
+Before running the tests make sure you are serving the app via `ng serve`.
+
+## Deploying to Github Pages
+
+Run `ng github-pages:deploy` to deploy to Github Pages.
+
+## Further help
+
+To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
