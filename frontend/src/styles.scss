@@ -1,12 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
 $default-color: #4db6ac;
 $white: #fff;
 $light-grey: #eee;
 $black: #000;
 $default-color-dark: #006064;
 $warning-color: #ffcc14;
-$grey: #424242;
+$dark-grey: #888;
+$light-red: #dd5555;
+$dark-red: #882222;
+$medium-grey: #B8B8B8;
 
-.default-color {
-  background-color: $default-color;
+.btn {
+  background-color: $light-red;
+  border: none;
+}
+
+.nav-link.active {
+  background: $light-red;
   color: $white;
+}
+
+.nav-link {
+  font-weight: 50;
+}
+
+a {
+  color: $black;
 }

@@ -15,17 +15,18 @@ import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { MomentModule } from 'angular2-moment';
 import { TaskDateSortPipe } from './tasks/pipes/task-date-sort.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
     TaskComponent,
-    HomeComponent,
     NavbarComponent,
     TaskFormComponent,
     TaskDateSortPipe,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,17 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './tasks/task/task.component';
+import { TaskFormComponent } from './tasks/task-form/task-form.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'tasks', component: TasksComponent },
+  { path: 'tasks/new', component: TaskFormComponent },
+  { path: 'tasks/:id', component: TaskComponent },
+  { path: 'tasks/:id/edit', component: TaskFormComponent }
 ];
 
 @NgModule({

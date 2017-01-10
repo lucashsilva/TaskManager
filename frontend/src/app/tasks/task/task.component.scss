@@ -1,6 +1,29 @@
 @import "../../../styles";
 
+.nav-item a {
+  border-radius: .25rem;
+  padding: 10px;
+}
+
+.card-header, .card-footer {
+  padding: 5px;
+  background: transparent;
+  vertical-align: middle;
+
+}
+
+.card-header ul, .card-footer ul {
+  margin: 0;
+}
+
+.card-title {
+  font-size: 16px;
+}
+
 .card {
-  margin: 5px;
+  font-size: 0.7rem;
+  border: none;
+  box-shadow: 0px 0px 5px $light-grey;
   width: 100%;
+  margin-bottom: 5px;
 }

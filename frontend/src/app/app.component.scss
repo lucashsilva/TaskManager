@@ -1,0 +1,21 @@
+@import "../styles";
+
+.page {
+  background: $light-grey;
+  margin-top: 50px;
+}
+
+
+.container {
+  padding-top: 10px;
+  height: 250vh;
+  font-family: 'Montserrat', sans-serif;
+}
+
+@media screen and (max-width: 990px) {
+    .sidebar {
+      display: none;
+    }
+
+
+}
