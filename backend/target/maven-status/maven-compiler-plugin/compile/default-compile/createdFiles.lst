@@ -1,2 +1,7 @@
-com/si1/lab03/api/tasks/TaskController.class
-com/si1/lab03/tasks/Task.class
+com/si1/lab03/api/user/User.class
+com/si1/lab03/api/task/TaskController.class
+com/si1/lab03/api/services/UserService.class
+com/si1/lab03/api/token/Token.class
+com/si1/lab03/api/auth/AuthController.class
+com/si1/lab03/api/login/LoginRequest.class
+com/si1/lab03/api/task/Task.class

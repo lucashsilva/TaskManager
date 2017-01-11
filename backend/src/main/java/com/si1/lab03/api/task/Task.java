@@ -1,4 +1,4 @@
-package com.si1.lab03.tasks;
+package com.si1.lab03.api.task;
 
 public class Task {
 	private String id;

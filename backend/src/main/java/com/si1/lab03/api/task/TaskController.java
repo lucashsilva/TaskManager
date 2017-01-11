@@ -1,4 +1,4 @@
-package com.si1.lab03.api.tasks;
+package com.si1.lab03.api.task;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,25 +9,31 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.si1.lab03.tasks.Task;
+import com.si1.lab03.api.services.UserService;
 
 @RestController
 public class TaskController {
 
 private static Map<String, Task> tasks;
 	
+
 	@RequestMapping(
 			value = "/api/tasks",
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Task>> getTasks() {
-		Collection<Task> tasks = this.tasks.values();
+	public ResponseEntity<Collection<Task>> getTasks(@RequestHeader(value = "Authorization", defaultValue = "") String token) {
+		Collection<Task> tasks = UserService.getInstance().getTasks(token);
 		
-		return new ResponseEntity<Collection<Task>>(tasks, HttpStatus.OK);
+		if (tasks != null) {
+			return new ResponseEntity<Collection<Task>>(tasks, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<Collection<Task>>(HttpStatus.UNAUTHORIZED);
 	}
 	
 	@RequestMapping(
