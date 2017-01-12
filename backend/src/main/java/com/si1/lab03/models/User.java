@@ -1,18 +1,26 @@
 package com.si1.lab03.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class User {
-	private long id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity(name="t_users")
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
 	private String email;
 	private String password;
-	private List<Task> tasks;
-
-	private static long nextId = 0;
+	@OneToMany(mappedBy="user")
+    private List<Task> tasks;
 	
 	public User() {
 		this.tasks = new ArrayList<Task>();
@@ -20,17 +28,16 @@ public class User {
 	}
 	
 	public User(String email, String password) {
-		this.id = nextId++;
 		this.email = email;
 		this.password = password;
 		this.tasks = new ArrayList<Task>();
 	}
 	
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	
@@ -50,13 +57,13 @@ public class User {
 		this.tasks = tasks;
 	}
 	
-	public boolean authenticate(String password) {
-		return this.password.equals(password);
+	public String getPassword() {
+		return password;
 	}
 
-	public void addTask(Task task) {
-		this.tasks.add(task);
-		
-	}
+	public void setPassword(String password) {
+		this.password = password;
+	} 
+
 
 }

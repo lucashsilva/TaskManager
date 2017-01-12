@@ -4,14 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity(name="t_tasks")
 public class Task implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
@@ -21,15 +26,19 @@ public class Task implements Serializable {
 	private Date timestamp;
 	private String priority;
 	private boolean done;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="owner_id")
+	private User user;
 	
 	public Task() {} 
 	
-	public Task(String title, String description, Date timestamp, String priority, boolean done) {
+	public Task(String title, String description, Date timestamp, String priority, boolean done, User user) {
 		this.title = title;
 		this.description = description;
 		this.timestamp = timestamp;
 		this.priority = priority;
 		this.done = done;
+		this.user = user;
 	}
 
 	public Integer getId() {
@@ -78,6 +87,10 @@ public class Task implements Serializable {
 
 	public void setDone(boolean done) {
 		this.done = done;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

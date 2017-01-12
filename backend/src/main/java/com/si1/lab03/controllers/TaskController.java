@@ -51,14 +51,9 @@ public class TaskController {
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Task> addTask(@RequestBody Task task) {
-		try {
-			taskService.create(task);
-		
-			return new ResponseEntity<Task>(task, HttpStatus.CREATED);
-		} catch (InvalidTaskException e) {
-			return new ResponseEntity<Task>(HttpStatus.BAD_REQUEST);
-		}
-		
+		taskService.create(task);
+		System.out.println(task.getTitle());
+		return new ResponseEntity<Task>(task, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(

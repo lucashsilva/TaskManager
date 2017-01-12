@@ -43,12 +43,8 @@ public class TaskService {
 		
 	}
 	
-	public void create(Task task) throws InvalidTaskException {
-		if (!taskRepository.exists(task.getId())) {
-			taskRepository.save(task);
-		} else {
-			throw new InvalidTaskException();
-		}
+	public void create(Task task) {
+		taskRepository.save(task);
 	}
 	
 	public void update(Integer id, Task task) throws TaskNotFoundException, InvalidTaskException {
