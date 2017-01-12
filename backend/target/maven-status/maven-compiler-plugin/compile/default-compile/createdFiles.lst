@@ -1,7 +1,10 @@
-com/si1/lab03/api/user/User.class
-com/si1/lab03/api/task/TaskController.class
-com/si1/lab03/api/services/UserService.class
-com/si1/lab03/api/token/Token.class
-com/si1/lab03/api/auth/AuthController.class
-com/si1/lab03/api/login/LoginRequest.class
-com/si1/lab03/api/task/Task.class
+com/si1/lab03/models/Permissions.class
+cmo/si1/lab03/config/WebSecurityConfig.class
+com/si1/lab03/dao/TaskRepository.class
+com/si1/lab03/models/User.class
+com/si1/lab03/controllers/MainController.class
+com/si1/lab03/models/Task.class
+com/si1/lab03/exceptions/InvalidTaskException.class
+com/si1/lab03/controllers/TaskController.class
+com/si1/lab03/exceptions/TaskNotFoundException.class
+com/si1/lab03/services/TaskService.class

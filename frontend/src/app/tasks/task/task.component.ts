@@ -54,7 +54,6 @@ export class Task {
   title: string;
   description: string;
   priority: string;
-  imageUrl: string;
   timestamp: Date;
   done: boolean;
 

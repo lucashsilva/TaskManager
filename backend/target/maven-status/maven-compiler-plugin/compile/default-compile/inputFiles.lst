@@ -1,4 +1,9 @@
-/home/lucas/lab03/src/main/java/com/si1/lab03/tasks/Task.java
-/home/lucas/lab03/src/main/java/com/si1/lab03/api/user/UserController.java
-/home/lucas/lab03/src/main/java/com/si1/lab03/user/User.java
-/home/lucas/lab03/src/main/java/com/si1/lab03/Lab03Application.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/controllers/MainController.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/services/TaskService.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/models/User.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/controllers/TaskController.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/Lab03Application.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/models/Task.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/dao/TaskRepository.java
+/home/lucas/si1_lab03/backend/src/main/java/cmo/si1/lab03/config/WebSecurityConfig.java
+/home/lucas/si1_lab03/backend/src/main/java/com/si1/lab03/models/Permissions.java
