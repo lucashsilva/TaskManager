@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { TasksService } from './services/tasks.service';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
-import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component'
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';

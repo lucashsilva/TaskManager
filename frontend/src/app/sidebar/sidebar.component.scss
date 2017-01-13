@@ -1,44 +1,85 @@
 @import "../../styles";
 
-.card {
+.sidebar {
+  background: $white;
   font-size: 0.8rem;
   border: none;
   width: 100%;
+  height: 100%;
   margin-bottom: 5px;
+}
+
+.sidebar-header {
+  width: 100%;
+  background: url('http://img12.deviantart.net/14c5/i/2013/276/9/8/mountain_background_with_waterfall_by_burtn-d6p1keb.jpg');
+  background-size: cover;
+}
+
+.profile-pic {
+
 }
 
 .avatar {
   width: 100px;
-  box-shadow: 0px 0px 10px $medium-grey;
+  height: 100px;
+  box-shadow: 0px 0px 5px $medium-grey;
   align-self: center;
   margin: 10px;
+  z-index: -1;
 }
+
 
 .name {
-  border-bottom: 1px solid $light-red;
-  width: 90%;
-  text-align: center;
-  align-self: center;
+  position: absolute;
+  margin-top: -33px;
+  width: 100%;
   padding: 5px;
-  font-size: 16px;
-  color: $light-red;
+  font-size: 12px;
+  line-height: 23px;
+  color: $white;
+  background: rgba(0, 0, 0, .4);
+  z-index: 999999;
 
 }
 
-.list-group-item {
+.menu-item {
   padding: 10px;
 }
 
-.list-group {
-  margin: 10px;
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
 }
 
+.menu li {
+  list-style-type: none;
+}
 
+.menu li:hover {
+  text-decoration: none;
+  font-weight: bold;
+  opacity: 0.9;
+}
 
-@media screen and (min-width: 990px) {
-    .card {
-      box-shadow: 0px 0px 5px $light-grey;
-    }
+.menu li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: $dark-grey;
+    display: block;
 
+}
 
+.count {
+  margin-left: 5px;
+  padding: 3px;
+  background: $dark-grey;
+  color: $white;
+  padding: 6px;
+  border-radius: 100%;
+  font-size: 10px;
+  float: right;
+  line-height: 8px;
 }

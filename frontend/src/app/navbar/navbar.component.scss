@@ -1,18 +1,21 @@
 @import "../../styles";
 
 nav {
-  background: $white;
+  background: $medium-blue;
   box-shadow: 0px 0px 5px $light-grey;
   font-family: 'Montserrat', sans-serif;
+  height: 70px;
+  box-shadow: 0px 0px 10px $dark-grey;
 }
 
 nav a {
-    color: $light-red;
+    color: $white;
     font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
 }
 
 nav a:hover {
-  color: $light-red;
+  color: $white;
 }
 
 
