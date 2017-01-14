@@ -9,13 +9,21 @@
 /frontend/bower_components
 
 # IDEs and editors
-/.idea
-/.vscode
-.project
-.classpath
-.c9/
-*.launch
-.settings/
+backend/.idea
+backend/.vscode
+backend/.project
+backend/.classpath
+backend/.c9/
+backend/*.launch
+backend/.settings/
+frontend/.idea
+frontend/.vscode
+frontend/.project
+frontend/.classpath
+frontend/.c9/
+frontend/*.launch
+frontend/.settings/
+
 
 # misc
 /frontend/.sass-cache

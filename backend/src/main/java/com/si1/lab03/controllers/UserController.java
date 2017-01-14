@@ -1,20 +1,19 @@
 package com.si1.lab03.controllers;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.si1.lab03.exceptions.InvalidUserException;
+import com.si1.lab03.exceptions.UserAlreadyExistsException;
 import com.si1.lab03.exceptions.UserNotFoundException;
 import com.si1.lab03.models.User;
+import com.si1.lab03.services.TokenAuthenticationService;
 import com.si1.lab03.services.UserService;
 
 @RestController
@@ -22,6 +21,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TokenAuthenticationService tokenService;
 	
 	
 	@RequestMapping(
@@ -32,9 +33,9 @@ public class UserController {
 		try {
 			userService.create(user);
 		
-			return new ResponseEntity<User>(user, HttpStatus.CREATED);
-		} catch (InvalidUserException e) {
-			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<User>(HttpStatus.CREATED);
+		} catch (UserAlreadyExistsException e) {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 		
 	}
@@ -43,26 +44,30 @@ public class UserController {
 			value = "api/users",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateUser(@RequestBody User user) {	
+	public ResponseEntity<User> updateUser(@RequestHeader(value="Authorization") String token, @RequestBody User user) {	
 		try {
-			userService.update(user);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-		} catch (UserNotFoundException | InvalidUserException e) {
-			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+			String email = tokenService.extractEmail(token);
+		
+			userService.update(email, user);
+			return new ResponseEntity<User>(HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
 		}
 
 	}
 	
 	@RequestMapping(
-			value = "/api/users/{id}", 
+			value = "/api/users", 
 			method = RequestMethod.DELETE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> deleteUser(@PathVariable("id") Integer id) {
+	public ResponseEntity<User> deleteUser(@RequestHeader(value="Authorization") String token) {
 		try {
-			userService.delete(id);
+			String email = tokenService.extractEmail(token);
+			
+			userService.delete(email);
 			return new ResponseEntity<User>(HttpStatus.OK);
 		} catch (UserNotFoundException e) {
-			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
 		}
 		
 	}

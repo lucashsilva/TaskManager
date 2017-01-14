@@ -40,7 +40,7 @@ public class TaskController {
 			tasks = userService.getTasks(email);
 			return new ResponseEntity<Collection<Task>>(tasks, HttpStatus.OK);
 		} catch (UserNotFoundException e) {
-			return new ResponseEntity<Collection<Task>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Collection<Task>>(HttpStatus.FORBIDDEN);
 		}
 		
 	}
@@ -55,8 +55,10 @@ public class TaskController {
 		try {
 			task = userService.getTask(id, email);
 			return new ResponseEntity<Task>(task, HttpStatus.OK);
-		} catch (TaskNotFoundException | UserNotFoundException e) {
+		} catch (TaskNotFoundException e) {
 			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
 		}
 		
 
@@ -71,7 +73,7 @@ public class TaskController {
 			userService.addTask(email, task);
 			return new ResponseEntity<Task>(HttpStatus.CREATED);
 		} catch (UserNotFoundException e) {
-			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
 		}
 	}
 	
@@ -86,8 +88,10 @@ public class TaskController {
 		try {
 			userService.updateTask(email, task);
 			return new ResponseEntity<Task>(HttpStatus.OK);
-		} catch (TaskNotFoundException | UserNotFoundException e) {
+		} catch (TaskNotFoundException e) {
 			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
 		}
 
 	}
@@ -101,8 +105,10 @@ public class TaskController {
 		try {
 			userService.deleteTask(email, id);
 			return new ResponseEntity<Task>(HttpStatus.OK);
-		} catch (TaskNotFoundException | UserNotFoundException e) {
+		} catch (TaskNotFoundException e) {
 			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
 		}
 	}
 	

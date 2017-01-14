@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.si1.lab03.dao.TaskRepository;
 import com.si1.lab03.dao.UserRepository;
-import com.si1.lab03.exceptions.InvalidUserException;
 import com.si1.lab03.exceptions.TaskNotFoundException;
+import com.si1.lab03.exceptions.UserAlreadyExistsException;
 import com.si1.lab03.exceptions.UserNotFoundException;
 import com.si1.lab03.models.Task;
 import com.si1.lab03.models.User;
@@ -48,11 +48,11 @@ public class UserService {
 
 	}
 
-	public void create(User user) throws InvalidUserException {
+	public void create(User user) throws UserAlreadyExistsException {
 		if (!exists(user.getEmail())) {
 			userRepository.save(user);
 		} else {
-			throw new InvalidUserException();
+			throw new UserAlreadyExistsException();
 		}
 	}
 
@@ -60,17 +60,26 @@ public class UserService {
 		return email != null && userRepository.findByEmail(email) != null;
 	}
 
-	public void update(User user) throws UserNotFoundException, InvalidUserException {
-		if (user.getEmail() != null && exists(user.getEmail())) {
-			userRepository.save(user);
-		} else {
-			throw new UserNotFoundException();
-		}
+	public void update(String email, User user) throws UserNotFoundException {
+		if (email != null) {
+			User userUpdated = userRepository.findByEmail(email);
+			
+			if (userUpdated != null) {
+				userUpdated.setEmail(user.getEmail());
+				userUpdated.setPassword(user.getPassword());
+				
+				userRepository.save(userUpdated);
+				return;
+			}
+		} 
+		
+		throw new UserNotFoundException();
+	
 	}
 
-	public void delete(Integer id) throws UserNotFoundException {
-		if (userRepository.exists(id)) {
-			userRepository.delete(id);
+	public void delete(String email) throws UserNotFoundException {
+		if (email != null && exists(email)) {
+			userRepository.deleteByEmail(email);
 		} else {
 			throw new UserNotFoundException();
 		}
