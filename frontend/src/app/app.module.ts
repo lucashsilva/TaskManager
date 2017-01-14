@@ -1,3 +1,4 @@
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { MomentModule } from 'angular2-moment';
 import { TaskDateSortPipe } from './tasks/pipes/task-date-sort.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     TaskFormComponent,
     TaskDateSortPipe,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    TasksChartComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpModule,
     AppRoutingModule,
     Ng2DatetimePickerModule,
-    MomentModule
+    MomentModule,
+    ChartsModule
   ],
   providers: [
     Title,

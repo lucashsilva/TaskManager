@@ -59,14 +59,12 @@
 }
 
 .menu li:hover {
-  text-decoration: none;
   font-weight: bold;
   opacity: 0.9;
 }
 
 .menu li a {
     text-decoration: none;
-    font-weight: bold;
     color: $dark-grey;
     display: block;
 
