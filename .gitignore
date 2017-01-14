@@ -41,3 +41,5 @@ frontend/.settings/
 #System Files
 .DS_Store
 Thumbs.db
+
+backend/target/
