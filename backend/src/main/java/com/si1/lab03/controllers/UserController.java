@@ -22,30 +22,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
-	@RequestMapping(
-			value = "/api/users",
-			method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<User>> getUsers() {
-		return new ResponseEntity<Collection<User>>(userService.findAll(), HttpStatus.OK);
-		
-	}
 	
-	@RequestMapping(
-			value = "/api/users/{id}", 
-			method = RequestMethod.GET, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> getUser(@PathVariable("id") Integer id) {
-		User user;
-		try {
-			user = userService.findOne(id);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-		} catch (UserNotFoundException e) {
-			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
-		}
-
-	}
+	
 	@RequestMapping(
 			value = "api/users",
 			method = RequestMethod.POST,
@@ -62,12 +40,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(
-			value = "api/users/{id}",
+			value = "api/users",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> updateUser(@PathVariable("id") Integer id, @RequestBody User user) {	
+	public ResponseEntity<User> updateUser(@RequestBody User user) {	
 		try {
-			userService.update(id, user);
+			userService.update(user);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (UserNotFoundException | InvalidUserException e) {
 			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);

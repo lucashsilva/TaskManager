@@ -1,13 +1,11 @@
-com/si1/lab03/exceptions/InvalidUserException.class
-cmo/si1/lab03/config/WebSecurityConfig.class
-com/si1/lab03/dao/TaskRepository.class
-com/si1/lab03/models/User.class
 com/si1/lab03/models/Task.class
 com/si1/lab03/exceptions/InvalidTaskException.class
 com/si1/lab03/controllers/TaskController.class
-com/si1/lab03/services/UserService.class
 com/si1/lab03/controllers/UserController.class
 com/si1/lab03/exceptions/TaskNotFoundException.class
 com/si1/lab03/dao/UserRepository.class
 com/si1/lab03/exceptions/UserNotFoundException.class
-com/si1/lab03/services/TaskService.class
+com/si1/lab03/exceptions/InvalidUserException.class
+com/si1/lab03/dao/TaskRepository.class
+com/si1/lab03/models/User.class
+com/si1/lab03/services/UserService.class

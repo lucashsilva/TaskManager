@@ -63,6 +63,21 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void addTask(Task task) {
+		this.tasks.add(task);
+		
+	}
+
+	public void deleteTask(Integer id) {
+		for (Task task: this.tasks) {
+			if (task.getId().equals(id)) {
+				this.tasks.remove(task);
+				return;
+			}
+		}
+		
 	} 
 
 
