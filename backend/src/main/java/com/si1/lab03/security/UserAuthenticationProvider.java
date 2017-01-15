@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -28,13 +29,13 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
             // use the credentials and authenticate against the third-party system
             return new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
         } else {
-            return null;
+        	throw new BadCredentialsException("Bad credentials.");
         }
     }
  
     @Override
     public boolean supports(Class<?> authentication) {
-        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    	return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
     }
 
 }

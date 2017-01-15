@@ -98,7 +98,7 @@ public class UserService {
 	public boolean authenticate(String email, String password) {
 		User user = userRepository.findByEmail(email);
 		
-		return user != null && user.getPassword().equals(password);
+		return (user != null && user.getPassword().equals(password));
 	}
 
 	public Task getTask(Integer id, String email) throws TaskNotFoundException, UserNotFoundException {

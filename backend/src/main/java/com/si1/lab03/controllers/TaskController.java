@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,7 +29,7 @@ public class TaskController {
 	@Autowired
 	private TokenAuthenticationService tokenService;
 
-
+	@CrossOrigin
 	@RequestMapping(
 			value = "/api/tasks",
 			method = RequestMethod.GET, 
@@ -45,6 +46,7 @@ public class TaskController {
 		
 	}
 	
+	@CrossOrigin
 	@RequestMapping(
 			value = "/api/tasks/{id}", 
 			method = RequestMethod.GET, 
@@ -63,6 +65,7 @@ public class TaskController {
 		
 
 	}
+	@CrossOrigin
 	@RequestMapping(
 			value = "api/tasks",
 			method = RequestMethod.POST,
@@ -77,6 +80,7 @@ public class TaskController {
 		}
 	}
 	
+	@CrossOrigin
 	@RequestMapping(
 			value = "api/tasks/{id}",
 			method = RequestMethod.PUT,
@@ -96,6 +100,7 @@ public class TaskController {
 
 	}
 	
+	@CrossOrigin
 	@RequestMapping(
 			value = "/api/tasks/{id}", 
 			method = RequestMethod.DELETE, 

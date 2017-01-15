@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 
-public class UserAuthentication implements Authentication {
+public class AuthenticatedUser implements Authentication {
 
 	private static final long serialVersionUID = 1L;
 	private String name;
@@ -15,11 +15,12 @@ public class UserAuthentication implements Authentication {
 	private Integer id;
 	private boolean authenticated = true;
 	
-	public UserAuthentication() {}
+	public AuthenticatedUser() {}
 	
-	public UserAuthentication(String email) {
+	public AuthenticatedUser(String email) {
 		this.name = email;
 	}
+
 	
 	public void setName(String name) {
 		this.name = name;
@@ -62,7 +63,7 @@ public class UserAuthentication implements Authentication {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+
 
 }
