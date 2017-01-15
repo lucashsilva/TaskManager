@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task',
@@ -13,7 +12,7 @@ export class TaskComponent implements OnInit {
   @Output() onEdit;
   @Output() onSwitch;
 
-  constructor(private tasksService: TasksService) {
+  constructor() {
     this.onDelete = new EventEmitter();
     this.onEdit = new EventEmitter();
     this.onSwitch = new EventEmitter();
@@ -23,13 +22,13 @@ export class TaskComponent implements OnInit {
   }
 
   deleteTask(): void {
-    this.tasksService.deleteTask(this.task).subscribe();
-    this.onDelete.emit();
+    // this.tasksService.deleteTask(this.task).subscribe();
+    // this.onDelete.emit();
   }
 
   editTask(): void {
-    this.tasksService.editTask(this.task).subscribe();
-    this.onEdit.emit();
+    // this.tasksService.editTask(this.task).subscribe();
+    // this.onEdit.emit();
   }
 
   taskSubmitted(result): void {
@@ -41,7 +40,7 @@ export class TaskComponent implements OnInit {
 
   switchDone(): void {
     this.task.done = !this.task.done;
-    this.tasksService.editTask(this.task).subscribe();
+    // this.tasksService.editTask(this.task).subscribe();
     this.onSwitch.emit();
 
   }

@@ -6,10 +6,13 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { Title }     from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { TasksService } from './services/tasks.service';
+import { MainComponent } from './main/main.component';
+import { UserService } from './services/user.service';
+import { TaskService } from './services/task.service';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component'
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 import { MomentModule } from 'angular2-moment';
@@ -17,10 +20,13 @@ import { TaskDateSortPipe } from './tasks/pipes/task-date-sort.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.component';
+import { AuthGuard } from './providers/auth-guard';
+import { RequestOptions, Http, XHRBackend} from '@angular/http';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MainComponent,
     TasksComponent,
     TaskComponent,
     NavbarComponent,
@@ -28,7 +34,8 @@ import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.compone
     TaskDateSortPipe,
     SidebarComponent,
     DashboardComponent,
-    TasksChartComponent
+    TasksChartComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,9 @@ import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.compone
   ],
   providers: [
     Title,
-    TasksService
+    UserService,
+    TaskService,
+    AuthGuard
   ],
 
   bootstrap: [AppComponent]

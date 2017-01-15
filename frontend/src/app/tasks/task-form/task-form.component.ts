@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Task } from '../task/task.component';
-import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task-form',
@@ -14,7 +13,7 @@ export class TaskFormComponent implements OnInit {
   @Input() task: Task;
   @Input() editForm = false;
 
-  constructor(private tasksService: TasksService) {
+  constructor() {
     this.toggleTaskForm = new EventEmitter();
     this.taskSubmitted = new EventEmitter();
     this.task = new Task();
@@ -35,32 +34,32 @@ export class TaskFormComponent implements OnInit {
   }
 
   addTask(): void {
-    this.tasksService.addTask(this.task).subscribe(
-     res => {
-       var newTask = res.json();
-
-       if(res.status == 200){
-         this.taskSubmitted.emit(true);
-
-       }
-     },
-     error => console.log(error)
-   );
+  //   this.tasksService.addTask(this.task).subscribe(
+  //    res => {
+  //      var newTask = res.json();
+   //
+  //      if(res.status == 200){
+  //        this.taskSubmitted.emit(true);
+   //
+  //      }
+  //    },
+  //    error => console.log(error)
+  //  );
 
 
   }
 
   saveTask(): void {
-    this.tasksService.editTask(this.task).subscribe(
-     res => {
-       var newTask = res.json();
-
-       if(res.status == 200){
-         this.taskSubmitted.emit(true);
-       }
-     },
-     error => console.log(error)
-   );
+  //   this.tasksService.editTask(this.task).subscribe(
+  //    res => {
+  //      var newTask = res.json();
+   //
+  //      if(res.status == 200){
+  //        this.taskSubmitted.emit(true);
+  //      }
+  //    },
+  //    error => console.log(error)
+  //  );
 
   }
 

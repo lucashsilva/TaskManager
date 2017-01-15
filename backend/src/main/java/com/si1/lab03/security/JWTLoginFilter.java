@@ -32,12 +32,17 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     throws AuthenticationException, IOException, ServletException {
         UserCredentials credentials = new ObjectMapper().readValue(httpServletRequest.getInputStream(), UserCredentials.class);
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword());
-        return getAuthenticationManager().authenticate(token);
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", httpServletRequest.getHeader("Origin"));
+        httpServletResponse.setHeader("Access-Control-Expose-Headers", "Authorization");
+
+ 		return getAuthenticationManager().authenticate(token);
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
     throws IOException, ServletException {
+    
+ 		
         String name = authentication.getName();
         tokenAuthenticationService.addAuthentication(response, name);
     }

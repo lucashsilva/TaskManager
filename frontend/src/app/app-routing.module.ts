@@ -1,17 +1,25 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { TaskFormComponent } from './tasks/task-form/task-form.component';
+import { AuthGuard } from './providers/auth-guard';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'tasks', component: TasksComponent },
-  { path: 'tasks/new', component: TaskFormComponent },
-  { path: 'tasks/:id', component: TaskComponent },
-  { path: 'tasks/:id/edit', component: TaskFormComponent }
+    { path: '', component: MainComponent, canActivate: [AuthGuard],  children: [
+    { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'tasks', component: TasksComponent },
+    { path: 'tasks/new', component: TaskFormComponent },
+    { path: 'tasks/:id', component: TaskComponent },
+    { path: 'tasks/:id/edit', component: TaskFormComponent }
+  ] },
+  { path: 'login', component: LoginPageComponent },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

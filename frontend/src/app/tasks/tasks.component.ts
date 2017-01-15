@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { TasksService } from '../services/tasks.service';
 import { Task } from './task/task.component';
 import { TaskDateSortPipe } from './pipes/task-date-sort.pipe';
 
@@ -15,10 +14,10 @@ export class TasksComponent implements OnInit {
   doneTasks: Task[];
   dateSortPipe: TaskDateSortPipe;
   showTaskForm: boolean;
-  
+
   @Output('onEdit') onEditEmitter = new EventEmitter();
 
-  constructor(private tasksService: TasksService) {
+  constructor() {
     this.showDoneTasks = false;
     this.dateSortPipe = new TaskDateSortPipe();
   }
@@ -31,20 +30,20 @@ export class TasksComponent implements OnInit {
   private fetchTasks(): void {
     this.initializeArrays();
 
-    this.tasksService.getTasks().subscribe(data => {
-      let tasks = data;
-
-      let done = 0;
-
-      for(let task of tasks){
-        if(task.done){
-          this.doneTasks.push(task);
-          done++;
-        }else{
-          this.tasks.push(task);
-        }
-      }
-    });;
+    // this.tasksService.getTasks().subscribe(data => {
+    //   let tasks = data;
+    //
+    //   let done = 0;
+    //
+    //   for(let task of tasks){
+    //     if(task.done){
+    //       this.doneTasks.push(task);
+    //       done++;
+    //     }else{
+    //       this.tasks.push(task);
+    //     }
+    //   }
+    // });;
 
   }
 
