@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-main',
@@ -8,12 +7,10 @@ import { TaskService } from '../services/task.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private taskService: TaskService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(res => {
-      console.log(res);
-    });
+
   }
 
 }

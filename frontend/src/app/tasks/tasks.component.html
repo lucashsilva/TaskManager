@@ -1,32 +1,27 @@
 <div class="row">
   <div class="col-sm">
-    <div class="row align-items-center tasks-header">
-      <div class="col tasks">
-        <span class="card-title">Tarefas pendentes</span>
+    <div class="card tasks" [class.dashboard-small-card]="dashboard">
+      <div class="title">Tarefas pendentes</div>
+      <div class="tasks-body">
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
       </div>
-      <div class="col">
-        <a class="btn btn-sm add-task" href="/tasks/new">Adicionar</a>
-      </div>
-    </div>
-    <app-task-form *ngIf="showTaskForm"></app-task-form>
-    <div class="tasks">
-      <app-task></app-task>
-      <app-task></app-task>
-      <app-task></app-task>
 
     </div>
   </div>
-  <div class="col-sm">
-    <div class="row align-items-center tasks-header">
-      <div class="col tasks">
-        <span class="card-title">Tarefas terminadas</span>
+  <div class="col-sm" *ngIf="!dashboard">
+    <div class="card tasks">
+      <div class="title">Tarefas pendentes</div>
+      <div class="tasks-body">
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
+        <app-task></app-task>
       </div>
-    </div>
-    <div class="tasks">
-      <app-task></app-task>
-      <app-task></app-task>
-      <app-task></app-task>
-
     </div>
   </div>
 </div>

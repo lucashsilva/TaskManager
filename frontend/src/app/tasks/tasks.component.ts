@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Task } from './task/task.component';
 import { TaskDateSortPipe } from './pipes/task-date-sort.pipe';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,83 +10,32 @@ import { TaskDateSortPipe } from './pipes/task-date-sort.pipe';
 })
 export class TasksComponent implements OnInit {
 
-  showDoneTasks: boolean;
-  tasks: Task[];
-  doneTasks: Task[];
+  @Input() tasks: Task[]
+  @Input() dashboard = false;
   dateSortPipe: TaskDateSortPipe;
-  showTaskForm: boolean;
 
-  @Output('onEdit') onEditEmitter = new EventEmitter();
-
-  constructor() {
-    this.showDoneTasks = false;
+  constructor(private taskService: TaskService) {
     this.dateSortPipe = new TaskDateSortPipe();
   }
 
   ngOnInit() {
-    this.initializeArrays();
-    this.fetchTasks();
+    this.initializeArray();
   }
 
   private fetchTasks(): void {
-    this.initializeArrays();
-
-    // this.tasksService.getTasks().subscribe(data => {
-    //   let tasks = data;
-    //
-    //   let done = 0;
-    //
-    //   for(let task of tasks){
-    //     if(task.done){
-    //       this.doneTasks.push(task);
-    //       done++;
-    //     }else{
-    //       this.tasks.push(task);
-    //     }
-    //   }
-    // });;
+    this.taskService.getTasks().subscribe(data => {
+      this.tasks = data;
+    });;
 
   }
 
-  getDoneTasks() {
-    return this.dateSortPipe.transform(this.doneTasks, "");
+  private initializeArray():void {
+    if (!this.tasks) {
+      this.tasks = <Task[]>(new Array());
+      this.fetchTasks();
+    }
   }
 
-  getUndoneTasks() {
-    return this.dateSortPipe.transform(this.tasks, "");
-  }
-
-
-  onEdit(): void {
-    this.fetchTasks();
-  }
-
-
-  onAdd(): void {
-    this.fetchTasks();
-  }
-
-  onDelete(): void {
-    this.fetchTasks();
-  }
-
-  onSwitch(): void {
-    this.fetchTasks();
-  }
-
-
-  private initializeArrays():void {
-    this.tasks = <Task[]>(new Array());
-    this.doneTasks = <Task[]>(new Array());
-  }
-
-  toggleDoneTasks(): void {
-    this.showDoneTasks = !this.showDoneTasks;
-  }
-
-  toggleTaskForm(): void {
-    this.showTaskForm = !this.showTaskForm;
-  }
 
 
 }

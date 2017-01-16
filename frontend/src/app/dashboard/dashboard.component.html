@@ -1,8 +1,12 @@
+
 <div class="row">
   <div class="col-12 col-sm-6 col-md-4">
     <app-tasks-chart></app-tasks-chart>
   </div>
+  <div class="col-12 col-sm">
+    <app-tasks [tasks]="tasks" [dashboard]="true"></app-tasks>
+  </div>
   <div class="col-12 col-sm-6 col-md-4">
-
+    <app-task-form [dashboard]="true"></app-task-form>
   </div>
 </div>

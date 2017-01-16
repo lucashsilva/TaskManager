@@ -1,6 +1,6 @@
-<div class="card">
-  <h6 *ngIf="!editForm">Adicionar tarefa</h6>
-  <h6 *ngIf="editForm">Editar tarefa</h6>
+<div class="card" [class.dashboard-small-card]="dashboard">
+  <span class="title" *ngIf="!editForm">Adicionar tarefa</span>
+  <span class="title" *ngIf="editForm">Editar tarefa</span>
   <label class="label">Título</label>
   <p class="control">
     <input [(ngModel)]="task.title" class="input" type="text" placeholder="Título">

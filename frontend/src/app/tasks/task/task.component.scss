@@ -5,25 +5,27 @@
   padding: 10px;
 }
 
-.card-header, .card-footer {
-  padding: 5px;
+.task-header, .task-footer {
   background: transparent;
   vertical-align: middle;
 
 }
 
-.card-header ul, .card-footer ul {
+.task-header ul, .task-footer ul {
   margin: 0;
 }
 
-.card-title {
+.task-title {
   font-size: 16px;
+  text-align: left;
 }
 
 .card {
   font-size: 0.7rem;
+  padding: 10px;
   border: none;
   box-shadow: 0px 0px 5px $light-grey;
   width: 100%;
   margin-bottom: 5px;
+  border-left: 5px solid $medium-blue;
 }

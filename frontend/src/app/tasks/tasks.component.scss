@@ -1,33 +1,9 @@
 @import "../../styles";
 
-.btn {
-  font-size: 16px;
-  border: none;
-  box-shadow: 0px 0px 5px $light-grey;
-  background: $light-red;
-  margin-bottom: 3px;
-  color: $white;
-  float: right;
-}
 
-.btn:hover {
-  background: $dark-red;
-}
+.tasks {}
 
-app-task-form {
-  margin-bottom: 5px;
-}
-
-
-.tasks-header {
-  height: 60px;
-}
-
-.card-title {
-  font-size: 12px;
-}
-
-.add-task {
-  font-size: 12px;
-  padding: 10px;
+.title {
+  font-size: 18px;
+  margin: 15px;
 }
