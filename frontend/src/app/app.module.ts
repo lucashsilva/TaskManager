@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { UserService } from './services/user.service';
 import { TaskService } from './services/task.service';
-import { TasksComponent } from './tasks/tasks.component';
+import { TasksCardComponent } from './tasks/tasks-card/tasks-card.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -27,7 +27,7 @@ import { RequestOptions, Http, XHRBackend} from '@angular/http';
   declarations: [
     AppComponent,
     MainComponent,
-    TasksComponent,
+    TasksCardComponent,
     TaskComponent,
     NavbarComponent,
     TaskFormComponent,

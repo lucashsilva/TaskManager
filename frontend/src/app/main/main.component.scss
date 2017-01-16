@@ -12,20 +12,14 @@ app-sidebar {
 }
 
 .page {
+  position:relative;
   margin-top: 90px;
   padding-left: 290px;
-  padding-right: 40px;
   width: 100vw;
 
 }
 
 
-.container {
-  padding-top: 10px;
-  padding-left: 290px;
-  height: 250vh;
-  font-family: 'Roboto', sans-serif;
-}
 
 @media screen and (max-width: 991px) {
     .page {
