@@ -18,15 +18,14 @@ nav a:hover {
   color: $white;
 }
 
-
-@media screen and (min-width: 990px) {
-    app-sidebar {
-      display: none;
-    }
-
-
+.navbar-content {
+  margin-top: 7px;
+  width: 100vw;
 }
 
-.navbar-toggler {
+
+.navbar-toggler-icon {
   border:none;
+  z-index:99999999;
+  margin-top: 5px;
 }

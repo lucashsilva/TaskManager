@@ -5,29 +5,83 @@ app-sidebar {
   left: 0;
   top: 0;
   padding-top: 70px;
-  width: 270px;
   height: 100vh;
   z-index: 999;
   box-shadow: 0px 0px 2px $medium-grey;
 }
 
+app-navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999999999999999999999999;
+}
+
 .page {
-  position:relative;
+  position:absolute;
   margin-top: 90px;
-  padding-left: 290px;
-  width: 100vw;
+
 
 }
 
 
+@media screen and (min-width: 1367px) {
 
-@media screen and (max-width: 991px) {
     .page {
-      padding-left: 20px;
+      left: 18vw;
+      width: 82vw;
+      opacity: 0.8;
     }
 
     app-sidebar {
-      left: -275px;
+      box-shadow: 0px 0px 10px $dark-grey;
+      width:18vw;
+    }
+
+}
+
+@media screen and (max-width: 1366px) {
+
+    .page {
+      left: 25vw;
+      width: 75vw;
+      opacity: 0.8;
+    }
+
+    app-sidebar {
+      box-shadow: 0px 0px 10px $dark-grey;
+      width:25vw;
+    }
+
+}
+
+
+@media screen and (max-width: 992px) {
+
+    .page {
+      left: 0;
+      width: 100vw;
+      opacity: 0.8;
+    }
+
+    app-sidebar {
+      box-shadow: 0px 0px 10px $dark-grey;
+      width:30vw;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+    .page {
+      left: 0;
+      width: 100vw;
+      opacity: 0.8;
+    }
+
+    app-sidebar {
+      box-shadow: 0px 0px 10px $dark-grey;
+      width:70vw;
     }
 
 }

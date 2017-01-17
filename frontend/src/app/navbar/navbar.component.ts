@@ -7,15 +7,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  @Output('toggleTaskForm') taskForm = new EventEmitter();
+  @Output('toggleSidebar') sidebar = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleTaskForm(): void {
-    this.taskForm.emit();
+  toggleSidebar(): void {
+    this.sidebar.emit();
   }
 
 }
