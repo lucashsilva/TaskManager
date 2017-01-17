@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Task } from '../../tasks/task/task.component';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-tasks-card',
@@ -10,12 +11,14 @@ export class TasksCardComponent implements OnInit {
 
   @Input() tasks: Task[]
 
-  constructor() {
+  constructor(private taskService: TaskService) {
 
   }
 
   ngOnInit() {
-
+    this.taskService.getTasks().subscribe(res => {
+      this.tasks = res;
+    });
   }
 
 

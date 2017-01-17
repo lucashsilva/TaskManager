@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../services/task.service';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Task } from '../tasks/task/task.component';
 
 @Component({
@@ -8,18 +7,18 @@ import { Task } from '../tasks/task/task.component';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  tasks: Task[];
+  @Input() tasks: Task[];
+  @Output('hasChanges') emitter;
 
-  constructor(private taskService: TaskService) { }
+  constructor() { }
 
   ngOnInit() {
 
   }
 
   fetchTasks() {
-    this.taskService.getTasks().subscribe(res => {
-      this.tasks = res;
-    });
+    this.emitter.emit(true);
   }
+
 
 }

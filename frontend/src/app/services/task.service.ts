@@ -24,10 +24,20 @@ export class TaskService {
      return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => <Task[]> res.json());
    }
 
-   //
-  //  addTask(task) {
-  //    return this.http.post("/task", JSON.stringify(task), this.getOptions());
-  //  }
+
+   addTask(task: Task) {
+        return this.http.post(this.apiUrl + "/tasks", JSON.stringify(task), this.userService.getOptions())
+                         .map((response: Response) => {
+
+          if(response.status >= 200) {
+           return true;
+         } else {
+           return false;
+         }
+
+       });
+      }
+
    //
   //  editTask(task) {
   //    return this.http.put(`/task/${task._id}`, JSON.stringify(task), this.getOptions());

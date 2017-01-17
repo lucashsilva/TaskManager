@@ -1,6 +1,6 @@
 <div class="card-columns">
-    <app-tasks-chart></app-tasks-chart>
+    <app-tasks-chart [tasks]="tasks"></app-tasks-chart>
     <app-tasks-card [tasks]="tasks"></app-tasks-card>
-    <app-task-form [dashboard]="true"></app-task-form>
+    <app-task-form-card (taskSubmitted)="fetchTasks()"></app-task-form-card>
 
 </div>

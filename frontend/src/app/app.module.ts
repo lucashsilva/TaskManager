@@ -13,8 +13,7 @@ import { TasksCardComponent } from './tasks/tasks-card/tasks-card.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { TaskFormComponent } from './tasks/task-form/task-form.component'
-import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
+import { TaskFormCardComponent } from './tasks/task-form-card/task-form-card.component'
 import { MomentModule } from 'angular2-moment';
 import { TaskDateSortPipe } from './tasks/pipes/task-date-sort.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -30,7 +29,7 @@ import { RequestOptions, Http, XHRBackend} from '@angular/http';
     TasksCardComponent,
     TaskComponent,
     NavbarComponent,
-    TaskFormComponent,
+    TaskFormCardComponent,
     TaskDateSortPipe,
     SidebarComponent,
     DashboardComponent,
@@ -42,7 +41,6 @@ import { RequestOptions, Http, XHRBackend} from '@angular/http';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    Ng2DatetimePickerModule,
     MomentModule,
     ChartsModule
   ],

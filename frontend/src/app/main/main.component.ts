@@ -1,4 +1,6 @@
 import { Component, OnInit,  trigger, state, style, transition, animate } from '@angular/core';
+import { TaskService } from '../services/task.service';
+import { Task } from '../tasks/task/task.component';
 
 @Component({
   selector: 'app-main',
@@ -28,18 +30,39 @@ import { Component, OnInit,  trigger, state, style, transition, animate } from '
   ]
 })
 export class MainComponent implements OnInit {
-  showSidebar = 'show'
-  constructor() { }
+  showSidebar = 'show';
+  tasks: Task[];
+
+  constructor(private taskService: TaskService) { this.fetchTasks(); }
 
   ngOnInit() {
     if(window.screen.width <= 724) {
       this.toggleSidebar();
     }
 
+
   }
 
   toggleSidebar() {
     this.showSidebar = this.showSidebar === 'hide' ? 'show' : 'hide';
+  }
+
+  fetchTasks() {
+    this.taskService.getTasks().subscribe(res => {
+      this.tasks = res;
+    });
+  }
+
+  getPendentTasksNumber() {
+    let count = 0;
+    if(this.tasks != null) {
+      for(let task of this.tasks) {
+        if(!task.done) {
+          count++;
+        }
+      }
+    }
+    return count;
   }
 
 }

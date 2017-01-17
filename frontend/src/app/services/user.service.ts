@@ -40,10 +40,19 @@ export class UserService {
    logout() {
      localStorage.removeItem('currentUser');
      this.authenticatedUser = null;
+     this.router.navigate(['/login']);
    }
 
    getToken(): string {
      return this.authenticatedUser.token;
+   }
+
+   getOptions() {
+     let options = new RequestOptions();
+     let headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8', 'Authorization': this.authenticatedUser.token });
+     options.headers = headers;
+
+     return options;
    }
 }
 

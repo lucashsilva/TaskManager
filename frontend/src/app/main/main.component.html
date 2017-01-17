@@ -1,5 +1,5 @@
 <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
-<app-sidebar [@sidebar]="showSidebar"></app-sidebar>
+<app-sidebar [@sidebar]="showSidebar" [pendentTasksCounter]="getPendentTasksNumber()"></app-sidebar>
 <div class="page container" [@page]="showSidebar">
   <router-outlet></router-outlet>
 </div>

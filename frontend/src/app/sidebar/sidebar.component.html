@@ -9,7 +9,10 @@
           <a href="/dashboard">Dashboard</a>
         </li>
         <li class="menu-item">
-          <a href="/tasks">Tarefas <span class="count">2</span></a>
+          <a href="/tasks">Tarefas <span *ngIf="pendentTasksCounter != 0" class="count">{{ pendentTasksCounter }}</span></a>
+        </li>
+        <li class="menu-item">
+          <a href="#" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>
