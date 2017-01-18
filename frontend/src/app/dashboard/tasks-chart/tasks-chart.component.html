@@ -1,7 +1,7 @@
 <div class="card chart">
   <span class="title">Visão geral</span>
   <canvas baseChart width="100"
-          [data]="getNumbers()"
+          [data]="data"
           [labels]="pieChartLabels"
           [chartType]="pieChartType"
           (chartHover)="chartHovered($event)"

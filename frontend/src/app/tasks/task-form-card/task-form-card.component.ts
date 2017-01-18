@@ -9,7 +9,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class TaskFormCardComponent implements OnInit {
   task: Task;
-  @Output('taskSubmitted') emitter = new EventEmitter();
+
 
   constructor(private taskService: TaskService) {
     this.task = new Task();
@@ -22,9 +22,13 @@ export class TaskFormCardComponent implements OnInit {
   addTask() {
       this.taskService.addTask(this.task).subscribe(res => {
         if(res) {
-          this.emitter.emit(true);
+          this.refresh();
         }
       });
+  }
+
+  refresh() {
+    location.reload();
   }
 
 

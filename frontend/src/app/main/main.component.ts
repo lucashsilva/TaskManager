@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   showSidebar = 'show';
   tasks: Task[];
 
-  constructor(private taskService: TaskService) { this.fetchTasks(); }
+  constructor(private taskService: TaskService) {  }
 
   ngOnInit() {
     if(window.screen.width <= 724) {
@@ -47,22 +47,19 @@ export class MainComponent implements OnInit {
     this.showSidebar = this.showSidebar === 'hide' ? 'show' : 'hide';
   }
 
-  fetchTasks() {
-    this.taskService.getTasks().subscribe(res => {
-      this.tasks = res;
-    });
-  }
-
   getPendentTasksNumber() {
     let count = 0;
-    if(this.tasks != null) {
+
+    if(this.tasks) {
       for(let task of this.tasks) {
-        if(!task.done) {
-          count++;
-        }
+          if(!task.done) count++;
       }
+
     }
+
     return count;
   }
+
+
 
 }
