@@ -1,6 +1,7 @@
 <div class="card tasks">
-        <div class="title">Tarefas pendentes</div>
+        <div class="title">Tarefas {{ doneType? 'terminadas':'pendentes' }}</div>
         <div class="tasks-body">
-          <app-task *ngFor="let task of tasks" [task]="task"></app-task>
+          <div *ngIf="tasks.length === 0" class="alert alert-success">Sem tarefas {{ doneType? 'terminadas':'pendentes' }}.</div>
+          <app-task *ngFor="let task of tasks" [task]="task" (hasChanges)="fetchTasks()"></app-task>
         </div>
 </div>

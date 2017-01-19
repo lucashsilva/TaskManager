@@ -8,13 +8,10 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./tasks-chart.component.scss']
 })
 export class TasksChartComponent implements OnInit {
-  @Input() tasks;
 
   constructor(private taskService: TaskService) {}
 
-  ngOnInit() {
-    this.fetchData();
-  }
+  ngOnInit() {  }
 
   // Pie
   public pieChartLabels:string[] = ['Terminadas', 'Pendentes'];
@@ -29,12 +26,12 @@ export class TasksChartComponent implements OnInit {
 
   }
 
-  getNumbers() {
+  getNumbers(tasks: Task[]) {
     let done = 0;
     let undone = 0;
 
-    if(this.tasks != null){
-      for(let task of this.tasks) {
+    if(tasks != null){
+      for(let task of tasks) {
         if(task.done){
           done++;
         }else{
@@ -44,10 +41,7 @@ export class TasksChartComponent implements OnInit {
 
     }
 
-    return [done, undone];
+    this.data = [done, undone];
   }
 
-  fetchData() {
-    this.data = this.getNumbers();
-  }
 }

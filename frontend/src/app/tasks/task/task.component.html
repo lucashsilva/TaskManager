@@ -6,6 +6,11 @@
     <p class="card-text">{{ task.description }}</p>
   </div>
   <div class="task-footer">
-      footer
+      <i *ngIf="!task.done" class="fa fa-check-square-o" aria-hidden="true" (click)="switchDone()"></i>
+      <i *ngIf="task.done" class="fa fa-undo" aria-hidden="true" (click)="switchDone()"></i>
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteTask()"></i>
+      <i class="fa fa-calendar" aria-hidden="true"><span class="text">{{ task.timestamp | date }}</span></i>
+      <i class="fa fa-clock-o" aria-hidden="true"><span class="text">{{ task.timestamp | date:'shortTime' }}</span></i>
   </div>
 </div>

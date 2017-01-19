@@ -9,17 +9,22 @@ import { TaskService } from '../../services/task.service';
 })
 export class TasksCardComponent implements OnInit {
 
+  @Input() doneType;
   @Input() tasks: Task[]
+  @Output('hasChanges') emitter: EventEmitter<boolean>;
+
 
   constructor(private taskService: TaskService) {
-
+    this.emitter = new EventEmitter<boolean>();
   }
 
   ngOnInit() {
 
   }
 
-
+  fetchTasks() {
+    this.emitter.emit(true);
+  }
 
 
 }

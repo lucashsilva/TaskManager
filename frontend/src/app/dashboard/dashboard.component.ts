@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Task } from '../tasks/task/task.component';
 import { TaskService } from '../services/task.service';
+import { SidebarService } from '../services/sidebar.service';
+import { TasksChartComponent } from './tasks-chart/tasks-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +10,11 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  @Input() tasks: Task[];
-  @Output('hasChanges') emitter;
+  tasks: any;
 
-  constructor(private taskService: TaskService) {
-    this.emitter = new EventEmitter();
+  @ViewChild(TasksChartComponent) tasksChart: TasksChartComponent;
+  constructor(private taskService: TaskService, private sidebarService: SidebarService) {
+    this.tasks = {done: [], undone: []}
   }
 
   ngOnInit() {
@@ -21,11 +23,26 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchTasks() {
-    this.taskService.getTasks().subscribe(res => {
-      this.tasks = res;
+    this.taskService.getTasks().then(res => {
+      this.tasks.done = this.getTasks(res, true);
+      this.tasks.undone = this.getTasks(res, false);
+      this.sidebarService.pendentTasksNumber = this.tasks.undone.length;
+      this.tasksChart.getNumbers(res);
     });
-    this.emitter.emit(true);
+
+
   }
 
+  getTasks(tasks, status) {
+    let result = [];
+
+    for (let task of tasks) {
+      if (task.done === status) {
+        result.push(task);
+      }
+    }
+
+    return result;
+  }
 
 }

@@ -125,7 +125,7 @@ public class UserService {
 			task.setUser(user);
 			user.addTask(task);
 			
-			taskRepository.save(task);
+	
 			userRepository.save(user);
 		} else {
 			throw new UserNotFoundException();
@@ -143,9 +143,8 @@ public class UserService {
 					
 					return;
 				}
-				
-				throw new TaskNotFoundException();
 			}
+			throw new TaskNotFoundException();
 		} else {
 			throw new UserNotFoundException();
 		}

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { UserService } from './services/user.service';
 import { TaskService } from './services/task.service';
+import { SidebarService } from './services/sidebar.service';
 import { TasksCardComponent } from './tasks/tasks-card/tasks-card.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -48,6 +49,7 @@ import { RequestOptions, Http, XHRBackend} from '@angular/http';
     Title,
     UserService,
     TaskService,
+    SidebarService,
     AuthGuard
   ],
 

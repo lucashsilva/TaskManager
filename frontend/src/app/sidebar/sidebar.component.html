@@ -6,10 +6,7 @@
     <div class="overview">
       <ul class="menu">
         <li class="menu-item">
-          <a href="/dashboard">Dashboard</a>
-        </li>
-        <li class="menu-item">
-          <a href="/tasks">Tarefas <span *ngIf="pendentTasksCounter != 0" class="count">{{ pendentTasksCounter }}</span></a>
+          <a href="/tasks">Tarefas <span *ngIf="this.sidebarService.pendentTasksNumber != 0" class="count">{{ this.sidebarService.pendentTasksNumber }}</span></a>
         </li>
         <li class="menu-item">
           <a href="#" (click)="logout()">Logout</a>

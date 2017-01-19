@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { SidebarService } from '../services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,7 @@ import { UserService } from '../services/user.service';
 export class SidebarComponent implements OnInit {
   @Input() pendentTasksCounter: Number;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private sidebarService: SidebarService) { }
 
   ngOnInit() {
   }

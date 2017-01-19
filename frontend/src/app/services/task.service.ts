@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
 import { UserService } from './user.service';
 
-
+import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -20,8 +20,8 @@ export class TaskService {
      return headers;
    }
 
-   getTasks():Observable<Task[]> {
-     return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => <Task[]> res.json());
+   getTasks():Promise<Task[]> {
+     return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => <Task[]> res.json()).toPromise();
    }
 
 
@@ -38,13 +38,13 @@ export class TaskService {
        });
       }
 
-   //
-  //  editTask(task) {
-  //    return this.http.put(`/task/${task._id}`, JSON.stringify(task), this.getOptions());
-  //  }
-   //
-  //  deleteTask(task) {
-  //    return this.http.delete(`/task/${task._id}`, this.getOptions());
-  //  }
+
+   editTask(task) {
+     return this.http.put(this.apiUrl + `/tasks/${task.id}`, JSON.stringify(task), this.userService.getOptions()).toPromise();
+   }
+
+   deleteTask(task) {
+     return this.http.delete(this.apiUrl + `/tasks/${task.id}`, this.userService.getOptions()).toPromise();
+   }
 
 }
