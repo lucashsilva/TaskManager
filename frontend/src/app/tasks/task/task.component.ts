@@ -107,7 +107,7 @@ export class Task {
 
   constructor() {
     this.done = false;
-    this.priority = "normal";
+    this.priority = "NORMAL";
     this.timestamp = new Date(Date.now());
     this.subtasks = new Array<Subtask>();
   }
