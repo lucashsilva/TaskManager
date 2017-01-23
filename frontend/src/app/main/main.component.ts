@@ -36,7 +36,7 @@ export class MainComponent implements OnInit {
   constructor(private taskService: TaskService) {  }
 
   ngOnInit() {
-    if(window.screen.width <= 724) {
+    if(window.screen.width <= 992) {
       this.toggleSidebar();
     }
 

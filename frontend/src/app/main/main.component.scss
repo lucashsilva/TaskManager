@@ -20,7 +20,7 @@ app-navbar {
 .page {
   position:absolute;
   margin-top: 90px;
-
+  left: 0;
 
 }
 
@@ -29,8 +29,8 @@ app-navbar {
 
     .page {
       left: 18vw;
-      width: 82vw;
-      opacity: 0.8;
+      width: 80vw;
+
     }
 
     app-sidebar {
@@ -44,8 +44,7 @@ app-navbar {
 
     .page {
       left: 25vw;
-      width: 75vw;
-      opacity: 0.8;
+      width: 74vw;
     }
 
     app-sidebar {
@@ -59,9 +58,8 @@ app-navbar {
 @media screen and (max-width: 992px) {
 
     .page {
-      left: 0;
       width: 100vw;
-      opacity: 0.8;
+      left: 0;
     }
 
     app-sidebar {
@@ -74,9 +72,8 @@ app-navbar {
 @media screen and (max-width: 576px) {
 
     .page {
-      left: 0;
       width: 100vw;
-      opacity: 0.8;
+      left: 0;
     }
 
     app-sidebar {
