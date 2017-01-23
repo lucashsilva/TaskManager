@@ -1,6 +1,10 @@
-<div class="card rounded-0">
+<div class="card rounded-0" [style.borderLeft]="getTaskBorder()">
   <div class="task-header">
     <input class="task-title" contenteditable="true" [(ngModel)]="task.title" placeholder="Adicionar título" (keyup.enter)="edit()" (focusout)="edit()" />
+    <div class="category" (click)="switchCategoryEditor()"><i class="fa fa-tags" aria-hidden="true"></i>
+      <input class="task-category" contenteditable="true" *ngIf="showEditCategory" [(ngModel)]="task.category" placeholder="Categoria" (keyup.enter)="editCategory()" (focusout)="editCategory()" />
+      <span *ngIf="!showEditCategory" class="task-category">{{ task.category }}</span>
+    </div>
   </div>
   <div class="task-description">
     <textarea onkeyup="autoGrowTextArea(this)" rows="1" [(ngModel)]="task.description" class="form-control card-text" type="textarea" id="message" name="description" placeholder="Adicionar descrição" (keyup.enter)="edit()" (focusout)="edit()" ></textarea>
