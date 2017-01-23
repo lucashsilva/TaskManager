@@ -20,12 +20,11 @@ export class TaskFormCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  addTask() {
-      this.taskService.addTask(this.task).then(res => {
-        if(res) {
-          this.emitter.emit(true);
-        }
-      });
+  save() {
+    this.taskService.addTask(this.task).then(res => {
+      this.emitter.emit();
+      this.task = new Task();
+    });
   }
 
 

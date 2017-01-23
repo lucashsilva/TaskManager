@@ -1,17 +1,12 @@
 .card-columns {
   column-count: 1;
 
-
   @media (min-width: 576px) {
     column-count: 2;
   }
   @media (min-width: 992px) {
     column-count: 3;
-    height: 600px;
+    height: 800px;
   }
 
-  @media (min-width: 1440px) {
-    column-count: 4;
-
-  }
 }

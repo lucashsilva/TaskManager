@@ -3,5 +3,4 @@
     <app-tasks-card [doneType]="false" [tasks]="tasks.undone" (hasChanges)="fetchTasks()"></app-tasks-card>
     <app-tasks-card [doneType]="true" [tasks]="tasks.done" (hasChanges)="fetchTasks()"></app-tasks-card>
     <app-task-form-card (taskAdded)="fetchTasks()"></app-task-form-card>
-
 </div>

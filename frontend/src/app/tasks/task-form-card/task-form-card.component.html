@@ -1,28 +1,5 @@
 <div class="card">
   <div class="title" *ngIf="!editForm">Adicionar tarefa</div>
-  <div class="form">
-
-      <div class="form-group">
-       <input [(ngModel)]="task.title" type="text" class="form-control" id="title" name="title" placeholder="Título" required>
-     </div>
-     <div class="form-group">
-       <textarea [(ngModel)]="task.description" class="form-control" type="textarea" id="message" name="description" placeholder="Descrição" rows="7"></textarea>
-     </div>
-     <div class="form-group">
-       <input [(ngModel)]="task.timestamp" type="text" class="form-control" id="mobile" name="mobile" placeholder="Timestamp" required>
-     </div>
-     <div class="form-group">
-       <select class="form-control" [(ngModel)]="task.priority" name="priority">
-         <option value="normal" selected="selected">Normal</option>
-         <option value="important">Importante</option>
-       </select>
-     </div>
-
-
-
-      <p class="control">
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right" (click)="addTask()">Adicionar</button>
-      </p>
-
-  </div>
+  <app-task [task]="task"></app-task>
+  <button class="btn" (click)="save()">Salvar</button>
 </div>

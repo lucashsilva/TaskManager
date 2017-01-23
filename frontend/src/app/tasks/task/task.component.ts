@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit {
 
   constructor(private taskService: TaskService) {
     this.hasChanges = new EventEmitter();
+    this.task = new Task();
   }
 
   ngOnInit() {
@@ -25,19 +26,42 @@ export class TaskComponent implements OnInit {
 
   }
 
-  editTask(): void {
-    // this.tasksService.editTask(this.task).subscribe();
-    // this.onEdit.emit();
-  }
-
-
   switchDone(): void {
     this.task.done = !this.task.done;
     this.taskService.editTask(this.task).then(res => {
       this.hasChanges.emit();
     });
+    this.edit();
+
+  }
+
+  switchSubtaskDone(subtask: Subtask): void {
+    subtask.done = !subtask.done;
+    this.edit();
 
 
+  }
+
+  deleteSubtask(subtask: Subtask): void {
+    let index = this.task.subtasks.indexOf(subtask, 0);
+    if(index > -1){
+      this.task.subtasks.splice(index, 1);
+    }
+    this.edit();
+  }
+
+  edit() {
+    if(this.task.id) {
+      this.taskService.editTask(this.task).then(res => {
+        this.hasChanges.emit();
+      });
+    } else {
+      this.hasChanges.emit(this.task);
+    }
+  }
+
+  addSubtask() {
+    this.task.subtasks.push(new Subtask());
   }
 
 }
@@ -55,6 +79,8 @@ export class Task {
   constructor() {
     this.done = false;
     this.priority = "normal";
+    this.timestamp = new Date(Date.now());
+    this.subtasks = new Array<Subtask>();
   }
 
 }

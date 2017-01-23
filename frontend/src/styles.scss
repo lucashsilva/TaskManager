@@ -14,7 +14,8 @@ $medium-blue: #2196f3;
 $light-yellow: #FFEE58;
 
 .btn {
-  background-color: $light-red;
+  background-color: $medium-blue;
+  color: $white;
   border: none;
 }
 
@@ -34,4 +35,5 @@ a {
 .card {
   margin-bottom: 30px;
   width: 100%;
+  display: inline-block;
 }
