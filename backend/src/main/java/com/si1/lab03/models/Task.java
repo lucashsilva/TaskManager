@@ -2,14 +2,16 @@ package com.si1.lab03.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,19 +28,18 @@ public class Task implements Serializable {
 	private Date timestamp;
 	private String priority;
 	private boolean done;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="owner_id")
-	private User user;
-	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="parent_id")
+	private List<Subtask> subtasks;
+
 	public Task() {} 
 	
-	public Task(String title, String description, Date timestamp, String priority, boolean done, User user) {
+	public Task(String title, String description, Date timestamp, String priority, boolean done) {
 		this.title = title;
 		this.description = description;
 		this.timestamp = timestamp;
 		this.priority = priority;
 		this.done = done;
-		this.user = user;
 	}
 
 	public Integer getId() {
@@ -89,8 +90,12 @@ public class Task implements Serializable {
 		this.done = done;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public List<Subtask> getSubtasks() {
+		return subtasks;
+	}
+
+	public void setSubtasks(List<Subtask> subtasks) {
+		this.subtasks = subtasks;
 	}
 
 	@Override

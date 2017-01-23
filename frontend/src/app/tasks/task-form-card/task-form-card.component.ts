@@ -21,7 +21,7 @@ export class TaskFormCardComponent implements OnInit {
   }
 
   addTask() {
-      this.taskService.addTask(this.task).subscribe(res => {
+      this.taskService.addTask(this.task).then(res => {
         if(res) {
           this.emitter.emit(true);
         }

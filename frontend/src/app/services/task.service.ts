@@ -25,7 +25,7 @@ export class TaskService {
    }
 
 
-   addTask(task: Task) {
+   addTask(task: Task):Promise<boolean> {
         return this.http.post(this.apiUrl + "/tasks", JSON.stringify(task), this.userService.getOptions())
                          .map((response: Response) => {
 
@@ -35,16 +35,32 @@ export class TaskService {
            return false;
          }
 
-       });
+       }).toPromise();
       }
 
 
    editTask(task) {
-     return this.http.put(this.apiUrl + `/tasks/${task.id}`, JSON.stringify(task), this.userService.getOptions()).toPromise();
+     return this.http.put(this.apiUrl + `/tasks/${task.id}`, JSON.stringify(task), this.userService.getOptions()).map((response: Response) => {
+
+      if(response.status >= 200) {
+      return true;
+      } else {
+      return false;
+      }
+
+      }).toPromise();
    }
 
    deleteTask(task) {
-     return this.http.delete(this.apiUrl + `/tasks/${task.id}`, this.userService.getOptions()).toPromise();
+     return this.http.delete(this.apiUrl + `/tasks/${task.id}`, this.userService.getOptions()).map((response: Response) => {
+
+        if(response.status >= 200) {
+        return true;
+        } else {
+        return false;
+        }
+
+      }).toPromise();
    }
 
 }

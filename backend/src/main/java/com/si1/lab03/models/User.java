@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity(name="t_users")
@@ -20,7 +21,8 @@ public class User implements Serializable {
 	private Integer id;
 	private String email;
 	private String password;
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="owner_id")
     private List<Task> tasks;
 	
 	public User() {

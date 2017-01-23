@@ -122,9 +122,7 @@ public class UserService {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			task.setUser(user);
 			user.addTask(task);
-			
 	
 			userRepository.save(user);
 		} else {
@@ -137,8 +135,7 @@ public class UserService {
 		
 		if (user != null) {
 			for (Task task: user.getTasks()) {
-				if (task.getId().equals(taskToBeUpdated.getId())) {
-					taskToBeUpdated.setUser(user);
+				if (task.getId().equals(taskToBeUpdated.getId())) {;
 					taskRepository.save(taskToBeUpdated);
 					
 					return;
@@ -158,8 +155,7 @@ public class UserService {
 			for (Task task: user.getTasks()) {
 				if (task.getId().equals(id)) {
 					user.deleteTask(id);
-					
-					taskRepository.delete(id);
+				
 					userRepository.save(user);
 					
 					return;

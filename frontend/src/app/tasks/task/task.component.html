@@ -5,6 +5,9 @@
   <div class="task-description">
     <p class="card-text">{{ task.description }}</p>
   </div>
+  <div class="atsk-subtasks">
+    <div *ngFor="let subtask of task.subtasks">{{ subtask.description }}</div>
+  </div>
   <div class="task-footer">
       <i *ngIf="!task.done" class="fa fa-check-square-o" aria-hidden="true" (click)="switchDone()"></i>
       <i *ngIf="task.done" class="fa fa-undo" aria-hidden="true" (click)="switchDone()"></i>

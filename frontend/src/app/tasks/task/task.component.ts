@@ -20,7 +20,8 @@ export class TaskComponent implements OnInit {
 
   deleteTask(): void {
     this.taskService.deleteTask(this.task).then(res => {
-      this.hasChanges.emit(true)});
+      if(res) this.hasChanges.emit(true)
+    });
 
   }
 
@@ -43,16 +44,27 @@ export class TaskComponent implements OnInit {
 
 
 export class Task {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   priority: string;
   timestamp: Date;
   done: boolean;
+  subtasks: Array<Subtask>;
 
   constructor() {
     this.done = false;
     this.priority = "normal";
   }
 
+}
+
+export class Subtask {
+  id: string;
+  description: string;
+  done: boolean;
+
+  constructor() {
+    this.done = false;
+  }
 }
