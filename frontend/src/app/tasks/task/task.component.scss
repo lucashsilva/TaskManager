@@ -92,3 +92,23 @@ input {
 .subtask {
   height: 18px;
 }
+
+.category {
+  padding: 5px;
+  border-radius: 2px;
+  background: $medium-blue;
+  color: $white;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 10px;
+
+}
+
+.task-category, .task-category::placeholder {
+  width: 60px;
+  color: $white;
+  overflow-x: visible;
+  background: transparent;
+}

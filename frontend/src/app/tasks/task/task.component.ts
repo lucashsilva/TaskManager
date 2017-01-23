@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -10,8 +11,9 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task;
   @Output() hasChanges;
+  showEditCategory: boolean;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private router: Router) {
     this.hasChanges = new EventEmitter();
     this.task = new Task();
   }
@@ -64,6 +66,32 @@ export class TaskComponent implements OnInit {
     this.task.subtasks.push(new Subtask());
   }
 
+  switchCategoryEditor() {
+    if(!this.showEditCategory) {
+      this.showEditCategory = true;
+    }
+  }
+
+  editCategory() {
+    if(this.editCategory) {
+      this.showEditCategory = false;
+    }
+
+    this.edit();
+  }
+
+  getTaskBorder() {
+    let result = "5px solid ";
+
+    if(this.task.priority === "HIGH") {
+      return result + "#dd5555";
+    } else if (this.task.priority === "LOW") {
+      return result + "#F9A825";
+    }
+
+    return result + "#2196f3";
+  }
+
 }
 
 
@@ -74,6 +102,7 @@ export class Task {
   priority: string;
   timestamp: Date;
   done: boolean;
+  category: string;
   subtasks: Array<Subtask>;
 
   constructor() {

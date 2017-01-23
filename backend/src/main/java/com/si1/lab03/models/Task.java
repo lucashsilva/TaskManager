@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,15 +28,17 @@ public class Task implements Serializable {
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
-	private String priority;
+	@Enumerated(EnumType.STRING)
+	private Priority priority;
 	private boolean done;
+	private String category;
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="parent_id")
 	private List<Subtask> subtasks;
 
 	public Task() {} 
 	
-	public Task(String title, String description, Date timestamp, String priority, boolean done) {
+	public Task(String title, String description, Date timestamp, Priority priority, boolean done) {
 		this.title = title;
 		this.description = description;
 		this.timestamp = timestamp;
@@ -74,11 +78,11 @@ public class Task implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	public String getPriority() {
+	public Priority getPriority() {
 		return priority;
 	}
 
-	public void setPriority(String priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 
@@ -96,6 +100,14 @@ public class Task implements Serializable {
 
 	public void setSubtasks(List<Subtask> subtasks) {
 		this.subtasks = subtasks;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
