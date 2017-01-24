@@ -14,7 +14,6 @@ export class TaskFormCardComponent implements OnInit {
   constructor(private taskService: TaskService) {
     this.task = new Task();
     this.emitter = new EventEmitter<boolean>();
-
   }
 
   ngOnInit() {

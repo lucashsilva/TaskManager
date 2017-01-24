@@ -13,16 +13,16 @@
       <div class="subtask" *ngFor="let subtask of task.subtasks">
         <label for="subtask"><i *ngIf="!subtask.done" class="fa fa-check-square-o" aria-hidden="true" (click)="switchSubtaskDone(subtask)"></i>
           <i *ngIf="subtask.done" class="fa fa-undo" aria-hidden="true" (click)="switchSubtaskDone(subtask)"></i>
-          <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteSubtask(subtask)"></i>
+          <i class="fa fa-times" aria-hidden="true" (click)="deleteSubtask(subtask)"></i>
         </label>
         <input [(ngModel)]="subtask.description" name="subtask" [class.subtask-done-description]="subtask.done" (keyup.enter)="edit()" (focusout)="edit()" placeholder="Editar descrição" />
       </div>
       <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubtask()"><span class="add-subtask">Adicionar subtarefa</span></i>
   </div>
   <div class="task-footer">
-      <i *ngIf="!task.done" class="fa fa-check-square-o" aria-hidden="true" (click)="switchDone()"></i>
+      <i *ngIf="!task.done" class="fa fa-check" aria-hidden="true" (click)="switchDone()"></i>
       <i *ngIf="task.done" class="fa fa-undo" aria-hidden="true" (click)="switchDone()"></i>
-      <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteTask()"></i>
+      <i class="fa fa-times" aria-hidden="true" (click)="deleteTask()"></i>
       <i class="fa fa-calendar" aria-hidden="true"><span class="text">{{ task.timestamp | date }}</span></i>
       <i class="fa fa-clock-o" aria-hidden="true"><span class="text">{{ task.timestamp | date:'shortTime' }}</span></i>
   </div>
