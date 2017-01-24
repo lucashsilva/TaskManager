@@ -81,3 +81,30 @@
   float: right;
   line-height: 8px;
 }
+
+.submenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    margin-bottom: -10px;
+}
+
+.submenu li {
+  list-style-type: none;
+}
+
+.submenu li:hover {
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.submenu li a {
+  text-decoration: none;
+  color: $dark-grey;
+  display: block;
+}
+
+a {
+  cursor: pointer;
+}

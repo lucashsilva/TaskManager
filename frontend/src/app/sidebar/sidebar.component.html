@@ -6,7 +6,15 @@
     <div class="overview">
       <ul class="menu">
         <li class="menu-item">
-          <a href="/tasks">Tarefas <span *ngIf="this.sidebarService.pendentTasksNumber != 0" class="count">{{ this.sidebarService.pendentTasksNumber }}</span></a>
+          <a href="/dashboard">Dashboard <span *ngIf="this.sidebarService.pendentTasksNumber != 0" class="count">{{ this.sidebarService.pendentTasksNumber }}</span></a>
+        </li>
+        <li class="menu-item">
+          <a (click)="toggleCategories()">Categorias</a>
+          <ul class="submenu" *ngIf="showCategories">
+            <li *ngFor="let category of this.sidebarService.categories" class="menu-item">
+              <a href="/tasks?category={{ category }}">{{ category }}</a>
+            </li>
+          </ul>
         </li>
         <li class="menu-item">
           <a href="#" (click)="logout()">Logout</a>

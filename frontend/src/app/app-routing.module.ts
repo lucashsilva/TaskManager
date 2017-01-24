@@ -5,13 +5,14 @@ import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TaskComponent } from './tasks/task/task.component';
+import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
 import { AuthGuard } from './providers/auth-guard';
 
 const routes: Routes = [
     { path: '', component: MainComponent, canActivate: [AuthGuard],  children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'tasks', component: DashboardComponent },
+      { path: 'tasks', component: TasksPageComponent },
       // { path: 'tasks/new', component: TaskFormComponent },
       { path: 'tasks/:id', component: TaskComponent },
       // { path: 'tasks/:id/edit', component: TaskFormComponent }

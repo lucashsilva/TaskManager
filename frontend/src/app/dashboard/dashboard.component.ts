@@ -3,7 +3,6 @@ import { Task } from '../tasks/task/task.component';
 import { TaskService } from '../services/task.service';
 import { SidebarService } from '../services/sidebar.service';
 import { TasksChartComponent } from './tasks-chart/tasks-chart.component';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -28,6 +27,7 @@ export class DashboardComponent implements OnInit {
       this.tasks.undone = this.getTasks(res, false);
       this.sidebarService.pendentTasksNumber = this.tasks.undone.length;
       this.tasksChart.getNumbers(res);
+      this.sidebarService.categories = this.getCategories(res);
     });
 
 
@@ -43,6 +43,18 @@ export class DashboardComponent implements OnInit {
     }
 
     return result;
+  }
+
+  getCategories(tasks: Task[]) {
+    let categories = [];
+
+    for(let task of tasks) {
+      if(!categories.some(x => x === task.category)) {
+        categories.push(task.category);
+      }
+    }
+
+    return categories;
   }
 
 }

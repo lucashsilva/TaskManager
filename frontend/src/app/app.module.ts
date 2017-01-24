@@ -22,6 +22,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.component';
 import { AuthGuard } from './providers/auth-guard';
 import { RequestOptions, Http, XHRBackend} from '@angular/http';
+import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { RequestOptions, Http, XHRBackend} from '@angular/http';
     SidebarComponent,
     DashboardComponent,
     TasksChartComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    TasksPageComponent
   ],
   imports: [
     BrowserModule,
