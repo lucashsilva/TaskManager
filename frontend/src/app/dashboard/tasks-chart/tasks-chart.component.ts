@@ -26,19 +26,18 @@ export class TasksChartComponent implements OnInit {
 
   }
 
-  getNumbers(tasks: Task[]) {
+  getNumbers(tasks: Task[], category?: string) {
     let done = 0;
     let undone = 0;
 
     if(tasks != null){
       for(let task of tasks) {
-        if(task.done){
+        if((task.done && category && category === task.category) || (task.done && (!category))) {
           done++;
-        }else{
+        } else if (((!task.done) && category && category === task.category) || ((!task.done) && (!category))) {
           undone++;
         }
       }
-
     }
 
     this.data = [done, undone];

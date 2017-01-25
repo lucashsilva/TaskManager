@@ -2,4 +2,5 @@ Mostrando tarefas na categoria {{ category }}
 <div class="columns">
     <app-tasks-card [doneType]="false" [tasks]="tasks.undone" (hasChanges)="fetchTasks()"></app-tasks-card>
     <app-tasks-card [doneType]="true" [tasks]="tasks.done" (hasChanges)="fetchTasks()"></app-tasks-card>
+    <app-tasks-chart></app-tasks-chart>
 </div>

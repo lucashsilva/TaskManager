@@ -4,6 +4,7 @@ import { Task } from '../tasks/task/task.component';
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
 import { UserService } from './user.service';
+import { SidebarService } from './sidebar.service';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -11,8 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class TaskService {
     private apiUrl = "http://localhost:8080/api";
-
-   constructor(private http: Http, private router: Router, private userService: UserService) { }
+   constructor(private http: Http, private router: Router, private userService: UserService, private sidebarService: SidebarService) { }
 
    getHeaders() {
      let headers = new Headers();
@@ -20,8 +20,12 @@ export class TaskService {
      return headers;
    }
 
-   getTasks():Promise<Task[]> {
-     return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => <Task[]> res.json()).toPromise();
+   getTasks(): Promise<Task[]> {
+     return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => {
+          return <Task[]> res.json();
+        }
+      ).toPromise();
+
    }
 
 
@@ -62,5 +66,33 @@ export class TaskService {
 
       }).toPromise();
    }
+
+
+     getTasksWithFilter(tasks: Task[], done: boolean, category?: string) {
+       let result = [];
+
+       for (let task of tasks) {
+
+         if ((category && task.category === category && task.done === done) || ((!category) && task.done === done)) {
+           result.push(task);
+         }
+       }
+
+       return result;
+     }
+
+     getCategories(tasks: Task[]) {
+       let categories = [];
+
+       for(let task of tasks) {
+         if(!categories.some(x => x === task.category)) {
+           categories.push(task.category);
+         }
+       }
+
+       return categories;
+     }
+
+
 
 }

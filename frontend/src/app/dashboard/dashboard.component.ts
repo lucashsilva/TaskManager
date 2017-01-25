@@ -23,38 +23,16 @@ export class DashboardComponent implements OnInit {
 
   fetchTasks() {
     this.taskService.getTasks().then(res => {
-      this.tasks.done = this.getTasks(res, true);
-      this.tasks.undone = this.getTasks(res, false);
-      this.sidebarService.pendentTasksNumber = this.tasks.undone.length;
-      this.tasksChart.getNumbers(res);
-      this.sidebarService.categories = this.getCategories(res);
+      if(res) {
+        this.tasks.done = this.taskService.getTasksWithFilter(res, true);
+        this.tasks.undone = this.taskService.getTasksWithFilter(res, false);
+        this.sidebarService.pendentTasksNumber = this.tasks.undone.length;
+        this.tasksChart.getNumbers(res);
+        this.sidebarService.categories = this.taskService.getCategories(res);
+      }
     });
 
 
-  }
-
-  getTasks(tasks, status) {
-    let result = [];
-
-    for (let task of tasks) {
-      if (task.done === status) {
-        result.push(task);
-      }
-    }
-
-    return result;
-  }
-
-  getCategories(tasks: Task[]) {
-    let categories = [];
-
-    for(let task of tasks) {
-      if(!categories.some(x => x === task.category)) {
-        categories.push(task.category);
-      }
-    }
-
-    return categories;
   }
 
 }
