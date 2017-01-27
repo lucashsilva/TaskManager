@@ -37,6 +37,7 @@ export class TasksPageComponent implements OnInit {
       }
     });
 
+  }
 
 
 

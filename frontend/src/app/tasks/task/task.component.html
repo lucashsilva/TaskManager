@@ -11,7 +11,7 @@
   </div>
   <div class="task-subtasks">
       <div class="subtask" *ngFor="let subtask of task.subtasks">
-        <label for="subtask"><i *ngIf="!subtask.done" class="fa fa-check-square-o" aria-hidden="true" (click)="switchSubtaskDone(subtask)"></i>
+        <label for="subtask"><i *ngIf="!subtask.done" class="fa fa-check" aria-hidden="true" (click)="switchSubtaskDone(subtask)"></i>
           <i *ngIf="subtask.done" class="fa fa-undo" aria-hidden="true" (click)="switchSubtaskDone(subtask)"></i>
           <i class="fa fa-times" aria-hidden="true" (click)="deleteSubtask(subtask)"></i>
         </label>

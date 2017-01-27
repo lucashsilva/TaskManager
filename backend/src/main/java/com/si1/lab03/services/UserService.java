@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.si1.lab03.dao.TaskRepository;
 import com.si1.lab03.dao.UserRepository;
+import com.si1.lab03.exceptions.TaskListNotFoundException;
 import com.si1.lab03.exceptions.TaskNotFoundException;
 import com.si1.lab03.exceptions.UserAlreadyExistsException;
 import com.si1.lab03.exceptions.UserNotFoundException;
 import com.si1.lab03.models.Task;
+import com.si1.lab03.models.TaskList;
 import com.si1.lab03.models.User;
 
 @Service
@@ -168,4 +170,76 @@ public class UserService {
 		}
 		
 	}
+
+	public List<TaskList> getTasksLists(String email) throws UserNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			return (List<TaskList>) user.getLists();
+		} else {
+			throw new UserNotFoundException();
+		}
+	}
+
+	public TaskList getTaskList(Integer id, String email) throws TaskListNotFoundException, UserNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			for (TaskList taskList: user.getLists()) {
+				if (taskList.getId().equals(id)) {
+					return taskList;
+				}
+			}
+			
+			throw new TaskListNotFoundException();
+		} else {
+			throw new UserNotFoundException();
+		}
+	}
+
+	public void addTaskList(String email, TaskList taskList) throws UserNotFoundException, TaskNotFoundException{
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			user.addTaskList(taskList);
+	
+			userRepository.save(user);
+		} else {
+			throw new UserNotFoundException();
+		}
+		
+	}
+
+	public void updateTaskList(String email, TaskList taskList) throws TaskListNotFoundException, TaskNotFoundException, UserNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			user.updateTaskList(taskList);
+		
+			userRepository.save(user);
+		
+		} else {
+			throw new UserNotFoundException();
+		}
+		
+		
+	}
+
+	public void deleteTaskList(String email, Integer id) throws UserNotFoundException, TaskListNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		if (user != null) {
+			user.removeTaskList(id);
+		
+			userRepository.save(user);
+		
+		} else {
+			throw new UserNotFoundException();
+		}
+		
+
+	}
+
+
+
 }
