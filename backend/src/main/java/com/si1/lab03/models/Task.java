@@ -2,7 +2,7 @@ package com.si1.lab03.models;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class Task implements Serializable {
 	private String category;
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="parent_id")
-	private List<Subtask> subtasks;
+	private Set<Subtask> subtasks;
 
 	public Task() {} 
 	
@@ -94,11 +94,11 @@ public class Task implements Serializable {
 		this.done = done;
 	}
 	
-	public List<Subtask> getSubtasks() {
+	public Set<Subtask> getSubtasks() {
 		return subtasks;
 	}
 
-	public void setSubtasks(List<Subtask> subtasks) {
+	public void setSubtasks(Set<Subtask> subtasks) {
 		this.subtasks = subtasks;
 	}
 

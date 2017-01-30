@@ -1,7 +1,7 @@
 package com.si1.lab03.controllers;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +36,7 @@ public class TaskController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<Task>> getTasks(@RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
-		List<Task> tasks;
+		Set<Task> tasks;
 		try {
 			tasks = userService.getTasks(email);
 			return new ResponseEntity<Collection<Task>>(tasks, HttpStatus.OK);

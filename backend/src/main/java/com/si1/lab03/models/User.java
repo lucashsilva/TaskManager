@@ -1,9 +1,9 @@
 package com.si1.lab03.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -26,21 +26,22 @@ public class User implements Serializable {
 	private String password;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="owner_id")
-    private List<Task> tasks;
+    private Set<Task> tasks;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="owner_id")
-    private List<TaskList> lists;
+    private Set<TaskList> lists;
 	
 	public User() {
-		this.tasks = new ArrayList<Task>();
-		this.lists = new ArrayList<TaskList>();
+		this.tasks = new HashSet<Task>();
+		this.lists = new HashSet<TaskList>();
+		
 	}
 	
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
-		this.tasks = new ArrayList<Task>();
-		this.lists = new ArrayList<TaskList>();
+		this.tasks = new HashSet<Task>();
+		this.lists = new HashSet<TaskList>();
 	}
 	
 	public Integer getId() {
@@ -63,7 +64,7 @@ public class User implements Serializable {
 		return tasks;
 	}
 	
-	public void setTasks(List<Task> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 	
@@ -90,31 +91,44 @@ public class User implements Serializable {
 		
 	}
 
-	public List<TaskList> getLists() {
+	public Set<TaskList> getLists() {
 		return lists;
 	}
 
-	public void setLists(List<TaskList> lists) {
+	public void setLists(Set<TaskList> lists) {
 		this.lists = lists;
 	}
 	
-	public void addTaskList(TaskList list) throws TaskNotFoundException {
+	public void addTaskList(TaskListRequest list) throws TaskNotFoundException {
+		TaskList taskList = new TaskList();
+		taskList.setTitle(list.getTitle());
+		
 		for(Integer id: list.getTasks()) {
-			if (!this.containsTask(id)) {
+			Task task = getTask(id);
+			
+			if (task == null) {
 				throw new TaskNotFoundException();
+			} else {
+				taskList.addTask(task);
 			}
 		}
 		
-		this.lists.add(list);
+		this.lists.add(taskList);
 	}
 
 	public boolean containsTask(Integer id) {
+		return getTask(id) != null;
+	}
+	
+	public Task getTask(Integer id) {
+		Task returnTask = null;
+		
 		for(Task task: this.tasks){
 			if(task.getId().equals(id)){
-				return true;
+				returnTask = task;
 			}
 		}
-		return false;
+		return returnTask;
 	}
 	
 	public TaskList getTaskList(Integer id){
@@ -131,7 +145,7 @@ public class User implements Serializable {
 		
 		if(taskList != null) {
 			this.removeTaskList(list);
-			this.addTaskList(list);
+			
 			return;
 		}
 		
@@ -142,6 +156,7 @@ public class User implements Serializable {
 		this.lists.remove(list);
 	}
 
+	
 	public void removeTaskList(Integer id) throws TaskListNotFoundException {
 		TaskList taskList = this.getTaskList(id);
 		
@@ -149,6 +164,7 @@ public class User implements Serializable {
 			this.lists.remove(taskList);
 			return;
 		}
+		
 		throw new TaskListNotFoundException();
 		
 	}

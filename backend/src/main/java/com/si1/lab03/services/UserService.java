@@ -2,6 +2,7 @@ package com.si1.lab03.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -15,6 +16,7 @@ import com.si1.lab03.exceptions.UserAlreadyExistsException;
 import com.si1.lab03.exceptions.UserNotFoundException;
 import com.si1.lab03.models.Task;
 import com.si1.lab03.models.TaskList;
+import com.si1.lab03.models.TaskListRequest;
 import com.si1.lab03.models.User;
 
 @Service
@@ -87,11 +89,11 @@ public class UserService {
 		}
 	}
 
-	public List<Task> getTasks(String email) throws UserNotFoundException {
+	public Set<Task> getTasks(String email) throws UserNotFoundException {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			return (List<Task>) user.getTasks();
+			return (Set<Task>) user.getTasks();
 		} else {
 			throw new UserNotFoundException();
 		}
@@ -171,11 +173,11 @@ public class UserService {
 		
 	}
 
-	public List<TaskList> getTasksLists(String email) throws UserNotFoundException {
+	public Set<TaskList> getTasksLists(String email) throws UserNotFoundException {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			return (List<TaskList>) user.getLists();
+			return (Set<TaskList>) user.getLists();
 		} else {
 			throw new UserNotFoundException();
 		}
@@ -197,13 +199,13 @@ public class UserService {
 		}
 	}
 
-	public void addTaskList(String email, TaskList taskList) throws UserNotFoundException, TaskNotFoundException{
+	public void addTaskList(String email, TaskListRequest taskList) throws UserNotFoundException, TaskNotFoundException{
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
 			user.addTaskList(taskList);
 	
-			userRepository.save(user);
+			userRepository.saveAndFlush(user);
 		} else {
 			throw new UserNotFoundException();
 		}
@@ -231,7 +233,7 @@ public class UserService {
 		if (user != null) {
 			user.removeTaskList(id);
 		
-			userRepository.save(user);
+			userRepository.saveAndFlush(user);
 		
 		} else {
 			throw new UserNotFoundException();

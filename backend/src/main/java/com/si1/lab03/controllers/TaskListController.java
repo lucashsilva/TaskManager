@@ -1,7 +1,7 @@
 package com.si1.lab03.controllers;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +20,7 @@ import com.si1.lab03.exceptions.TaskNotFoundException;
 import com.si1.lab03.exceptions.UserNotFoundException;
 import com.si1.lab03.models.Task;
 import com.si1.lab03.models.TaskList;
+import com.si1.lab03.models.TaskListRequest;
 import com.si1.lab03.services.TokenAuthenticationService;
 import com.si1.lab03.services.UserService;
 
@@ -38,7 +39,7 @@ public class TaskListController {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<TaskList>> getTasks(@RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
-		List<TaskList> tasksLists;
+		Set<TaskList> tasksLists;
 		try {
 			tasksLists = userService.getTasksLists(email);
 			return new ResponseEntity<Collection<TaskList>>(tasksLists, HttpStatus.OK);
@@ -73,7 +74,7 @@ public class TaskListController {
 			value = "api/lists",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> addTask(@RequestBody TaskList taskList, @RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<TaskList> addTask(@RequestBody TaskListRequest taskList, @RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
 		try {
 			userService.addTaskList(email, taskList);

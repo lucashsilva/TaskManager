@@ -1,17 +1,21 @@
 package com.si1.lab03.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity(name = "t_lists")
 public class TaskList implements Serializable {
@@ -21,12 +25,16 @@ public class TaskList implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String title;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="list_id")
-	private List<TaskListAssociation> tasks;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="t_task_list", 
+	      joinColumns=@JoinColumn(name="list_id"),
+	      inverseJoinColumns=@JoinColumn(name="task_id"))  
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
+	private Set<Task> tasks;
 	
 	public TaskList() {
-		this.tasks = new ArrayList<TaskListAssociation>();
+		this.tasks = new HashSet<Task>();
 	}
 
 	public Integer getId() {
@@ -45,19 +53,18 @@ public class TaskList implements Serializable {
 		this.title = title;
 	}
 
-	public List<Integer> getTasks() {
-		List<Integer> list = new ArrayList<Integer>();
-		
-		for(TaskListAssociation association: this.tasks) {
-			list.add(association.getTaskId());
-		}
-		
-		return list;
+	public Set<Task> getTasks() {
+		return this.tasks;
 	}
 
-	public void setTasks(List<TaskListAssociation> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
+	
+	public void addTask(Task task) {
+		this.tasks.add(task);
+	}
+	
 
 	@Override
 	public int hashCode() {
