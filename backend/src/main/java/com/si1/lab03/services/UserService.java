@@ -203,7 +203,14 @@ public class UserService {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			user.addTaskList(taskList);
+			TaskList list = new TaskList();
+			list.setTitle(taskList.getTitle());
+			
+			for(Integer id: taskList.getTasks()) {
+				list.addTask(getTask(id, email));
+			}
+			
+			user.addTaskList(list);
 	
 			userRepository.saveAndFlush(user);
 		} else {
@@ -212,11 +219,11 @@ public class UserService {
 		
 	}
 
-	public void updateTaskList(String email, TaskList taskList) throws TaskListNotFoundException, TaskNotFoundException, UserNotFoundException {
+	public void updateTaskList(String email, TaskListRequest taskListRequest) throws TaskListNotFoundException, TaskNotFoundException, UserNotFoundException {
 		User user = userRepository.findByEmail(email);
 		
 		if (user != null) {
-			user.updateTaskList(taskList);
+			getTaskList(taskListRequest.getId(), email).setTitle(taskListRequest.getTitle());;
 		
 			userRepository.save(user);
 		
@@ -226,6 +233,7 @@ public class UserService {
 		
 		
 	}
+
 
 	public void deleteTaskList(String email, Integer id) throws UserNotFoundException, TaskListNotFoundException {
 		User user = userRepository.findByEmail(email);
@@ -240,6 +248,27 @@ public class UserService {
 		}
 		
 
+	}
+
+	public void addTaskToList(String email, Integer taskId, Integer listId) throws UserNotFoundException, TaskNotFoundException, TaskListNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		Task task = this.getTask(taskId, email);
+		TaskList taskList = user.getTaskList(listId);
+		taskList.addTask(task);
+		
+		userRepository.saveAndFlush(user);
+	}
+
+	public void deleteTaskFromList(String email, Integer taskId, Integer listId) throws TaskNotFoundException, UserNotFoundException, TaskListNotFoundException {
+		User user = userRepository.findByEmail(email);
+		
+		Task task = this.getTask(taskId, email);
+		TaskList taskList = user.getTaskList(listId);
+		taskList.removeTask(task);
+		
+		userRepository.saveAndFlush(user);
+		
 	}
 
 

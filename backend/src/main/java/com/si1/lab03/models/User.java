@@ -24,10 +24,10 @@ public class User implements Serializable {
 	private Integer id;
 	private String email;
 	private String password;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="owner_id")
     private Set<Task> tasks;
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="owner_id")
     private Set<TaskList> lists;
 	
@@ -99,22 +99,6 @@ public class User implements Serializable {
 		this.lists = lists;
 	}
 	
-	public void addTaskList(TaskListRequest list) throws TaskNotFoundException {
-		TaskList taskList = new TaskList();
-		taskList.setTitle(list.getTitle());
-		
-		for(Integer id: list.getTasks()) {
-			Task task = getTask(id);
-			
-			if (task == null) {
-				throw new TaskNotFoundException();
-			} else {
-				taskList.addTask(task);
-			}
-		}
-		
-		this.lists.add(taskList);
-	}
 
 	public boolean containsTask(Integer id) {
 		return getTask(id) != null;
@@ -131,27 +115,28 @@ public class User implements Serializable {
 		return returnTask;
 	}
 	
-	public TaskList getTaskList(Integer id){
+	public TaskList getTaskList(Integer id) throws TaskListNotFoundException{
 		for(TaskList taskList: this.lists){
 			if(taskList.getId().equals(id)){
 				return taskList;
 			}
 		}
-		return null;
+		
+		throw new TaskListNotFoundException();
 	}
 
 	public void updateTaskList(TaskList list) throws TaskListNotFoundException, TaskNotFoundException {
 		TaskList taskList = this.getTaskList(list.getId());
 		
 		if(taskList != null) {
-			this.removeTaskList(list);
+//			taskList.merge(list);
 			
 			return;
 		}
 		
-		throw new TaskListNotFoundException();
 	}
 
+	
 	public void removeTaskList(TaskList list) {
 		this.lists.remove(list);
 	}
@@ -165,7 +150,11 @@ public class User implements Serializable {
 			return;
 		}
 		
-		throw new TaskListNotFoundException();
+		
+	}
+
+	public void addTaskList(TaskList list) {
+		this.lists.add(list);
 		
 	}
 

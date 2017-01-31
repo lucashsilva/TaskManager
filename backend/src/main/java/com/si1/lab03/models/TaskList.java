@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +24,7 @@ public class TaskList implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String title;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name="t_task_list", 
 	      joinColumns=@JoinColumn(name="list_id"),
 	      inverseJoinColumns=@JoinColumn(name="task_id"))  
@@ -35,6 +34,12 @@ public class TaskList implements Serializable {
 	
 	public TaskList() {
 		this.tasks = new HashSet<Task>();
+	}
+	
+	public TaskList(Integer id, String title) {
+		this.tasks = new HashSet<Task>();
+		this.id = id;
+		this.title = title;
 	}
 
 	public Integer getId() {
@@ -65,6 +70,20 @@ public class TaskList implements Serializable {
 		this.tasks.add(task);
 	}
 	
+	public void removeTask(Task task) {
+		this.tasks.remove(task);
+	}
+	
+	public boolean containsTask(Integer id) {
+		for (Task task: this.tasks) {
+			if(task.getId().equals(id)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -90,6 +109,8 @@ public class TaskList implements Serializable {
 			return false;
 		return true;
 	}
+
+
 	
 	
 

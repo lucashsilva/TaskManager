@@ -37,7 +37,7 @@ public class TaskListController {
 			value = "/api/lists",
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<TaskList>> getTasks(@RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Collection<TaskList>> getTaskLists(@RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
 		Set<TaskList> tasksLists;
 		try {
@@ -54,7 +54,7 @@ public class TaskListController {
 			value = "/api/lists/{id}", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> getTask(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<TaskList> getTaskList(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
 		TaskList taskList;
 		try {
@@ -74,7 +74,7 @@ public class TaskListController {
 			value = "api/lists",
 			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> addTask(@RequestBody TaskListRequest taskList, @RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<TaskList> addTaskList(@RequestBody TaskListRequest taskList, @RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
 		try {
 			userService.addTaskList(email, taskList);
@@ -89,7 +89,7 @@ public class TaskListController {
 			value = "api/lists/{id}",
 			method = RequestMethod.PUT,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> updateTask(@PathVariable("id") Integer id, @RequestBody TaskList taskList, @RequestHeader(value="Authorization") String token) {	
+	public ResponseEntity<TaskList> updateTask(@PathVariable("id") Integer id, @RequestBody TaskListRequest taskList, @RequestHeader(value="Authorization") String token) {	
 		String email = tokenService.extractEmail(token);
 		taskList.setId(id);
 
@@ -106,15 +106,51 @@ public class TaskListController {
 	
 	@CrossOrigin
 	@RequestMapping(
+			value = "api/lists/{listId}/{taskId}",
+			method = RequestMethod.PUT,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<TaskList> addTaskToList(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId, @RequestHeader(value="Authorization") String token) {	
+		String email = tokenService.extractEmail(token);
+
+		try {
+			userService.addTaskToList(email, taskId, listId);
+			return new ResponseEntity<TaskList>(HttpStatus.OK);
+		} catch (TaskListNotFoundException | TaskNotFoundException e) {
+			return new ResponseEntity<TaskList>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<TaskList>(HttpStatus.FORBIDDEN);
+		}
+
+	}
+	
+	@CrossOrigin
+	@RequestMapping(
 			value = "/api/lists/{id}", 
 			method = RequestMethod.DELETE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Task> deleteTask(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token) {
+	public ResponseEntity<Task> deleteTaskList(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token) {
 		String email = tokenService.extractEmail(token);
 		try {
 			userService.deleteTaskList(email, id);
 			return new ResponseEntity<Task>(HttpStatus.OK);
 		} catch (TaskListNotFoundException e) {
+			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);
+		}
+	}
+	
+	@CrossOrigin
+	@RequestMapping(
+			value = "api/lists/{listId}/{taskId}",
+			method = RequestMethod.DELETE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Task> deleteTaskFromList(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId,@RequestHeader(value="Authorization") String token) {
+		String email = tokenService.extractEmail(token);
+		try {
+			userService.deleteTaskFromList(email, taskId, listId);
+			return new ResponseEntity<Task>(HttpStatus.OK);
+		} catch (TaskListNotFoundException | TaskNotFoundException e) {
 			return new ResponseEntity<Task>(HttpStatus.NOT_FOUND);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<Task>(HttpStatus.FORBIDDEN);

@@ -32,7 +32,7 @@ public class Task implements Serializable {
 	private Priority priority;
 	private boolean done;
 	private String category;
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="parent_id")
 	private Set<Subtask> subtasks;
 
