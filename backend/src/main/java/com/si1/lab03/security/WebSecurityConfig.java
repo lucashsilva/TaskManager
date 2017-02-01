@@ -2,7 +2,6 @@ package com.si1.lab03.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +19,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // disable caching
         http.headers().cacheControl();
+        http.headers().frameOptions().disable();
 
         http.csrf().disable() // disable csrf for our requests.
             .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-            .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+            .antMatchers("/api/**").permitAll()
+            .antMatchers("/h2-console/**").permitAll()
             .anyRequest().authenticated()
             .and()
             // We filter the api/login requests
