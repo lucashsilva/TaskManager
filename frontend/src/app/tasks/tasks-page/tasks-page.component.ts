@@ -31,9 +31,8 @@ export class TasksPageComponent implements OnInit {
       if(res) {
         this.tasks.done = this.taskService.getTasksWithFilter(res, true, this.category);
         this.tasks.undone = this.taskService.getTasksWithFilter(res, false, this.category);
-        this.sidebarService.pendentTasksNumber = this.taskService.getTasksWithFilter(res, false).length;
         this.tasksChart.getNumbers(res, this.category);
-        this.sidebarService.categories = this.taskService.getCategories(res);
+        this.sidebarService.update();
       }
     });
 

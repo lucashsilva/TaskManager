@@ -112,3 +112,10 @@ input {
   overflow-x: visible;
   background: transparent;
 }
+
+.priority-selector {
+  background: transparent;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid $light-grey;
+}

@@ -14,20 +14,21 @@ export class TaskService {
     private apiUrl = "http://localhost:8080/api";
    constructor(private http: Http, private router: Router, private userService: UserService, private sidebarService: SidebarService) { }
 
-   getHeaders() {
-     let headers = new Headers();
-     headers.append('Authorization', this.userService.getToken());
-     return headers;
-   }
-
    getTasks(): Promise<Task[]> {
-     return this.http.get(this.apiUrl + '/tasks', {"headers": this.getHeaders()}).map(res => {
+     return this.http.get(this.apiUrl + '/tasks', this.userService.getOptions()).map(res => {
           return <Task[]> res.json();
         }
       ).toPromise();
 
    }
 
+   getTask(id): Promise<Task> {
+     return this.http.get(this.apiUrl + '/tasks/'+id, this.userService.getOptions()).map(res => {
+          return <Task> res.json();
+        }
+      ).toPromise();
+
+   }
 
    addTask(task: Task):Promise<boolean> {
         return this.http.post(this.apiUrl + "/tasks", JSON.stringify(task), this.userService.getOptions())
@@ -73,25 +74,13 @@ export class TaskService {
 
        for (let task of tasks) {
 
-         if ((category && task.category === category && task.done === done) || ((!category) && task.done === done)) {
+        if ((category && task.category === category && task.done === done) || ((!category) && task.done === done)) {
            result.push(task);
-         }
-       }
+        }
+      }
 
-       return result;
-     }
-
-     getCategories(tasks: Task[]) {
-       let categories = [];
-
-       for(let task of tasks) {
-         if(!categories.some(x => x === task.category)) {
-           categories.push(task.category);
-         }
-       }
-
-       return categories;
-     }
+      return result;
+    }
 
 
 

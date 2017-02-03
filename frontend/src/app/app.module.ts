@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { UserService } from './services/user.service';
 import { TaskService } from './services/task.service';
+import { TaskListService } from './services/task-list.service';
 import { SidebarService } from './services/sidebar.service';
 import { TasksCardComponent } from './tasks/tasks-card/tasks-card.component';
 import { TaskComponent } from './tasks/task/task.component';
@@ -23,7 +24,9 @@ import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.compone
 import { AuthGuard } from './providers/auth-guard';
 import { RequestOptions, Http, XHRBackend} from '@angular/http';
 import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
-
+import { TaskListsCardComponent } from './task-lists/task-lists-card/task-lists-card.component';
+import { TaskListComponent } from './task-lists/task-list/task-list.component';
+import { TaskListsPageComponent } from './task-lists/task-lists-page/task-lists-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
     DashboardComponent,
     TasksChartComponent,
     LoginPageComponent,
-    TasksPageComponent
+    TasksPageComponent,
+    TaskListsCardComponent,
+    TaskListComponent,
+    TaskListsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +59,7 @@ import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
     UserService,
     TaskService,
     SidebarService,
+    TaskListService,
     AuthGuard
   ],
 

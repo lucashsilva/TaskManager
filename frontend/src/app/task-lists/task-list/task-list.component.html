@@ -1,0 +1,5 @@
+<div *ngIf="list.tasks.length === 0" class="alert alert-success">Sem tarefas nesta lista.</div>
+<div class="task-list" *ngFor="let task of list.tasks">
+  {{ list.title }}
+  <app-task [task]="task"></app-task>
+</div>

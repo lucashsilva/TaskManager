@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.si1.lab03.exceptions.TaskNotFoundException;
@@ -42,6 +43,40 @@ public class TaskController {
 			return new ResponseEntity<Collection<Task>>(tasks, HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<Collection<Task>>(HttpStatus.FORBIDDEN);
+		}
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(
+			value = "/api/tasks/count",
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Integer> getTasksCount(@RequestHeader(value="Authorization") String token, @RequestParam("done") boolean done) {
+		String email = tokenService.extractEmail(token);
+		Integer tasksCount;
+		try {
+			tasksCount = userService.getTasksCount(email, done);
+			return new ResponseEntity<Integer>(tasksCount, HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Integer>(HttpStatus.FORBIDDEN);
+		}
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(
+			value = "/api/tasks/categories",
+			method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Collection<String>> getTasksCategories(@RequestHeader(value="Authorization") String token) {
+		String email = tokenService.extractEmail(token);
+		Set<String> categories;
+		try {
+			categories = userService.getTasksCategories(email);
+			return new ResponseEntity<Collection<String>>(categories, HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Collection<String>>(HttpStatus.FORBIDDEN);
 		}
 		
 	}

@@ -79,7 +79,9 @@ public class TaskListController {
 		try {
 			userService.addTaskList(email, taskList);
 			return new ResponseEntity<TaskList>(HttpStatus.CREATED);
-		} catch (UserNotFoundException | TaskNotFoundException e) {
+		} catch (TaskNotFoundException e) {
+			return new ResponseEntity<TaskList>(HttpStatus.NOT_FOUND);
+		} catch (UserNotFoundException e) {
 			return new ResponseEntity<TaskList>(HttpStatus.FORBIDDEN);
 		}
 	}

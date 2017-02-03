@@ -8,7 +8,6 @@ import { Router } from '@angular/router'
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  @Input() pendentTasksCounter: Number;
   showCategories: boolean;
 
   constructor(private userService: UserService, private sidebarService: SidebarService, private router: Router) { }

@@ -1,6 +1,7 @@
 package com.si1.lab03.services;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -66,7 +67,7 @@ public class UserService {
 
 	public void update(String email, User user) throws UserNotFoundException {
 		if (email != null) {
-			User userUpdated = userRepository.findByEmail(email);
+			User userUpdated = getUser(email);
 			
 			if (userUpdated != null) {
 				userUpdated.setEmail(user.getEmail());
@@ -90,7 +91,7 @@ public class UserService {
 	}
 
 	public Set<Task> getTasks(String email) throws UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			return (Set<Task>) user.getTasks();
@@ -106,7 +107,7 @@ public class UserService {
 	}
 
 	public Task getTask(Integer id, String email) throws TaskNotFoundException, UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			for (Task task: user.getTasks()) {
@@ -123,7 +124,7 @@ public class UserService {
 	}
 
 	public void addTask(String email, Task task) throws UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			user.addTask(task);
@@ -135,7 +136,7 @@ public class UserService {
 	}
 
 	public void updateTask(String email, Task taskToBeUpdated) throws UserNotFoundException, TaskNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			for (Task task: user.getTasks()) {
@@ -153,7 +154,7 @@ public class UserService {
 	}
 
 	public void deleteTask(String email, Integer id) throws TaskNotFoundException, UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			for (Task task: user.getTasks()) {
@@ -174,7 +175,7 @@ public class UserService {
 	}
 
 	public Set<TaskList> getTasksLists(String email) throws UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			return (Set<TaskList>) user.getLists();
@@ -184,7 +185,7 @@ public class UserService {
 	}
 
 	public TaskList getTaskList(Integer id, String email) throws TaskListNotFoundException, UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			for (TaskList taskList: user.getLists()) {
@@ -200,7 +201,7 @@ public class UserService {
 	}
 
 	public void addTaskList(String email, TaskListRequest taskList) throws UserNotFoundException, TaskNotFoundException{
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			TaskList list = new TaskList();
@@ -220,7 +221,7 @@ public class UserService {
 	}
 
 	public void updateTaskList(String email, TaskListRequest taskListRequest) throws TaskListNotFoundException, TaskNotFoundException, UserNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			getTaskList(taskListRequest.getId(), email).setTitle(taskListRequest.getTitle());;
@@ -236,7 +237,7 @@ public class UserService {
 
 
 	public void deleteTaskList(String email, Integer id) throws UserNotFoundException, TaskListNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		if (user != null) {
 			user.removeTaskList(id);
@@ -251,7 +252,7 @@ public class UserService {
 	}
 
 	public void addTaskToList(String email, Integer taskId, Integer listId) throws UserNotFoundException, TaskNotFoundException, TaskListNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		Task task = this.getTask(taskId, email);
 		TaskList taskList = user.getTaskList(listId);
@@ -261,7 +262,7 @@ public class UserService {
 	}
 
 	public void deleteTaskFromList(String email, Integer taskId, Integer listId) throws TaskNotFoundException, UserNotFoundException, TaskListNotFoundException {
-		User user = userRepository.findByEmail(email);
+		User user = getUser(email);
 		
 		Task task = this.getTask(taskId, email);
 		TaskList taskList = user.getTaskList(listId);
@@ -269,6 +270,39 @@ public class UserService {
 		
 		userRepository.saveAndFlush(user);
 		
+	}
+
+	public Integer getTasksCount(String email, boolean status) throws UserNotFoundException {
+		Set<Task> tasks = new HashSet<Task>();
+		User user = getUser(email);
+		for(Task task: user.getTasks()) {
+			if(task.isDone() == status) {
+				tasks.add(task);
+			}
+		}
+		
+		return tasks.size();
+	}
+
+	public Set<String> getTasksCategories(String email) throws UserNotFoundException {
+		Set<String> categories = new HashSet<String>();
+		User user = getUser(email);
+		
+		for(Task task: user.getTasks()) {
+			if(!categories.contains(task.getCategory())){
+				categories.add(task.getCategory());
+			}
+		}
+		return categories;
+	}
+
+	private User getUser(String email) throws UserNotFoundException {
+		User user = userRepository.findByEmail(email);
+		if(user != null) {
+			return user;
+		}
+		
+		throw new UserNotFoundException();
 	}
 
 
