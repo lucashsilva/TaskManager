@@ -1,6 +1,18 @@
-Mostrando tarefas na categoria {{ category }}
-<div class="columns">
-    <app-tasks-card [doneType]="false" [tasks]="tasks.undone" (hasChanges)="fetchTasks()"></app-tasks-card>
-    <app-tasks-card [doneType]="true" [tasks]="tasks.done" (hasChanges)="fetchTasks()"></app-tasks-card>
+<span class="card category" *ngIf="category">Mostrando tarefas na categoria {{ category }}</span>
+<div class="linha">
+  <div class="coluna">
     <app-tasks-chart></app-tasks-chart>
+  </div>
+  <div class="coluna">
+    <app-tasks-card [doneType]="false" [tasks]="tasks.undone" (hasChanges)="fetchTasks()"></app-tasks-card>
+  </div>
+  <div class="coluna">
+    <app-tasks-card [doneType]="true" [tasks]="tasks.done" (hasChanges)="fetchTasks()"></app-tasks-card>
+  </div>
 </div>
+<div [@taskform]="showForm" class="taskform">
+  <div class="box">
+    <app-task-form-card (hasChanges)="changeHandler($event)"></app-task-form-card>
+  </div>
+</div>
+<button (click)="toggleForm()" type="button" class="btn btn-default btn-circle btn-xl" id="add-task-button"><i class="fa fa-plus"></i></button>

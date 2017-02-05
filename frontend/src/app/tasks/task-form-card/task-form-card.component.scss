@@ -7,9 +7,23 @@
 }
 
 .btn {
-  margin: 5px;
+  margin: 10px;
+  background: transparent;
+  padding: 0;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: $medium-blue;  
+  font-weight: bolder;
+  float: right;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover {
+  opacity: 0.8;
 }
 
 .card {
   display: inline-block;
 }
+

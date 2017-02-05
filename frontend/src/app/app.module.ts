@@ -19,8 +19,7 @@ import { TaskFormCardComponent } from './tasks/task-form-card/task-form-card.com
 import { MomentModule } from 'angular2-moment';
 import { TaskDateSortPipe } from './tasks/pipes/task-date-sort.pipe';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TasksChartComponent } from './dashboard/tasks-chart/tasks-chart.component';
+import { TasksChartComponent } from './tasks/tasks-chart/tasks-chart.component';
 import { AuthGuard } from './providers/auth-guard';
 import { RequestOptions, Http, XHRBackend} from '@angular/http';
 import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
@@ -38,7 +37,6 @@ import { TaskListsPageComponent } from './task-lists/task-lists-page/task-lists-
     TaskFormCardComponent,
     TaskDateSortPipe,
     SidebarComponent,
-    DashboardComponent,
     TasksChartComponent,
     LoginPageComponent,
     TasksPageComponent,

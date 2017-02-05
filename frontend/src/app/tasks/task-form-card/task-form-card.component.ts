@@ -9,11 +9,11 @@ import { TaskService } from '../../services/task.service';
 })
 export class TaskFormCardComponent implements OnInit {
   task: Task;
-  @Output('taskAdded') emitter: EventEmitter<boolean>;
+  @Output('hasChanges') emitter: EventEmitter<Task>;
 
   constructor(private taskService: TaskService) {
     this.task = new Task();
-    this.emitter = new EventEmitter<boolean>();
+    this.emitter = new EventEmitter<Task>();
   }
 
   ngOnInit() {
@@ -21,11 +21,14 @@ export class TaskFormCardComponent implements OnInit {
 
   save() {
     this.taskService.addTask(this.task).then(res => {
-      this.emitter.emit();
+      this.emitter.emit(this.task);
       this.task = new Task();
     });
   }
 
+  close() {
+    this.emitter.emit(null);
+  }
 
 
 }

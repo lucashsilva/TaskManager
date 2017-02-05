@@ -27,6 +27,9 @@ export class LoginPageComponent implements OnInit {
       }
     });
 
+
+    
+
   }
 
   redirect() {
@@ -35,7 +38,7 @@ export class LoginPageComponent implements OnInit {
     if (redirectUrl) {
       this.router.navigate([redirectUrl]);
     } else {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['tasks']);
     }
 
   }

@@ -6,7 +6,7 @@
     <div class="overview">
       <ul class="menu">
         <li class="menu-item">
-          <a href="/dashboard">Dashboard <span *ngIf="this.sidebarService.pendentTasksCount != 0" class="count">{{ this.sidebarService.pendentTasksCount }}</span></a>
+          <a href="/dashboard">Tarefas <span *ngIf="this.sidebarService.pendentTasksCount != 0" class="count">{{ this.sidebarService.pendentTasksCount }}</span></a>
         </li>
         <li class="menu-item">
           <a (click)="toggleCategories()">Categorias</a>

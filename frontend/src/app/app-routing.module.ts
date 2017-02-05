@@ -2,7 +2,6 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main/main.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
@@ -11,8 +10,7 @@ import { AuthGuard } from './providers/auth-guard';
 
 const routes: Routes = [
     { path: '', component: MainComponent, canActivate: [AuthGuard],  children: [
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'tasks'},
       { path: 'tasks', component: TasksPageComponent },
       { path: 'tasks/:id', component: TaskComponent },
       { path: 'lists', component: TaskListsPageComponent },

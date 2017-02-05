@@ -28,6 +28,7 @@ import { Task } from '../tasks/task/task.component';
       transition('hide => show', animate('400ms ease-in-out'))
     ])
   ]
+
 })
 export class MainComponent implements OnInit {
   showSidebar = 'show';
@@ -46,6 +47,7 @@ export class MainComponent implements OnInit {
   toggleSidebar() {
     this.showSidebar = this.showSidebar === 'hide' ? 'show' : 'hide';
   }
+
 
   getPendentTasksNumber() {
     let count = 0;

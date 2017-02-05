@@ -1,18 +1,33 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, trigger, state, style, transition, animate } from '@angular/core';
 import { TaskService } from '../../services/task.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { Task } from '../task/task.component';
 import { ActivatedRoute } from '@angular/router';
-import { TasksChartComponent } from '../../dashboard/tasks-chart/tasks-chart.component';
+import { TasksChartComponent } from '../tasks-chart/tasks-chart.component';
 
 @Component({
   selector: 'app-tasks-page',
   templateUrl: './tasks-page.component.html',
-  styleUrls: ['./tasks-page.component.scss']
+  styleUrls: ['./tasks-page.component.scss'],
+  animations: [
+    trigger('taskform', [
+      state('show', style({
+        visibility: 'visible',
+        opacity: '1'
+      })),
+      state('hide', style({
+        visibility: 'hidden',
+        opacity: '0'
+      })),
+      transition('show => hide', animate('400ms ease-in-out')),
+      transition('hide => show', animate('400ms ease-in-out'))
+    ])
+  ]
 })
 export class TasksPageComponent implements OnInit {
   tasks: any;
   category: string;
+  showForm = 'hide';
   @ViewChild(TasksChartComponent) tasksChart: TasksChartComponent;
   constructor(private taskService: TaskService, private sidebarService: SidebarService, private route: ActivatedRoute) {
     this.tasks = {done: [], undone: []}
@@ -38,7 +53,16 @@ export class TasksPageComponent implements OnInit {
 
   }
 
+  toggleForm() {
+    this.showForm = this.showForm === 'hide' ? 'show' : 'hide';
+  }
 
+  changeHandler(event) {
+    this.toggleForm();
 
+    if(event) {
+      this.fetchTasks();
+    }
+  }
 
 }
