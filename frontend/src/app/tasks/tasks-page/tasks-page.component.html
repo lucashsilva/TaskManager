@@ -12,7 +12,7 @@
 </div>
 <div [@taskform]="showForm" class="taskform">
   <div class="box">
-    <app-task-form-card (hasChanges)="changeHandler($event)"></app-task-form-card>
+    <app-task-form-card (hasChanges)="changeHandler($event)" [category]="category"></app-task-form-card>
   </div>
 </div>
 <button (click)="toggleForm()" type="button" class="btn btn-default btn-circle btn-xl" id="add-task-button"><i class="fa fa-plus"></i></button>

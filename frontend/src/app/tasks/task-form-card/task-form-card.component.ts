@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import {Input, Component,  OnInit,  Output,  EventEmitter} from '@angular/core';
 import { Task } from '../task/task.component';
 import { TaskService } from '../../services/task.service';
 
@@ -8,15 +8,16 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./task-form-card.component.scss']
 })
 export class TaskFormCardComponent implements OnInit {
+  @Input() category: string;
   task: Task;
   @Output('hasChanges') emitter: EventEmitter<Task>;
 
   constructor(private taskService: TaskService) {
-    this.task = new Task();
     this.emitter = new EventEmitter<Task>();
   }
 
   ngOnInit() {
+    this.reset();
   }
 
   save() {
@@ -30,5 +31,8 @@ export class TaskFormCardComponent implements OnInit {
     this.emitter.emit(null);
   }
 
-
+  reset() { 
+    this.task = new Task();
+    this.task.category = this.category;
+  }
 }

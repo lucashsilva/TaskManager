@@ -111,6 +111,7 @@ export class Task {
     this.timestamp = new Date(Date.now());
     this.subtasks = new Array<Subtask>();
   }
+  
 
 }
 
@@ -122,4 +123,5 @@ export class Subtask {
   constructor() {
     this.done = false;
   }
+  
 }
