@@ -21,7 +21,12 @@ export class TaskListService {
 
    getLists(): Promise<TaskList[]> {
      return this.http.get(this.apiUrl + '/lists', {"headers": this.getHeaders()}).map(res => {
-          return <TaskList[]> res.json();
+          if(res.status >= 200 && res.status <= 400) {
+            return <TaskList[]> res.json();
+         } else {
+           throw new Error("Não foi possível carregar os dados.");
+         }
+
         }
       ).toPromise();
 
@@ -30,25 +35,25 @@ export class TaskListService {
 
    addList(list: TaskList):Promise<boolean> {
         return this.http.post(this.apiUrl + "/lists", JSON.stringify(list), this.userService.getOptions())
-                         .map((response: Response) => {
+                         .map((res: Response) => {
 
-          if(response.status >= 200) {
+         if(res.status >= 200 && res.status <= 400) {
            return true;
          } else {
-           return false;
+           throw new Error("Erro na requisição. Verifique os dados.");
          }
 
        }).toPromise();
       }
 
    deleteTask(list: TaskList) {
-     return this.http.delete(this.apiUrl + `/lists/${list.id}`, this.userService.getOptions()).map((response: Response) => {
+     return this.http.delete(this.apiUrl + `/lists/${list.id}`, this.userService.getOptions()).map((res: Response) => {
 
-        if(response.status >= 200) {
-        return true;
-        } else {
-        return false;
-        }
+        if(res.status >= 200 && res.status <= 400) {
+           return true;
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados.");
+         }
 
       }).toPromise();
    }

@@ -2,18 +2,27 @@ package com.si1.lab03.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-@Entity(name="t_subtasks")
+@Entity
+@Table(name="subtasks")
 public class Subtask implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Column
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column
+	@NotNull
 	private String description;
+	@Column
+	@NotNull
 	private boolean done;
 	
 	public Integer getId() {

@@ -3,4 +3,5 @@
   <app-task [task]="task"></app-task>
   <button class="btn" (click)="save()">Salvar</button>
   <button class="btn" (click)="close()">Cancelar</button>
+  <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
 </div>

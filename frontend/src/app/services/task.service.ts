@@ -16,7 +16,11 @@ export class TaskService {
 
    getTasks(): Promise<Task[]> {
      return this.http.get(this.apiUrl + '/tasks', this.userService.getOptions()).map(res => {
-          return <Task[]> res.json();
+          if(res.status == 200) {
+            return <Task[]> res.json();
+          } else {
+            throw new Error("Não foi possível carregar os dados.");
+          }
         }
       ).toPromise();
 
@@ -24,7 +28,11 @@ export class TaskService {
 
    getTask(id): Promise<Task> {
      return this.http.get(this.apiUrl + '/tasks/'+id, this.userService.getOptions()).map(res => {
-          return <Task> res.json();
+          if(res.status >= 200 && res.status <= 400) {
+            return <Task> res.json();
+          } else {
+            throw new Error("Não foi possível carregar os dados.");
+          }
         }
       ).toPromise();
 
@@ -32,12 +40,12 @@ export class TaskService {
 
    addTask(task: Task):Promise<boolean> {
         return this.http.post(this.apiUrl + "/tasks", JSON.stringify(task), this.userService.getOptions())
-                         .map((response: Response) => {
+                         .map((res: Response) => {
 
-          if(response.status >= 200) {
+         if(res.status >= 200 && res.status <= 400) {
            return true;
          } else {
-           return false;
+           throw new Error("Erro na requisição. Verifique os dados.");
          }
 
        }).toPromise();
@@ -45,25 +53,27 @@ export class TaskService {
 
 
    editTask(task) {
-     return this.http.put(this.apiUrl + `/tasks/${task.id}`, JSON.stringify(task), this.userService.getOptions()).map((response: Response) => {
+     return this.http.put(this.apiUrl + `/tasks/${task.id}`, JSON.stringify(task), this.userService.getOptions()).map((res: Response) => {
 
-      if(response.status >= 200) {
-      return true;
-      } else {
-      return false;
-      }
+          if(res.status >= 200 && res.status <= 400) {
+           return true;
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados.");
+         }
+
 
       }).toPromise();
    }
 
    deleteTask(task) {
-     return this.http.delete(this.apiUrl + `/tasks/${task.id}`, this.userService.getOptions()).map((response: Response) => {
+     return this.http.delete(this.apiUrl + `/tasks/${task.id}`, this.userService.getOptions()).map((res: Response) => {
 
-        if(response.status >= 200) {
-        return true;
-        } else {
-        return false;
-        }
+          if(res.status >= 200 && res.status <= 400) {
+           return true;
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados. ");
+         }
+
 
       }).toPromise();
    }

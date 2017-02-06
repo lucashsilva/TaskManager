@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,23 +15,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-@Entity(name="t_tasks")
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@Entity
+@Table(name="tasks")
 public class Task implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	@Column
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column
+	@NotNull
 	private String title;
+	@Column
+	@NotNull
 	private String description;
+	@Column
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date timestamp;
+	@Column
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Priority priority;
+	@Column
+	@NotNull
 	private boolean done;
+	@Column
 	private String category;
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="parent_id")

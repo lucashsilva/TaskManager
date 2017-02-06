@@ -49,19 +49,5 @@ export class MainComponent implements OnInit {
   }
 
 
-  getPendentTasksNumber() {
-    let count = 0;
-
-    if(this.tasks) {
-      for(let task of this.tasks) {
-          if(!task.done) count++;
-      }
-
-    }
-
-    return count;
-  }
-
-
 
 }

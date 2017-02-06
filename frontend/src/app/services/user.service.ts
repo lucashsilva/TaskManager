@@ -27,7 +27,7 @@ export class UserService {
                                                             token: this.authenticatedUser.token}));
         return true;
       } else {
-        return false;
+        throw new Error("Credenciais inválidas.");
       }
 
     });

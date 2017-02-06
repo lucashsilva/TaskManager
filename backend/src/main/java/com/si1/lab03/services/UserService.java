@@ -289,7 +289,7 @@ public class UserService {
 		User user = getUser(email);
 		
 		for(Task task: user.getTasks()) {
-			if(!categories.contains(task.getCategory())){
+			if(task.getCategory() != null && !categories.contains(task.getCategory())){
 				categories.add(task.getCategory());
 			}
 		}

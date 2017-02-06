@@ -6,23 +6,32 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.si1.lab03.exceptions.TaskListNotFoundException;
 import com.si1.lab03.exceptions.TaskNotFoundException;
 
-@Entity(name="t_users")
+@Entity
+@Table(name="users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Column
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@Column
+	@NotNull
 	private String email;
+	@Column
+	@NotNull
 	private String password;
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="owner_id")

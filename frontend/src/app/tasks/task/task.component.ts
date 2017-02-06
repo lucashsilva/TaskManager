@@ -11,10 +11,12 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task;
   @Output() hasChanges;
+  @Output() errorEmitter;
   showEditCategory: boolean;
 
   constructor(private taskService: TaskService, private router: Router) {
     this.hasChanges = new EventEmitter();
+    this.errorEmitter = new EventEmitter();
     this.task = new Task();
   }
 

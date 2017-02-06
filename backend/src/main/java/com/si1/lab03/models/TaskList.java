@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,21 +12,27 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity(name = "t_lists")
+@Entity
+@Table(name="task_lists")
 public class TaskList implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Column
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	@Column
+	@NotNull
 	private String title;
 	@ManyToMany
-	@JoinTable(name="t_task_list", 
+	@JoinTable(name="task_list", 
 	      joinColumns=@JoinColumn(name="list_id"),
 	      inverseJoinColumns=@JoinColumn(name="task_id"))  
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

@@ -9,8 +9,9 @@ import { TaskService } from '../../services/task.service';
 })
 export class TaskFormCardComponent implements OnInit {
   @Input() category: string;
-  task: Task;
   @Output('hasChanges') emitter: EventEmitter<Task>;
+  task: Task;
+  errorMessage: string;
 
   constructor(private taskService: TaskService) {
     this.emitter = new EventEmitter<Task>();
@@ -25,6 +26,7 @@ export class TaskFormCardComponent implements OnInit {
       this.emitter.emit(this.task);
       this.task = new Task();
     });
+
   }
 
   close() {
