@@ -25,7 +25,7 @@
       <i class="fa fa-times" aria-hidden="true" (click)="deleteTask()"></i>
       <i class="fa fa-calendar" aria-hidden="true"><span class="text">{{ task.timestamp | date }}</span></i>
       <i class="fa fa-clock-o" aria-hidden="true"><span class="text">{{ task.timestamp | date:'shortTime' }}</span></i>
-      <span class="text"> Prioridade: </span><select [(ngModel)]="task.priority" class="priority-selector">
+      <span class="text"> Prioridade: </span><select [(ngModel)]="task.priority" (change)="edit()" class="priority-selector">
         <option value="NORMAL">Normal</option>
         <option value="LOW">Baixa</option>
         <option value="HIGH">Alta</option>

@@ -1,9 +1,19 @@
 .title {
   font-size: 18px;
+  margin: 15px;
 }
 
 .card {
-  padding: 15px;
   margin-bottom: 30px;
   width: 100%;
+}
+
+.alert {
+  margin: 15px;
+  margin-top: 0;
+}
+
+canvas {
+  margin-top: -15px;
+  margin-bottom: 15px;
 }

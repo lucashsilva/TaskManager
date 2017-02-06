@@ -8,7 +8,7 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./tasks-chart.component.scss']
 })
 export class TasksChartComponent implements OnInit {
-
+  showChart: boolean;
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {  }
@@ -31,6 +31,8 @@ export class TasksChartComponent implements OnInit {
     let undone = 0;
 
     if(tasks != null){
+      this.showChart = tasks.length > 0;
+      
       for(let task of tasks) {
         if((task.done && category && category === task.category) || (task.done && (!category))) {
           done++;
