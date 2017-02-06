@@ -1,6 +1,7 @@
 import { Component, OnInit,  trigger, state, style, transition, animate } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../tasks/task/task.component';
+import {UserService, User} from '../services/user.service';
 
 @Component({
   selector: 'app-main',
@@ -33,14 +34,21 @@ import { Task } from '../tasks/task/task.component';
 export class MainComponent implements OnInit {
   showSidebar = 'show';
   tasks: Task[];
+  user: User;
 
-  constructor(private taskService: TaskService) {  }
+  constructor(private taskService: TaskService, private userService: UserService) { 
+    this.user = new User();
+
+   }
 
   ngOnInit() {
     if(window.screen.width <= 992) {
       this.toggleSidebar();
     }
 
+    this.userService.getUser().then(user => {
+      this.user = user;
+    });
 
   }
 

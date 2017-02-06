@@ -1,9 +1,12 @@
 package com.si1.lab03.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,7 @@ public class UserController {
 	@Autowired
 	private TokenAuthenticationService tokenService;
 	
-	
+	@CrossOrigin
 	@RequestMapping(
 			value = "api/users",
 			method = RequestMethod.POST,
@@ -40,6 +43,7 @@ public class UserController {
 		
 	}
 	
+	@CrossOrigin
 	@RequestMapping(
 			value = "api/users",
 			method = RequestMethod.PUT,
@@ -56,6 +60,7 @@ public class UserController {
 
 	}
 	
+	@CrossOrigin
 	@RequestMapping(
 			value = "/api/users", 
 			method = RequestMethod.DELETE, 
@@ -68,6 +73,23 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.OK);
 		} catch (UserNotFoundException e) {
 			return new ResponseEntity<User>(HttpStatus.FORBIDDEN);
+		}
+		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(
+			value = "api/users/info",
+			method = RequestMethod.GET,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Map<String, String>> getUserInfo(@RequestHeader(value="Authorization") String token) {
+		try {
+			String email = tokenService.extractEmail(token);
+			Map<String, String> userInfo = userService.getUserInfo(email);
+		
+			return new ResponseEntity<Map<String, String>>(userInfo, HttpStatus.OK);
+		} catch (UserNotFoundException e) {
+			return new ResponseEntity<Map<String, String>>(HttpStatus.CONFLICT);
 		}
 		
 	}

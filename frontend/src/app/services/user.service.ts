@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
@@ -31,6 +32,16 @@ export class UserService {
       }
 
     });
+   }
+
+   getUser(): Promise<User> {
+     return this.http.get(this.apiUrl + '/users/info', this.getOptions()).map(res => {
+       if(res.status >= 200 && res.status <= 400) {
+         return <User> res.json();
+       } else {
+         throw new Error("Erro ao obter dados do usuário.");
+       }
+     }).toPromise();
    }
 
    isLoggedIn():boolean {
@@ -72,5 +83,17 @@ export class AuthenticatedUser {
   constructor(email: string, token: string) {
     this.email = email;
     this.token = token;
+  }
+}
+
+export class User {
+  firstName: string;
+  lastName: string;
+  email: string;
+
+  constructor() {
+    this.firstName = "";
+    this.lastName = "";
+    this.email = "";
   }
 }

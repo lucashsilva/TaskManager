@@ -1,8 +1,10 @@
 package com.si1.lab03.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -303,6 +305,16 @@ public class UserService {
 		}
 		
 		throw new UserNotFoundException();
+	}
+
+	public Map<String, String> getUserInfo(String email) throws UserNotFoundException {
+		User user = getUser(email);
+		HashMap<String, String> userInfo = new HashMap<String, String>();
+		userInfo.put("firstName", user.getFirstName());
+		userInfo.put("lastName", user.getLastName());
+		userInfo.put("email", user.getEmail());
+		
+		return userInfo;
 	}
 
 

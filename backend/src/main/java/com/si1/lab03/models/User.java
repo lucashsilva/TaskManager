@@ -29,6 +29,12 @@ public class User implements Serializable {
 	private Integer id;
 	@Column
 	@NotNull
+	private String firstName;
+	@Column
+	@NotNull
+	private String lastName;
+	@Column
+	@NotNull
 	private String email;
 	@Column
 	@NotNull
@@ -61,6 +67,22 @@ public class User implements Serializable {
 		this.id = id;
 	}
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public String getEmail() {
 		return email;
 	}
