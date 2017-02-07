@@ -1,3 +1,4 @@
+import {Task} from 'protractor/built';
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Response, Http } from '@angular/http';
 import { TaskList } from '../task-lists/task-list/task-list.component';
@@ -46,8 +47,21 @@ export class TaskListService {
        }).toPromise();
       }
 
-   deleteTask(list: TaskList) {
+   deleteList(list: TaskList) {
      return this.http.delete(this.apiUrl + `/lists/${list.id}`, this.userService.getOptions()).map((res: Response) => {
+
+        if(res.status >= 200 && res.status <= 400) {
+           return true;
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados.");
+         }
+
+      }).toPromise();
+   }
+
+
+   deleteTaskFromList(list: TaskList, task: Task) {
+     return this.http.delete(this.apiUrl + `/lists/${list.id}/${task.id}`, this.userService.getOptions()).map((res: Response) => {
 
         if(res.status >= 200 && res.status <= 400) {
            return true;

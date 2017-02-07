@@ -19,17 +19,22 @@
       </div>
       <i class="fa fa-plus-circle" aria-hidden="true" (click)="addSubtask()"><span class="add-subtask">Adicionar subtarefa</span></i>
   </div>
+  <div *ngIf="task.taskLists && task.taskLists.length > 0" class="task-lists">
+    <i class="fa fa-list" aria-hidden="true"><span class="lists-title">Listas associadas: </span></i>
+    <span *ngFor="let list of task.taskLists" class="list">{{list.title}} <i class="fa fa-times" aria-hidden="true" (click)="deleteTaskFromList(list)"></i></span>
+  </div>
   <div class="task-footer">
-      <i *ngIf="!task.done" class="fa fa-check" aria-hidden="true" (click)="switchDone()"></i>
-      <i *ngIf="task.done" class="fa fa-undo" aria-hidden="true" (click)="switchDone()"></i>
-      <i class="fa fa-times" aria-hidden="true" (click)="deleteTask()"></i>
-      <i class="fa fa-calendar" aria-hidden="true"><span class="text">{{ task.timestamp | date }}</span></i>
-      <i class="fa fa-clock-o" aria-hidden="true"><span class="text">{{ task.timestamp | date:'shortTime' }}</span></i>
       <span class="text"> Prioridade: </span><select [(ngModel)]="task.priority" (change)="edit()" class="priority-selector">
         <option value="NORMAL">Normal</option>
         <option value="LOW">Baixa</option>
         <option value="HIGH">Alta</option>
       </select>
-
+      <br>
+      <i *ngIf="!task.done" class="fa fa-check" aria-hidden="true" (click)="switchDone()"></i>
+      <i *ngIf="task.done" class="fa fa-undo" aria-hidden="true" (click)="switchDone()"></i>
+      <i class="fa fa-times" aria-hidden="true" (click)="deleteTask()"></i>
+      <i class="fa fa-calendar" aria-hidden="true"><span class="text">{{ task.timestamp | date }}</span></i>
+      <i class="fa fa-clock-o" aria-hidden="true"><span class="text">{{ task.timestamp | date:'shortTime' }}</span></i>
+  
   </div>
 </div>

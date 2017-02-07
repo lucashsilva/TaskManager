@@ -14,14 +14,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 @Table(name="tasks")
@@ -36,7 +34,6 @@ public class Task implements Serializable {
 	@NotNull
 	private String title;
 	@Column
-	@NotNull
 	private String description;
 	@Column
 	@NotNull
@@ -54,6 +51,8 @@ public class Task implements Serializable {
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="parent_id")
 	private Set<Subtask> subtasks;
+	@ManyToMany(mappedBy="tasks")
+	private Set<TaskList> taskLists;
 
 	public Task() {} 
 	
@@ -127,6 +126,14 @@ public class Task implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public Set<TaskList> getTaskLists() {
+		return taskLists;
+	}
+
+	public void setTaskLists(Set<TaskList> taskLists) {
+		this.taskLists = taskLists;
 	}
 
 	@Override

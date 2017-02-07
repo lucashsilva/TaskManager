@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.si1.lab03.exceptions.TaskNotFoundException;
 
 @Entity
 @Table(name="task_lists")
@@ -77,8 +78,12 @@ public class TaskList implements Serializable {
 		this.tasks.add(task);
 	}
 	
-	public void removeTask(Task task) {
-		this.tasks.remove(task);
+	public boolean removeTask(Task task) throws TaskNotFoundException {
+		if(!this.tasks.remove(task)){
+			throw new TaskNotFoundException();
+		}
+		
+		return true;
 	}
 	
 	public boolean containsTask(Integer id) {

@@ -1,3 +1,1 @@
-<div class="columns">
-    <app-task-lists-card [lists]="lists"></app-task-lists-card>
-</div>
+<app-task-lists-card [lists]="lists" (hasChanges)="fetchLists()"></app-task-lists-card>

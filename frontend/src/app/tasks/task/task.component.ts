@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
+import { TaskListService } from '../../services/task-list.service';
+import { TaskList } from '../../task-lists/task-list/task-list.component';
 
 @Component({
   selector: 'app-task',
@@ -14,7 +16,7 @@ export class TaskComponent implements OnInit {
   @Output() errorEmitter;
   showEditCategory: boolean;
 
-  constructor(private taskService: TaskService, private router: Router) {
+  constructor(private taskService: TaskService, private listService: TaskListService, private router: Router) {
     this.hasChanges = new EventEmitter();
     this.errorEmitter = new EventEmitter();
     this.task = new Task();
@@ -56,6 +58,7 @@ export class TaskComponent implements OnInit {
 
   edit() {
     if(this.task.id) {
+      this.task.taskLists = new Array<number>(); 
       this.taskService.editTask(this.task).then(res => {
         this.hasChanges.emit();
       });
@@ -94,6 +97,14 @@ export class TaskComponent implements OnInit {
     return result + "#2196f3";
   }
 
+  deleteTaskFromList(list) {
+    this.listService.deleteTaskFromList(list, this.task).then(res => {
+      if(res){
+        this.hasChanges.emit();
+      }
+    });
+  }
+
 }
 
 
@@ -106,12 +117,14 @@ export class Task {
   done: boolean;
   category: string;
   subtasks: Array<Subtask>;
+  taskLists: Array<number> | Array<TaskList>;
 
   constructor() {
     this.done = false;
     this.priority = "NORMAL";
     this.timestamp = new Date(Date.now());
     this.subtasks = new Array<Subtask>();
+    this.taskLists = new Array<number>();
   }
   
 

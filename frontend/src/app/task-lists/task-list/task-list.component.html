@@ -1,5 +1,7 @@
-<div *ngIf="list.tasks.length === 0" class="alert alert-success">Sem tarefas nesta lista.</div>
-<div class="task-list" *ngFor="let task of list.tasks">
+<div class="task-list">
   {{ list.title }}
-  <app-task [task]="task"></app-task>
+  <div *ngIf="list.tasks.length === 0" class="alert alert-success">Sem tarefas nesta lista.</div>
+  <div *ngFor="let task of list.tasks">
+    <app-task [task]="task" (hasChanges)="fetchLists()"></app-task>
+  </div>
 </div>

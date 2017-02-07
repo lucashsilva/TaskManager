@@ -1,0 +1,14 @@
+@import "../../../styles";
+
+.task-list {
+    background: $white;
+    border: 1px dotted $medium-grey;
+    border-bottom: 3px solid $medium-grey;
+    margin: 5px;
+    padding: 5px;
+}
+
+.alert {
+    margin: 5px;
+    margin-bottom: 0;
+}

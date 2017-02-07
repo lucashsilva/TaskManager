@@ -13,6 +13,7 @@ export class TaskListsCardComponent implements OnInit {
 
   constructor() {
     this.lists = new Array<TaskList>();
+    this.emitter = new EventEmitter<boolean>();
    }
 
   ngOnInit() {

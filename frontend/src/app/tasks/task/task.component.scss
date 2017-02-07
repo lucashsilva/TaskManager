@@ -24,7 +24,6 @@
   font-size: 0.7rem;
   padding: 10px;
   border: none;
-  box-shadow: 0px 0px 5px $light-grey;
   width: 100%;
   margin-bottom: 5px;
   border-left: 5px solid $medium-blue;
@@ -118,4 +117,19 @@ input {
   padding: 5px;
   border-radius: 2px;
   border: 1px solid $light-grey;
+}
+
+.list {
+  font-size: 10px;
+  padding: 3px;
+  background-color: $light-grey;
+  border-radius: 2px;
+}
+
+.lists-title {
+  margin-left: 3px;
+}
+
+.fa.fa-list {
+  margin-right: 3px;
 }

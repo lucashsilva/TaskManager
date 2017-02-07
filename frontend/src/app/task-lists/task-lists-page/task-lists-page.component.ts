@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { TaskListService } from '../../services/task-list.service';
 import { TaskService } from '../../services/task.service';
-import { TaskList } from '../task-list/task-list.component';
+import {TaskList } from '../task-list/task-list.component';
 import { Task } from '../../tasks/task/task.component';
 
 @Component({
@@ -19,10 +19,11 @@ export class TaskListsPageComponent implements OnInit {
 
   ngOnInit() {
     this.fetchLists();
-    this.sidebarService.update();
   }
 
   fetchLists() {
+    this.sidebarService.update();
+    
     this.taskListService.getLists().then(res => {
       if(res) {
         this.lists = res;
@@ -41,6 +42,7 @@ export class TaskListsPageComponent implements OnInit {
     for(let id of list.tasks) {
       let task = this.taskService.getTask(id).then(res => {
         if(res) {
+
           tasks.push(res);
         }
       });
@@ -49,7 +51,6 @@ export class TaskListsPageComponent implements OnInit {
 
     return tasks;
   }
-
 
 
 }
