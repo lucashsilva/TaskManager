@@ -36,8 +36,6 @@ public class TaskList implements Serializable {
 	@JoinTable(name="task_list", 
 	      joinColumns=@JoinColumn(name="list_id"),
 	      inverseJoinColumns=@JoinColumn(name="task_id"))  
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
 	private Set<Task> tasks;
 	
 	public TaskList() {

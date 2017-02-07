@@ -108,14 +108,14 @@ public class TaskListController {
 	
 	@CrossOrigin
 	@RequestMapping(
-			value = "api/lists/{listId}/{taskId}",
-			method = RequestMethod.PUT,
+			value = "api/lists/{listId}/{taskIds}",
+			method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> addTaskToList(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId, @RequestHeader(value="Authorization") String token) {	
+	public ResponseEntity<TaskList> addTasksToList(@PathVariable("listId") Integer listId, @PathVariable("taskIds") Set<Integer> taskIds, @RequestHeader(value="Authorization") String token) {	
 		String email = tokenService.extractEmail(token);
 
 		try {
-			userService.addTaskToList(email, taskId, listId);
+			userService.addTasksToList(email, taskIds, listId);
 			return new ResponseEntity<TaskList>(HttpStatus.OK);
 		} catch (TaskListNotFoundException | TaskNotFoundException e) {
 			return new ResponseEntity<TaskList>(HttpStatus.NOT_FOUND);

@@ -2,6 +2,7 @@ package com.si1.lab03.models;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="tasks")
@@ -127,11 +132,21 @@ public class Task implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
-	public Set<TaskList> getTaskLists() {
-		return taskLists;
+	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = true)
+	public Set<String> getTaskLists() {
+		Set<String> lists = new HashSet<String>();
+		
+		for(TaskList list: this.taskLists) {
+			lists.add(list.getTitle());
+		}
+		
+		return lists;
 	}
-
+	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@JsonIdentityReference(alwaysAsId = false)
 	public void setTaskLists(Set<TaskList> taskLists) {
 		this.taskLists = taskLists;
 	}

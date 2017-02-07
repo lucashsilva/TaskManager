@@ -124,6 +124,7 @@ input {
   padding: 3px;
   background-color: $light-grey;
   border-radius: 2px;
+  margin-left: 3px;
 }
 
 .lists-title {
@@ -132,4 +133,8 @@ input {
 
 .fa.fa-list {
   margin-right: 3px;
+}
+
+.select-text {
+  font-size: 12px;
 }

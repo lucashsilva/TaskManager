@@ -27,6 +27,7 @@ import { TaskListsCardComponent } from './task-lists/task-lists-card/task-lists-
 import { TaskListComponent } from './task-lists/task-list/task-list.component';
 import { TaskListsPageComponent } from './task-lists/task-lists-page/task-lists-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { TaskListFormComponent } from './task-lists/task-list-form/task-list-form.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
     TaskListsCardComponent,
     TaskListComponent,
     TaskListsPageComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    TaskListFormComponent
   ],
   imports: [
     BrowserModule,

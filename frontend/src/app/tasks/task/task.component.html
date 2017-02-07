@@ -21,10 +21,10 @@
   </div>
   <div *ngIf="task.taskLists && task.taskLists.length > 0" class="task-lists">
     <i class="fa fa-list" aria-hidden="true"><span class="lists-title">Listas associadas: </span></i>
-    <span *ngFor="let list of task.taskLists" class="list">{{list.title}} <i class="fa fa-times" aria-hidden="true" (click)="deleteTaskFromList(list)"></i></span>
+    <span *ngFor="let list of task.taskLists" class="list">{{list}}</span>
   </div>
   <div class="task-footer">
-      <span class="text"> Prioridade: </span><select [(ngModel)]="task.priority" (change)="edit()" class="priority-selector">
+      <span class="select-text"> Prioridade: </span><select [(ngModel)]="task.priority" (change)="edit()" class="priority-selector">
         <option value="NORMAL">Normal</option>
         <option value="LOW">Baixa</option>
         <option value="HIGH">Alta</option>

@@ -6,10 +6,10 @@ import java.util.Set;
 public class TaskListRequest {
 	private Integer id;
 	private String title;
-	private Set<Integer> tasks;
+	private Set<Task> tasks;
 	
 	public TaskListRequest() {
-		this.tasks = new HashSet<Integer>();
+		this.tasks = new HashSet<Task>();
 	}
 	
 	public Integer getId() {
@@ -20,11 +20,11 @@ public class TaskListRequest {
 		this.id = id;
 	}
 	
-	public Set<Integer> getTasks() {
+	public Set<Task> getTasks() {
 		return tasks;
 	}
 	
-	public void setTasks(Set<Integer> tasks) {
+	public void setTasks(Set<Task> tasks) {
 		this.tasks = tasks;
 	}
 

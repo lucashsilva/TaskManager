@@ -58,7 +58,6 @@ export class TaskComponent implements OnInit {
 
   edit() {
     if(this.task.id) {
-      this.task.taskLists = new Array<number>(); 
       this.taskService.editTask(this.task).then(res => {
         this.hasChanges.emit();
       });
@@ -117,14 +116,14 @@ export class Task {
   done: boolean;
   category: string;
   subtasks: Array<Subtask>;
-  taskLists: Array<number> | Array<TaskList>;
+  taskLists: Array<string>;
 
   constructor() {
     this.done = false;
     this.priority = "NORMAL";
     this.timestamp = new Date(Date.now());
     this.subtasks = new Array<Subtask>();
-    this.taskLists = new Array<number>();
+    this.taskLists = new Array<string>();
   }
   
 

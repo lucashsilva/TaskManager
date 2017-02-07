@@ -27,10 +27,10 @@ export class TaskListComponent implements OnInit {
 export class TaskList {
   id: number;
   title: string;
-  tasks: Task[] | number[];
+  tasks: Task[] ;
 
   constructor() {
-    this.tasks = Array<number>();
+    this.tasks = Array<Task>();
   }
 
 }

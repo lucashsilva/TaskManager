@@ -1,4 +1,4 @@
-import {Task} from 'protractor/built';
+import { Task } from '../tasks/task/task.component';
 import { Injectable } from '@angular/core';
 import { Headers, RequestOptions, Response, Http } from '@angular/http';
 import { TaskList } from '../task-lists/task-list/task-list.component';

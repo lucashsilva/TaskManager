@@ -1,1 +1,7 @@
 <app-task-lists-card [lists]="lists" (hasChanges)="fetchLists()"></app-task-lists-card>
+<div [@listform]="showForm" class="listform">
+  <div class="box">
+      <app-task-list-form (hasChanges)="changeHandler($event)" [tasks]="tasks"></app-task-list-form>
+  </div>
+</div>
+<button (click)="toggleForm()" type="button" class="btn btn-default btn-circle btn-xl" id="add-list-button"><i class="fa fa-plus"></i></button>

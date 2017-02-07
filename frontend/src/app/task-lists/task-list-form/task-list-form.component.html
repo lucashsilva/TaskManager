@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="title">{{ editForm? 'Editar lista' : 'Adicionar lista'}}</div>
+  <div class="list-body">
+    <input class="list-title" [(ngModel)]="list.title" placeholder="Adicionar título" />
+    <div class="tasks">
+      <div class="task" *ngFor="let task of tasks">
+        <div class="task-item"><app-task [task]="task"></app-task></div><div class="checkbox-space"><input (change)="addOrRemove(task, $event)" type="checkbox" class="checkbox"/></div>
+      </div>
+  </div>
+  <button class="btn" (click)="save()">Salvar</button>
+  <button class="btn" (click)="close()">Cancelar</button>
+  <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
+</div>

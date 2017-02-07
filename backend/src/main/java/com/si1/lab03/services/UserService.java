@@ -209,8 +209,8 @@ public class UserService {
 			TaskList list = new TaskList();
 			list.setTitle(taskList.getTitle());
 			
-			for(Integer id: taskList.getTasks()) {
-				list.addTask(getTask(id, email));
+			for(Task task: taskList.getTasks()) {
+				list.addTask(getTask(task.getId(), email));
 			}
 			
 			user.addTaskList(list);
@@ -253,14 +253,17 @@ public class UserService {
 
 	}
 
-	public void addTaskToList(String email, Integer taskId, Integer listId) throws UserNotFoundException, TaskNotFoundException, TaskListNotFoundException {
+	public void addTasksToList(String email, Set<Integer> taskIds, Integer listId) throws UserNotFoundException, TaskListNotFoundException, TaskNotFoundException {
 		User user = getUser(email);
-		
-		Task task = this.getTask(taskId, email);
 		TaskList taskList = user.getTaskList(listId);
-		taskList.addTask(task);
+		
+		for(Integer id: taskIds) {
+			Task task = this.getTask(id, email);
+			taskList.addTask(task);
+		}
 		
 		userRepository.saveAndFlush(user);
+		
 	}
 
 	public void deleteTaskFromList(String email, Integer taskId, Integer listId) throws TaskNotFoundException, UserNotFoundException, TaskListNotFoundException {
