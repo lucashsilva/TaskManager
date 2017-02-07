@@ -6,6 +6,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { TasksPageComponent } from './tasks/tasks-page/tasks-page.component';
 import { TaskListsPageComponent } from './task-lists/task-lists-page/task-lists-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+
 import { AuthGuard } from './providers/auth-guard';
 
 const routes: Routes = [
@@ -14,6 +16,7 @@ const routes: Routes = [
       { path: 'tasks', component: TasksPageComponent },
       { path: 'tasks/:id', component: TaskComponent },
       { path: 'lists', component: TaskListsPageComponent },
+      { path: 'contact', component: ContactPageComponent }
     ] },
   { path: 'login', component: LoginPageComponent },
   { path: '**', redirectTo: 'login' }
