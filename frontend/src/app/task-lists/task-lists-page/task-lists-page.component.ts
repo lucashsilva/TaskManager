@@ -1,4 +1,5 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import {TaskListFormComponent } from '../task-list-form/task-list-form.component';
+import { Component, OnInit, trigger, state, style, transition, animate, ViewChild } from '@angular/core';
 import { SidebarService } from '../../services/sidebar.service';
 import { TaskListService } from '../../services/task-list.service';
 import { TaskService } from '../../services/task.service';
@@ -28,6 +29,7 @@ export class TaskListsPageComponent implements OnInit {
   lists: Array<TaskList>;
   tasks: Array<Task>;
   showForm = "hide";
+  @ViewChild(TaskListFormComponent) editForm: TaskListFormComponent;
 
   constructor(private sidebarService: SidebarService, private taskListService: TaskListService, private taskService: TaskService) {
     this.lists = new Array<TaskList>();
@@ -35,6 +37,10 @@ export class TaskListsPageComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
     this.fetchLists();
     this.fetchTasks();
   }
@@ -64,9 +70,28 @@ export class TaskListsPageComponent implements OnInit {
     this.toggleForm();
 
     if(event) {
-      this.fetchLists();
+      this.fetchData();
     }
   }
 
+  editList(list) {
+    if(list){ 
+      this.editForm.list = list;
+      this.editForm.editForm = true;
+      this.fetchData();
+
+      this.toggleForm();
+    }
+  
+  }
+
+  deleteList(list) {
+    if(list) {
+      this.taskListService.deleteList(list).then(res => {
+          this.fetchLists();
+          this.fetchTasks();
+      });
+    }
+  }
 
 }

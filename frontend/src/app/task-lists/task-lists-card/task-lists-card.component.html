@@ -2,6 +2,6 @@
         <div class="title">Listas de tarefas</div>
         <div class="lists-body">
           <div *ngIf="lists.length === 0" class="alert alert-success">Sem listas de tarefas.</div>
-          <app-task-list *ngFor="let list of lists" [list]="list" (hasChanges)="fetchLists()"></app-task-list>
+          <app-task-list *ngFor="let list of lists" [list]="list" (hasChanges)="fetchLists()" (onDelete)="deleteList($event)" (listToEdit)="editList($event)"></app-task-list>
         </div>
 </div>

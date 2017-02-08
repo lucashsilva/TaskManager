@@ -10,10 +10,14 @@ import { Task } from '../../tasks/task/task.component';
 export class TaskListsCardComponent implements OnInit {
   @Output('hasChanges') emitter: EventEmitter<boolean>;
   @Input() lists: TaskList[];
+  @Output('listToEdit') editEmitter: EventEmitter<TaskList>;
+  @Output('onDelete') deleteEmitter: EventEmitter<TaskList>;
 
   constructor() {
     this.lists = new Array<TaskList>();
     this.emitter = new EventEmitter<boolean>();
+    this.editEmitter = new EventEmitter<TaskList>();
+    this.deleteEmitter = new EventEmitter<TaskList>();
    }
 
   ngOnInit() {
@@ -23,5 +27,11 @@ export class TaskListsCardComponent implements OnInit {
     this.emitter.emit(true);
   }
 
+  editList(list) {
+    this.editEmitter.emit(list);
+  }
 
+  deleteList(list) {
+    this.deleteEmitter.emit(list);
+  }
 }

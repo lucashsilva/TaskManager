@@ -226,8 +226,11 @@ public class UserService {
 		User user = getUser(email);
 		
 		if (user != null) {
-			getTaskList(taskListRequest.getId(), email).setTitle(taskListRequest.getTitle());;
-		
+			TaskList taskList = getTaskList(taskListRequest.getId(), email);
+			taskList.setTitle(taskListRequest.getTitle());;
+			taskList.setTasks(taskListRequest.getTasks());
+			
+			
 			userRepository.save(user);
 		
 		} else {

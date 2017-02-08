@@ -47,6 +47,17 @@ export class TaskListService {
        }).toPromise();
       }
 
+   editList(list: TaskList): Promise<boolean> {
+     return this.http.put(this.apiUrl + '/lists/' + list.id, JSON.stringify(list), this.userService.getOptions()).map(res => {
+        if(res.status >= 200 && res.status <= 400) {
+           return true;
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados.");
+         }
+     }).toPromise();
+   
+   }
+
    deleteList(list: TaskList) {
      return this.http.delete(this.apiUrl + `/lists/${list.id}`, this.userService.getOptions()).map((res: Response) => {
 

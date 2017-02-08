@@ -10,6 +10,7 @@ import { Task } from '../../tasks/task/task.component';
 })
 export class TaskListFormComponent implements OnInit {
   errorMessage: string;
+  @Input() editForm: boolean;
   @Input() list: TaskList;
   @Input() tasks: Array<Task>;
   @Output("hasChanges") emitter: EventEmitter<TaskList>;
@@ -35,16 +36,37 @@ export class TaskListFormComponent implements OnInit {
     for(let task of this.list.tasks) {
       task.taskLists = []; // this has to be done to avoid parsing errors since the subtasks come as titles 
     }
-    this.listService.addList(this.list).then(res => {
-      this.emitter.emit(this.list);
-      this.list = new TaskList();
-    });
+    if(this.editForm) {
+      this.listService.editList(this.list).then(res => {
+        this.emitter.emit(this.list);
+         this.list = new TaskList();
+      });
+    } else {
+      this.listService.addList(this.list).then(res => {
+        this.emitter.emit(this.list);
+        this.list = new TaskList();
+      });
+    }
 
+    if(this.editForm) {
+      this.editForm = false;
+    }
   }
 
   close() {
     this.emitter.emit(null);
+    if(this.editForm) {
+      this.editForm = false;
+    }
   }
 
+  contains(task: Task): boolean {
+    for(let taskL of this.list.tasks) {
+      if(taskL.id === task.id) {
+        return true;
+      }
+    }
+    return false;
+  }
 
 }
