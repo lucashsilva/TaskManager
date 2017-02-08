@@ -1,3 +1,4 @@
+import {TaskListService} from '../../services/task-list.service';
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { TaskList } from '../task-list/task-list.component';
 import { Task } from '../../tasks/task/task.component';
@@ -13,7 +14,7 @@ export class TaskListsCardComponent implements OnInit {
   @Output('listToEdit') editEmitter: EventEmitter<TaskList>;
   @Output('onDelete') deleteEmitter: EventEmitter<TaskList>;
 
-  constructor() {
+  constructor(private listService: TaskListService) {
     this.lists = new Array<TaskList>();
     this.emitter = new EventEmitter<boolean>();
     this.editEmitter = new EventEmitter<TaskList>();
@@ -33,5 +34,13 @@ export class TaskListsCardComponent implements OnInit {
 
   deleteList(list) {
     this.deleteEmitter.emit(list);
+  }
+
+  deleteAllLists() {
+    for(let list of this.lists) {
+      this.listService.deleteList(list).then(res => {
+        this.emitter.emit();
+      });
+    }
   }
 }

@@ -1,5 +1,5 @@
 <div class="card lists">
-        <div class="title">Listas de tarefas</div>
+        <div class="title">Listas de tarefas <i class="fa fa-trash-o" (click)="deleteAllLists()"></i></div>
         <div class="lists-body">
           <div *ngIf="lists.length === 0" class="alert alert-success">Sem listas de tarefas.</div>
           <app-task-list *ngFor="let list of lists" [list]="list" (hasChanges)="fetchLists()" (onDelete)="deleteList($event)" (listToEdit)="editList($event)"></app-task-list>
