@@ -56,7 +56,7 @@ public class Task implements Serializable {
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="parent_id")
 	private Set<Subtask> subtasks;
-	@ManyToMany(mappedBy="tasks")
+	@ManyToMany(mappedBy="tasks", cascade = CascadeType.ALL)
 	private Set<TaskList> taskLists;
 
 	public Task() {} 
