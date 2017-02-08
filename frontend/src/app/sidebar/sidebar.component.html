@@ -17,6 +17,14 @@
           </ul>
         </li>
         <li class="menu-item">
+          <a (click)="togglePriorities()">Prioridades</a>
+          <ul class="submenu" *ngIf="showPriorities">
+            <li *ngFor="let priority of priorities" class="menu-item">
+              <a href="/tasks?priority={{ priority }}">{{ getPriorityLabel(priority) }}</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item">
           <a href="/lists">Listas de Tarefas</a>
         </li>
         <li class="menu-item">

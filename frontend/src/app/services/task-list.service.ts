@@ -32,6 +32,19 @@ export class TaskListService {
       ).toPromise();
 
    }
+  
+  getListsFromTask(task): Promise<string[]> {
+     return this.http.get(this.apiUrl + '/tasks/' + task.id + '/lists', {"headers": this.getHeaders()}).map(res => {
+          if(res.status >= 200 && res.status <= 400) {
+            return <string[]> res.json();
+         } else {
+           throw new Error("Não foi possível carregar os dados.");
+         }
+
+        }
+      ).toPromise();
+
+   }
 
 
    addList(list: TaskList):Promise<boolean> {

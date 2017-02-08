@@ -57,6 +57,8 @@ export class TaskComponent implements OnInit {
   }
 
   edit() {
+    this.task.taskLists = [];
+
     if(this.task.id) {
       this.taskService.editTask(this.task).then(res => {
         this.hasChanges.emit();
@@ -104,6 +106,7 @@ export class TaskComponent implements OnInit {
     });
   }
 
+
 }
 
 
@@ -125,6 +128,8 @@ export class Task {
     this.subtasks = new Array<Subtask>();
     this.taskLists = new Array<string>();
   }
+
+
   
 
 }

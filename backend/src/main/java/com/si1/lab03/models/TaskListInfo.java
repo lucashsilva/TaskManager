@@ -1,0 +1,30 @@
+package com.si1.lab03.models;
+
+public class TaskListInfo {
+	private Integer id;
+	private String title;
+	
+	public TaskListInfo(Integer id, String title) {
+		this.id = id;
+		this.title = title;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
+
+}

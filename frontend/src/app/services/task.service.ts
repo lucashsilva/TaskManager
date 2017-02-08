@@ -79,17 +79,10 @@ export class TaskService {
    }
 
 
-     getTasksWithFilter(tasks: Task[], done: boolean, category?: string) {
-       let result = [];
-
-       for (let task of tasks) {
-
-        if ((category && task.category === category && task.done === done) || ((!category) && task.done === done)) {
-           result.push(task);
-        }
-      }
-
-      return result;
+     getTasksWithFilter(tasks: Task[], done: boolean, category?: string, priority?: string) {
+       return tasks.filter(task => {
+          return (task.done == done && (!category || (category && task.category == category)) && (!priority || (priority && task.priority === priority)));
+       });
     }
 
 

@@ -133,20 +133,16 @@ public class Task implements Serializable {
 		this.category = category;
 	}
 	
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = true)
-	public Set<String> getTaskLists() {
-		Set<String> lists = new HashSet<String>();
+	public Set<TaskListInfo> getTaskLists() {
+		Set<TaskListInfo> taskLists = new HashSet<TaskListInfo>();
 		
 		for(TaskList list: this.taskLists) {
-			lists.add(list.getTitle());
+			taskLists.add(new TaskListInfo(list.getId(), list.getTitle()));
 		}
 		
-		return lists;
+		return taskLists;
 	}
 	
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	@JsonIdentityReference(alwaysAsId = false)
 	public void setTaskLists(Set<TaskList> taskLists) {
 		this.taskLists = taskLists;
 	}

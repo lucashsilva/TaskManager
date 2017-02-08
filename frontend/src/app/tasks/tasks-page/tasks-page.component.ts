@@ -27,6 +27,7 @@ import { TasksChartComponent } from '../tasks-chart/tasks-chart.component';
 export class TasksPageComponent implements OnInit {
   tasks: any;
   category: string;
+  priority: string;
   showForm = 'hide';
   @ViewChild(TasksChartComponent) tasksChart: TasksChartComponent;
   constructor(private taskService: TaskService, private sidebarService: SidebarService, private route: ActivatedRoute) {
@@ -38,14 +39,15 @@ export class TasksPageComponent implements OnInit {
     this.route.queryParams.subscribe(
       data => {
         this.category = data['category'];
+        this.priority = data['priority'];
       });
   }
 
   fetchTasks() {
     this.taskService.getTasks().then(res => {
       if(res) {
-        this.tasks.done = this.taskService.getTasksWithFilter(res, true, this.category);
-        this.tasks.undone = this.taskService.getTasksWithFilter(res, false, this.category);
+        this.tasks.done = this.taskService.getTasksWithFilter(res, true, this.category, this.priority);
+        this.tasks.undone = this.taskService.getTasksWithFilter(res, false, this.category, this.priority);
         this.tasksChart.getNumbers(res, this.category);
         this.sidebarService.update();
       }

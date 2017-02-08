@@ -1,5 +1,11 @@
 <div class="card tasks">
-        <div class="title">Tarefas {{ doneType? 'terminadas':'pendentes' }}</div>
+        <div class="title">Tarefas {{ doneType? 'terminadas':'pendentes' }} 
+          <select (change)="changeOrderCriteria($event.target.value)" class="priority-selector">
+            <option value="Ordenar por:" selected="selected">Ordenar por:</option>
+            <option value="name">Nome</option>
+            <option value="priority">Prioridade</option>
+          </select>
+      </div>
         <div class="tasks-body">
           <div *ngIf="tasks.length === 0" class="alert alert-success">Sem tarefas {{ doneType? 'terminadas':'pendentes' }}.</div>
           <app-task *ngFor="let task of tasks" [task]="task" (hasChanges)="fetchTasks()"></app-task>

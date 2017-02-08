@@ -11,7 +11,9 @@ import { User } from '../services/user.service';
 })
 export class SidebarComponent implements OnInit {
   showCategories: boolean;
+  showPriorities: boolean;
   @Input() user: User;
+  priorities = ["HIGH", "NORMAL", "LOW"];
 
   constructor(private userService: UserService, private sidebarService: SidebarService, private router: Router) { }
 
@@ -26,7 +28,21 @@ export class SidebarComponent implements OnInit {
     this.showCategories = !this.showCategories;
   }
 
+   togglePriorities() {
+    this.showPriorities = !this.showPriorities;
+  }
+
   navigateToCategory(category: string) {
     this.router.navigate(['/tasks?category=' + category]);
+  }
+
+  getPriorityLabel(priority) {
+    if(priority == "HIGH") {
+      return "Alta";
+    } else if (priority == "NORMAL") {
+      return "Normal";
+    } else if (priority == "LOW") {
+      return "Baixa";
+    }
   }
 }
