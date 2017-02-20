@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService {
-    private apiUrl = "http://localhost:8080/api";
+    private apiUrl = window.location.hostname + "/api";
     private authenticatedUser: AuthenticatedUser;
 
 
