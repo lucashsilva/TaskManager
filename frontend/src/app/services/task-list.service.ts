@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskListService {
-   private apiUrl = window.location.hostname + "/api";
+   private apiUrl = "/api";
    constructor(private http: Http, private router: Router, private userService: UserService) { }
 
    getHeaders() {

@@ -7,7 +7,7 @@ import { UserService } from './user.service';
 
 @Injectable()
 export class SidebarService {
-  private apiUrl = window.location.hostname + "/api";
+  private apiUrl = "/api";
   categories: string[];
   pendentTasksCount = 0;
 
