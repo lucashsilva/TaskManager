@@ -1,9 +1,12 @@
 package com.si1.lab03.controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.si1.lab03.exceptions.TaskListNotFoundException;
 import com.si1.lab03.exceptions.TaskNotFoundException;
 import com.si1.lab03.exceptions.UserNotFoundException;
@@ -54,11 +62,38 @@ public class TaskListController {
 			value = "/api/lists/{id}", 
 			method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TaskList> getTaskList(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token) {
+	public ResponseEntity getTaskList(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token, @RequestParam(value = "format", required = false) String format) throws FileNotFoundException {
 		String email = tokenService.extractEmail(token);
 		TaskList taskList;
 		try {
 			taskList = userService.getTaskList(id, email);
+			
+			if(format != null && format.equalsIgnoreCase("pdf")){
+		        Document document = new Document();
+		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		        try {
+					 PdfWriter.getInstance(document, baos);
+			         document.open();
+			         Paragraph titulo = new Paragraph("Lista de Tarefas - Resumo");
+			         titulo.setAlignment(1);
+			         document.add(titulo);
+			         document.add(new Paragraph(taskList.toString()));
+			         // step 5
+			         document.close();
+			         
+			         byte[] contents = baos.toByteArray();
+
+			         HttpHeaders headers = new HttpHeaders();
+			         headers.setContentType(MediaType.parseMediaType("application/pdf"));
+			         String filename = "output.pdf";
+			         headers.setContentDispositionFormData(filename, filename);
+			         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+			         return new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
+			  } catch (DocumentException e) {
+				 return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+			  }
+			}
+			
 			return new ResponseEntity<TaskList>(taskList, HttpStatus.OK);
 		} catch (TaskListNotFoundException e) {
 			return new ResponseEntity<TaskList>(HttpStatus.NOT_FOUND);
@@ -69,6 +104,7 @@ public class TaskListController {
 
 	}
 	
+
 	@CrossOrigin
 	@RequestMapping(
 			value = "api/lists",

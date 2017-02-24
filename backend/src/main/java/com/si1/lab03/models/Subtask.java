@@ -45,5 +45,16 @@ public class Subtask implements Serializable {
 		this.done = done;
 	}
 	
+	public String toString() {
+		return this.getDescription() + " | Status: " + getStatus();
+	}
 
+	private String getStatus() {
+		if(this.isDone()) {
+			return "Terminada";
+		} else {
+			return "Pendente";
+		}
+	}
+	
 }

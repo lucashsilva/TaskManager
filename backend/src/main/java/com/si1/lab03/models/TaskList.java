@@ -120,6 +120,16 @@ public class TaskList implements Serializable {
 		return true;
 	}
 
+	public String toString() {
+		String output = "Título da lista: " + getTitle() + System.lineSeparator();
+		
+		for(Task task: this.tasks) {
+			output += "-----------------------------------------------------" + System.lineSeparator();
+			output += task.toString() + System.lineSeparator();
+		}
+		
+		return output;
+	}
 
 	
 	

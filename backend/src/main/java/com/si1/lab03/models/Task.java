@@ -22,14 +22,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 @Entity
 @Table(name="tasks")
 public class Task implements Serializable {
 	
+	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static final long serialVersionUID = 1L;
 	@Column
 	@Id
@@ -149,10 +146,44 @@ public class Task implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", timestamp=" + timestamp
-				+ ", priority=" + priority + ", done=" + done + "]";
+		String output = "Título: " + getTitle() + LINE_SEPARATOR;
+		if(getDescription() != null) {
+			output += "Descrição: " + getDescription() + LINE_SEPARATOR;
+		}
+		
+		output += "Prioridade: " + getPriority(getPriority()) + LINE_SEPARATOR 
+				+ "Data: " + getTimestamp().toString() + LINE_SEPARATOR
+				+ "Status: " + getStatus();
+		
+		if(this.getSubtasks().size() > 0) {
+			output += LINE_SEPARATOR + "Subtarefas:";
+			
+			for(Subtask subtask: this.getSubtasks()) {
+				output += LINE_SEPARATOR + "- " + subtask;
+			}
+		}
+		
+		return output;
+	}
+	
+	private String getPriority(Priority priority) {
+		if(priority == Priority.HIGH) {
+			return "Alta";
+		} else if (priority == Priority.NORMAL) {
+			return "Média";
+		} else {
+			return "Baixa";
+		}
 	}
 
+	private String getStatus() {
+		if(this.isDone()) {
+			return "Terminada";
+		} else {
+			return "Pendente";
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -177,6 +208,7 @@ public class Task implements Serializable {
 			return false;
 		return true;
 	}
+	
 	
 
 	
