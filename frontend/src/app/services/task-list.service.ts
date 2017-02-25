@@ -1,6 +1,6 @@
 import { Task } from '../tasks/task/task.component';
 import { Injectable } from '@angular/core';
-import { Headers, RequestOptions, Response, Http } from '@angular/http';
+import { Headers, RequestOptions, Response, Http, ResponseContentType } from '@angular/http';
 import { TaskList } from '../task-lists/task-list/task-list.component';
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskListService {
-    private apiUrl = "http://localhost:8080/api";
+    private apiUrl = "/api";
    constructor(private http: Http, private router: Router, private userService: UserService) { }
 
    getHeaders() {
@@ -24,19 +24,6 @@ export class TaskListService {
      return this.http.get(this.apiUrl + '/lists', {"headers": this.getHeaders()}).map(res => {
           if(res.status >= 200 && res.status <= 400) {
             return <TaskList[]> res.json();
-         } else {
-           throw new Error("Não foi possível carregar os dados.");
-         }
-
-        }
-      ).toPromise();
-
-   }
-  
-  getListsFromTask(task): Promise<string[]> {
-     return this.http.get(this.apiUrl + '/tasks/' + task.id + '/lists', {"headers": this.getHeaders()}).map(res => {
-          if(res.status >= 200 && res.status <= 400) {
-            return <string[]> res.json();
          } else {
            throw new Error("Não foi possível carregar os dados.");
          }
@@ -96,6 +83,16 @@ export class TaskListService {
       }).toPromise();
    }
 
+   downloadList(id) {
+     return this.http.get(this.apiUrl + '/lists/' + id + '?format=pdf', {responseType: ResponseContentType.Blob, headers: this.getHeaders()}).map(res => {
+        if(res.status >= 200 && res.status <= 400) {
+           return res.blob();
+         } else {
+           throw new Error("Erro na requisição. Verifique os dados.");
+         }
+     }).toPromise();
+
+   }
 
 
 }

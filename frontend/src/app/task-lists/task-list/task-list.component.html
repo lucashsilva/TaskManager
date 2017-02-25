@@ -1,8 +1,9 @@
-<div class="task-list">
+<div class="task-list" id="exportable">
   {{ list.title }}
   <div class="icons">
-    <i (click)="delete()" class="fa fa-times"></i>
+    <i (click)="download()" class="fa fa-download" aria-hidden="true"></i>
     <i (click)="edit()" class="fa fa-pencil"></i>
+    <i (click)="delete()" class="fa fa-times"></i>
   </div>
   <div *ngIf="list.tasks.length === 0" class="alert alert-success">Sem tarefas nesta lista.</div>
   <div *ngFor="let task of list.tasks">

@@ -1,5 +1,7 @@
+import {TaskListService} from '../../services/task-list.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../tasks/task/task.component';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-task-list',
@@ -11,7 +13,7 @@ export class TaskListComponent implements OnInit {
   @Output("hasChanges") emitter: EventEmitter<boolean>;
   @Output("listToEdit") editEmitter: EventEmitter<TaskList>;
   @Output("onDelete") deleteEmitter: EventEmitter<TaskList>;
-  constructor() {
+  constructor(private listService: TaskListService) {
     this.list = new TaskList();
     this.emitter = new EventEmitter<boolean>();
     this.editEmitter = new EventEmitter<TaskList>();
@@ -31,6 +33,15 @@ export class TaskListComponent implements OnInit {
 
   delete() {
     this.deleteEmitter.emit(this.list);
+  }
+
+  download() {
+    this.listService.downloadList(this.list.id).then(res => {
+      var mediaType = 'application/pdf';
+      var blob = new Blob([res], {type: mediaType});
+      var filename = this.list.id + '.pdf';
+      FileSaver.saveAs(blob, filename);
+    });
   }
 
 }
